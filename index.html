@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>CD-CASINO</title>
+    <title>CD-CASINO VIP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;700;900&family=Oswald:wght@400;500;700&display=swap');
@@ -49,12 +49,20 @@
             box-shadow: 0 8px 0 rgba(0,0,0,0.6), 0 15px 20px rgba(0,0,0,0.4);
             border-bottom-width: 4px;
         }
-        .btn-super:active {
+        .btn-super:active:not(:disabled) {
             transform: translateY(8px);
             box-shadow: 0 0px 0 rgba(0,0,0,0.6), 0 5px 10px rgba(0,0,0,0.4);
             border-bottom-width: 0px;
             padding-top: calc(1rem + 4px);
             padding-bottom: calc(1rem - 4px);
+        }
+        .btn-super:disabled {
+            filter: grayscale(1);
+            opacity: 0.7;
+            cursor: not-allowed;
+            box-shadow: 0 4px 0 rgba(0,0,0,0.6), 0 5px 10px rgba(0,0,0,0.4);
+            border-bottom-width: 2px;
+            transform: translateY(4px);
         }
         .btn-super::after {
             content: '';
@@ -70,7 +78,8 @@
         }
 
         .click-bounce { transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
-        .click-bounce:active { transform: scale(0.92); }
+        .click-bounce:active:not(:disabled) { transform: scale(0.92); }
+        .click-bounce:disabled { opacity: 0.5; cursor: not-allowed; }
         
         .game-card {
             transition: all 0.3s ease;
@@ -124,6 +133,9 @@
         }
         .card-back { background: repeating-linear-gradient(45deg,#1e293b,#1e293b 10px,#0f172a 10px,#0f172a 20px); }
         .card-front { transform: rotateY(180deg); background: white; display: flex; align-items: center; justify-content: center; flex-direction: column;}
+        
+        .xd-card { transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .xd-card:hover { transform: translateY(-10px) rotate(2deg) scale(1.05); z-index: 50; }
 
         .roulette-window {
             width: 100%; height: 90px; overflow: hidden; position: relative;
@@ -154,12 +166,12 @@
             border: 8px solid #cbd5e1; box-shadow: 0 0 30px rgba(255,255,255,0.2), inset 0 0 20px rgba(0,0,0,0.5);
             transition: transform 5s cubic-bezier(0.1, 0.85, 0.15, 1);
             background: conic-gradient(
-                #ef4444 0deg 60deg,    /* Đỏ: x2 */
-                #3b82f6 60deg 120deg,  /* Xanh: /2 */
-                #22c55e 120deg 180deg, /* Lục: x3 */
-                #eab308 180deg 240deg, /* Vàng: +1000 */
-                #a855f7 240deg 300deg, /* Tím: x5 */
-                #0f172a 300deg 360deg  /* Đen: 0 */
+                #ef4444 0deg 60deg,
+                #3b82f6 60deg 120deg,
+                #22c55e 120deg 180deg,
+                #eab308 180deg 240deg,
+                #a855f7 240deg 300deg,
+                #0f172a 300deg 360deg
             );
             position: relative;
         }
@@ -294,7 +306,25 @@
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-                <!-- CRASH GAME THÊM MỚI -->
+                <!-- XÌ DÁCH MỚI THÊM -->
+                <div onclick="openGame('xidach')" class="game-card col-span-2 glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border-2 border-teal-500/50 shadow-[0_0_20px_rgba(20,184,166,0.3)]">
+                    <div class="h-24 bg-gradient-to-br from-[#022c22] to-[#0f766e] flex items-center justify-center gap-4 relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,#fff_1px,transparent_1px)] bg-[size:10px_10px]"></div>
+                        <div class="text-4xl drop-shadow-lg z-10 font-black flex items-center">
+                            <div class="w-9 h-14 bg-white rounded flex flex-col justify-center items-center rotate-[-15deg] z-10 shadow-lg border border-slate-200">
+                                <span class="text-slate-900 text-sm leading-none">A</span><span class="text-slate-900 text-xl leading-none">♠</span>
+                            </div>
+                            <div class="w-9 h-14 bg-white rounded flex flex-col justify-center items-center rotate-[15deg] z-20 shadow-xl border border-slate-200 -ml-3 mt-2">
+                                <span class="text-red-600 text-sm leading-none">J</span><span class="text-red-600 text-xl leading-none">♥</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col z-10">
+                            <h3 class="font-black text-2xl text-teal-300 tracking-wider">XÌ DÁCH 21</h3>
+                            <span class="text-xs text-teal-100 bg-teal-900/60 px-2 py-0.5 rounded-full border border-teal-400/50 self-start mt-1 shadow-sm">Blackjack - Tỉ lệ 1:1.5</span>
+                        </div>
+                    </div>
+                </div>
+
                 <div onclick="openGame('crash')" class="game-card col-span-2 glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border-2 border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
                     <div class="h-24 bg-gradient-to-br from-[#020617] to-[#1e3a8a] flex items-center justify-center gap-4 relative overflow-hidden">
                         <div class="text-4xl drop-shadow-lg z-10 animate-bounce">🚀</div>
@@ -399,7 +429,70 @@
             </div>
         </div>
 
-        <!-- TÀU VŨ TRỤ (CRASH) VIEW -->
+        <div id="view-xidach" class="hidden w-full max-w-lg p-3 flex flex-col items-center h-full">
+            <h2 class="text-2xl font-black text-teal-400 tracking-widest mb-2 drop-shadow-md">XÌ DÁCH 21</h2>
+            
+            <!-- Table Area -->
+            <div class="w-full bg-gradient-to-b from-[#064e3b] to-[#022c22] rounded-3xl p-4 shadow-[0_20px_50px_rgba(0,0,0,0.8)] border-4 border-yellow-700/50 relative overflow-hidden flex flex-col justify-between min-h-[380px]">
+                
+                <!-- Table decorations -->
+                <div class="absolute inset-0 border-2 border-dashed border-teal-700/30 m-2 rounded-2xl pointer-events-none"></div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-teal-800/20 text-6xl font-black pointer-events-none whitespace-nowrap opacity-50">BLACKJACK</div>
+                
+                <!-- Dealer Area -->
+                <div class="w-full flex flex-col items-center relative z-10 h-32">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-black/60 text-teal-300 px-3 py-1 rounded-full text-xs font-black border border-teal-500/30 shadow-md">NHÀ CÁI</span>
+                        <span id="xd-dealer-score" class="font-bold text-white bg-slate-800 px-2 py-0.5 rounded shadow opacity-0 transition-opacity">0</span>
+                    </div>
+                    <div id="xd-dealer-cards" class="flex justify-center -space-x-8 perspective-1000 mt-2">
+                        <!-- Dealer cards will go here -->
+                    </div>
+                </div>
+
+                <!-- Status Message -->
+                <div id="xd-status-msg" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center w-full z-20 pointer-events-none opacity-0 transition-all duration-300 scale-50">
+                    <h1 class="text-4xl font-black text-yellow-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.8)] tracking-wider">YOU WIN!</h1>
+                    <p class="text-white font-bold bg-black/50 inline-block px-4 py-1 rounded-full mt-2">+50,000</p>
+                </div>
+
+                <!-- Player Area -->
+                <div class="w-full flex flex-col items-center relative z-10 h-32 mt-4">
+                    <div id="xd-player-cards" class="flex justify-center -space-x-8 perspective-1000 mb-2">
+                        <!-- Player cards will go here -->
+                    </div>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span class="bg-black/60 text-emerald-400 px-3 py-1 rounded-full text-xs font-black border border-emerald-500/30 shadow-md">NGƯỜI CHƠI</span>
+                        <span id="xd-player-score" class="font-bold text-white bg-slate-800 px-2 py-0.5 rounded shadow opacity-0 transition-opacity">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Betting Info -->
+            <div class="w-full mt-4 glass-panel p-3 rounded-xl flex items-center justify-between border border-teal-500/30">
+                <span class="text-sm font-bold text-slate-300">TIỀN CƯỢC:</span>
+                <span id="xd-bet-display" class="font-mono text-3xl font-black text-yellow-400 drop-shadow-md">0</span>
+            </div>
+
+            <!-- Controls -->
+            <div id="xd-controls-bet" class="w-full mt-4 flex gap-3 justify-center">
+                <button onclick="XIDACH.deal()" id="xd-btn-deal" class="flex-1 py-4 bg-gradient-to-r from-teal-600 to-emerald-600 rounded-xl font-black text-xl text-white btn-super uppercase tracking-widest border-teal-800">CHIA BÀI</button>
+                <button onclick="XIDACH.clearBet()" id="xd-btn-clear" class="px-6 glass-panel border-2 border-red-500/50 rounded-xl text-red-400 font-bold click-bounce text-sm bg-red-900/20">HỦY</button>
+            </div>
+            
+            <div id="xd-controls-play" class="w-full mt-4 flex gap-2 justify-center hidden">
+                <button onclick="XIDACH.hit()" id="xd-btn-hit" class="flex-1 py-3 bg-gradient-to-b from-blue-500 to-blue-700 rounded-xl font-black text-white btn-super uppercase shadow-lg border-blue-900 flex flex-col items-center justify-center leading-none">
+                    <span class="text-2xl mb-1">+</span><span class="text-sm">RÚT BÀI</span>
+                </button>
+                <button onclick="XIDACH.stand()" id="xd-btn-stand" class="flex-1 py-3 bg-gradient-to-b from-rose-500 to-rose-700 rounded-xl font-black text-white btn-super uppercase shadow-lg border-rose-900 flex flex-col items-center justify-center leading-none">
+                    <span class="text-2xl mb-1">✋</span><span class="text-sm">DẰN BÀI</span>
+                </button>
+                <button onclick="XIDACH.double()" id="xd-btn-double" class="flex-1 py-3 bg-gradient-to-b from-amber-500 to-amber-700 rounded-xl font-black text-slate-900 btn-super uppercase shadow-lg border-amber-900 flex flex-col items-center justify-center leading-none">
+                    <span class="text-2xl mb-1">x2</span><span class="text-sm">GẤP ĐÔI</span>
+                </button>
+            </div>
+        </div>
+
         <div id="view-crash" class="hidden w-full max-w-lg p-2 flex flex-col items-center">
             <h2 class="text-2xl font-black text-blue-400 tracking-widest mb-2 drop-shadow-md">TÀU VŨ TRỤ (CRASH)</h2>
             
@@ -424,6 +517,10 @@
 
             <div class="w-full px-2">
                 <button onclick="CRASH.action()" id="crash-btn-action" class="w-full py-4 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-xl font-black text-xl text-white btn-super uppercase tracking-widest border-blue-800 transition-all">ĐẶT CƯỢC</button>
+            </div>
+            
+            <div class="w-full mt-4 flex gap-2 overflow-x-auto pb-2 scrollbar-hide px-2" id="crash-history">
+                <!-- History -->
             </div>
         </div>
 
@@ -849,11 +946,12 @@
                 if(currentView === 'baicao') BAI.addBet();
                 if(currentView === 'vongquay') VQ.addBet();
                 if(currentView === 'nohu') NH.addBet();
+                if(currentView === 'xidach') XIDACH.addBet();
             }
         }
 
         function hideAllViews() {
-            ['lobby', 'taixiu', 'xocdia', 'baicao', 'roulette', 'vongquay', 'nohu', 'chungkhoan', 'baucua', 'crash'].forEach(v => {
+            ['lobby', 'taixiu', 'xocdia', 'baicao', 'roulette', 'vongquay', 'nohu', 'chungkhoan', 'baucua', 'crash', 'xidach'].forEach(v => {
                 const el = document.getElementById(`view-${v}`);
                 if(el) el.classList.add('hidden');
             });
@@ -868,7 +966,8 @@
             'nohu': '<b>LUẬT CHƠI NỔ HŨ (SLOTS):</b><br><br>- Chọn mức cược và bấm QUAY.<br>- Trúng 2 biểu tượng bất kỳ giống nhau: Hoàn vốn (x2).<br>- Trúng 3 biểu tượng giống nhau (Hoa quả, Kim cương...): Thắng x10 tiền cược.<br>- Trúng 3 số 7️⃣: <b>JACKPOT x50 TIỀN CƯỢC!</b>',
             'baicao': '<b>LUẬT CHƠI BÀI CÀO 3 LÁ:</b><br><br>- Đặt cược và hệ thống sẽ chia 3 lá bài cho bạn và 3 lá cho Nhà Cái.<br>- Tính tổng điểm hàng đơn vị (J, Q, K = 10đ -> 0đ).<br>- Ai cao điểm hơn thì thắng. Nếu 9 điểm (Nút) sẽ có hiệu ứng đặc biệt!<br>- Bằng điểm thì Hòa, hoàn lại tiền cược.',
             'chungkhoan': '<b>LUẬT TRADE CHỨNG KHOÁN:</b><br><br>- Quan sát biểu đồ Nến Nhật BTC/USD di chuyển.<br>- Đặt cược dự đoán giá sẽ <b>TĂNG</b> hay <b>GIẢM</b>.<br>- Lệnh sẽ khớp ngay lập tức. Sau thời gian bạn chọn (5s/10s/15s), nếu giá chốt khớp với dự đoán, bạn thắng (1 ăn 1.95).',
-            'crash': '<b>LUẬT CHƠI TÀU VŨ TRỤ (CRASH):</b><br><br>- Bạn chọn mức cược và bấm ĐẶT CƯỢC.<br>- Tàu vũ trụ sẽ cất cánh, kéo theo hệ số nhân (Multiplier) tăng dần từ 1.00x.<br>- Bạn phải bấm <b>CHỐT LỜI</b> trước khi tàu nổ tung (Crashed).<br>- Nếu chốt lời thành công, bạn nhận: Tiền cược x Hệ số lúc chốt.<br>- Nếu tàu nổ trước khi bạn chốt, bạn mất tiền cược.<br><br><i>Lưu ý: Tàu có thể nổ ngay tại 1.00x!</i>'
+            'crash': '<b>LUẬT CHƠI TÀU VŨ TRỤ (CRASH):</b><br><br>- Bạn chọn mức cược và bấm ĐẶT CƯỢC.<br>- Tàu vũ trụ sẽ cất cánh, kéo theo hệ số nhân (Multiplier) tăng dần từ 1.00x.<br>- Bạn phải bấm <b>CHỐT LỜI</b> trước khi tàu nổ tung (Crashed).<br>- Nếu chốt lời thành công, bạn nhận: Tiền cược x Hệ số lúc chốt.<br>- Nếu tàu nổ trước khi bạn chốt, bạn mất tiền cược.<br><br><i>Lưu ý: Tàu có thể nổ ngay tại 1.00x!</i>',
+            'xidach': '<b>LUẬT CHƠI XÌ DÁCH 21 (BLACKJACK):</b><br><br>- Mục tiêu: Tổng điểm các lá bài càng gần 21 càng tốt, không vượt quá 21.<br>- <b>Điểm số:</b> Các lá 2-10 tính theo mặt số. J, Q, K tính 10. Lá A (Át) tính là 1 hoặc 11 tùy ý sao cho có lợi nhất.<br>- <b>Hành động:</b><br>  + <b>RÚT BÀI (Hit):</b> Lấy thêm 1 lá.<br>  + <b>DẰN BÀI (Stand):</b> Dừng rút, chốt điểm chờ Nhà cái.<br>  + <b>GẤP ĐÔI (Double):</b> Nhân đôi tiền cược, chỉ được rút thêm đúng 1 lá duy nhất.<br>- Nhà cái buộc phải Rút nếu <= 16 điểm và Dằn nếu >= 17 điểm.<br>- <b>Blackjack (Xì Dách):</b> 2 lá đầu gồm 1 lá A và 1 lá 10/J/Q/K. Tỉ lệ ăn 1:1.5.<br>- Nếu quá 21 điểm (Quắc/Bust) sẽ thua ngay lập tức.'
         };
 
         function openInstructionManual() {
@@ -884,8 +983,8 @@
         }
 
         function openGame(gameId) {
-            if(TX.hasBets() || XD.hasBets() || BAI.hasBets() || RL.hasBets() || VQ.hasBets() || NH.hasBets() || CK.hasBets() || CRASH.state === 'RUNNING') {
-                showToast("Vui lòng đợi kết thúc cược hiện tại trước khi chuyển!", true); return;
+            if(TX.hasBets() || XD.hasBets() || BAI.hasBets() || RL.hasBets() || VQ.hasBets() || NH.hasBets() || CK.hasBets() || CRASH.state === 'RUNNING' || XIDACH.state !== 'IDLE') {
+                showToast("Vui lòng đợi kết thúc ván hiện tại trước khi chuyển!", true); return;
             }
             hideAllViews(); currentView = gameId;
             const viewEl = document.getElementById(`view-${gameId}`);
@@ -893,7 +992,7 @@
             
             elBtnBack.classList.remove('hidden'); elLogo.classList.add('hidden');
             
-            if(['roulette', 'baicao', 'taixiu', 'xocdia', 'vongquay', 'nohu', 'baucua'].includes(gameId)) {
+            if(['roulette', 'baicao', 'taixiu', 'xocdia', 'vongquay', 'nohu', 'baucua', 'xidach'].includes(gameId)) {
                 chipSelector.classList.remove('hidden');
                 selectGlobalChip(selectedChip, false);
             } else {
@@ -908,17 +1007,14 @@
                 localStorage.setItem('tutorial_seen_' + gameId, 'true');
             }
             
-            if(gameId === 'chungkhoan') {
-                CK.initCanvas();
-            }
-            if(gameId === 'crash') {
-                CRASH.initCanvas();
-            }
+            if(gameId === 'chungkhoan') CK.initCanvas();
+            if(gameId === 'crash') CRASH.initCanvas();
+            if(gameId === 'xidach') XIDACH.resetUI();
         }
 
         function goHome() {
-            if(TX.hasBets() || XD.hasBets() || BAI.hasBets() || RL.hasBets() || VQ.hasBets() || NH.hasBets() || CK.hasBets() || CRASH.state === 'RUNNING') {
-                showToast("Vui lòng hủy cược trước khi thoát sảnh!", true); return;
+            if(TX.hasBets() || XD.hasBets() || BAI.hasBets() || RL.hasBets() || VQ.hasBets() || NH.hasBets() || CK.hasBets() || CRASH.state === 'RUNNING' || (XIDACH.state !== 'IDLE' && XIDACH.hasBets())) {
+                showToast("Vui lòng hoàn thành ván hoặc hủy cược trước khi thoát!", true); return;
             }
             hideAllViews(); currentView = 'lobby';
             document.getElementById('view-lobby').classList.remove('hidden');
@@ -928,7 +1024,7 @@
         }
 
         const fakeNames = ['hoang***', 'vip_pro88', 'tuan_anh', 'linhnga9x', 'game_thu', 'bac_gau', 'huan_hoa_hong', 'tai_phiet', 'soi_don_doc', 'vu_casino', 'lan_ngoc'];
-        const fakeGames = ['Tài Xỉu', 'Xóc Đĩa', 'Roulette', 'Vòng Quay', 'Bài Cào', 'Bầu Cua', 'Nổ Hũ', 'Chứng Khoán', 'Tàu Vũ Trụ'];
+        const fakeGames = ['Tài Xỉu', 'Xóc Đĩa', 'Roulette', 'Vòng Quay', 'Bài Cào', 'Bầu Cua', 'Nổ Hũ', 'Chứng Khoán', 'Tàu Vũ Trụ', 'Xì Dách 21'];
         
         function spawnFakePlayer() {
             setTimeout(spawnFakePlayer, Math.random() * 3000 + 2000); 
@@ -957,7 +1053,280 @@
         }
         setTimeout(spawnFakePlayer, 1000);
 
-        // --- GAME CRASH ---
+        const XIDACH = {
+            state: 'IDLE', // IDLE, PLAYER_TURN, DEALER_TURN
+            betAmount: 0,
+            deck: [], pHand: [], dHand: [],
+            
+            hasBets() { return this.betAmount > 0; },
+            
+            addBet() { 
+                if(this.state !== 'IDLE') return; 
+                if(globalBalance < selectedChip) return showToast("Không đủ lúa!", true);
+                globalBalance -= selectedChip; updateBalance(); 
+                this.betAmount += selectedChip; 
+                document.getElementById('xd-bet-display').innerText = formatMoney(this.betAmount);
+            },
+            
+            clearBet() { 
+                if(this.state !== 'IDLE') return; 
+                globalBalance += this.betAmount; updateBalance(); 
+                this.betAmount = 0; 
+                document.getElementById('xd-bet-display').innerText = '0'; 
+            },
+
+            getDeck() { 
+                let d = []; 
+                for(let s of ['♠', '♣', '♥', '♦']) 
+                    for(let v of ['A','2','3','4','5','6','7','8','9','10','J','Q','K']) 
+                        d.push({s, v}); 
+                // Shuffle
+                for(let i=d.length-1; i>0; i--) { 
+                    const j=Math.floor(Math.random()*(i+1)); 
+                    [d[i], d[j]]=[d[j], d[i]]; 
+                } 
+                return d; 
+            },
+
+            calcScore(hand) {
+                let sum = 0, aces = 0;
+                for(let c of hand) {
+                    if(['J','Q','K'].includes(c.v)) sum += 10;
+                    else if(c.v === 'A') { sum += 11; aces++; }
+                    else sum += parseInt(c.v);
+                }
+                while(sum > 21 && aces > 0) { sum -= 10; aces--; }
+                return sum;
+            },
+
+            createCardElement(c, isHidden = false) {
+                const isRed = ['♥','♦'].includes(c.s);
+                return `
+                    <div class="card-container w-16 h-24 xd-card flex-shrink-0">
+                        <div class="card-inner ${isHidden ? '' : 'flipped'}">
+                            <div class="card-back rounded-lg border-2 border-white/50 shadow-md"></div>
+                            <div class="card-front rounded-lg border-2 border-slate-300 shadow-md bg-white flex flex-col justify-center items-center">
+                                <div class="font-bold ${isRed ? 'text-red-600' : 'text-slate-900'} text-xl">${c.v}</div>
+                                <div class="${isRed ? 'text-red-600' : 'text-slate-900'} text-2xl">${c.s}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderHands(hideDealerSecond = false) {
+                const pBox = document.getElementById('xd-player-cards');
+                const dBox = document.getElementById('xd-dealer-cards');
+                
+                pBox.innerHTML = this.pHand.map(c => this.createCardElement(c)).join('');
+                
+                if (hideDealerSecond && this.dHand.length === 2) {
+                    dBox.innerHTML = this.createCardElement(this.dHand[0]) + this.createCardElement(this.dHand[1], true);
+                    document.getElementById('xd-dealer-score').innerText = this.calcScore([this.dHand[0]]);
+                } else {
+                    dBox.innerHTML = this.dHand.map(c => this.createCardElement(c)).join('');
+                    document.getElementById('xd-dealer-score').innerText = this.calcScore(this.dHand);
+                }
+                
+                document.getElementById('xd-player-score').innerText = this.calcScore(this.pHand);
+            },
+
+            resetUI() {
+                document.getElementById('xd-player-cards').innerHTML = '';
+                document.getElementById('xd-dealer-cards').innerHTML = '';
+                document.getElementById('xd-player-score').classList.remove('opacity-100');
+                document.getElementById('xd-dealer-score').classList.remove('opacity-100');
+                document.getElementById('xd-status-msg').classList.remove('opacity-100', 'scale-100');
+                document.getElementById('xd-status-msg').classList.add('opacity-0', 'scale-50');
+                
+                document.getElementById('xd-controls-bet').classList.remove('hidden');
+                document.getElementById('xd-controls-play').classList.add('hidden');
+                
+                // Reset states
+                this.betAmount = 0;
+                document.getElementById('xd-bet-display').innerText = '0';
+                this.state = 'IDLE';
+            },
+
+            deal() {
+                if(this.state !== 'IDLE') return; 
+                if(this.betAmount <= 0) return showToast("Vui lòng đặt cược!", true);
+                
+                this.state = 'DEALING';
+                playSound('chip');
+                
+                document.getElementById('xd-controls-bet').classList.add('hidden');
+                document.getElementById('xd-player-score').classList.add('opacity-100');
+                document.getElementById('xd-dealer-score').classList.add('opacity-100');
+                document.getElementById('xd-status-msg').classList.remove('opacity-100', 'scale-100');
+                document.getElementById('xd-status-msg').classList.add('opacity-0', 'scale-50');
+
+                this.deck = this.getDeck();
+                this.pHand = [this.deck.pop(), this.deck.pop()];
+                this.dHand = [this.deck.pop(), this.deck.pop()];
+
+                this.renderHands(true);
+                
+                setTimeout(() => {
+                    // Check initial Blackjack
+                    const pScore = this.calcScore(this.pHand);
+                    const dScore = this.calcScore(this.dHand);
+                    
+                    if (pScore === 21) {
+                        this.resolve(true); // Player has BJ, resolve immediately
+                    } else {
+                        this.state = 'PLAYER_TURN';
+                        document.getElementById('xd-controls-play').classList.remove('hidden');
+                        document.getElementById('xd-btn-double').disabled = false;
+                        
+                        // Check if dealer has A up, offer insurance? Too complex, skip for now.
+                    }
+                }, 800);
+            },
+
+            hit() {
+                if(this.state !== 'PLAYER_TURN') return;
+                playSound('chip');
+                
+                this.pHand.push(this.deck.pop());
+                this.renderHands(true);
+                
+                document.getElementById('xd-btn-double').disabled = true; // Cannot double after hit
+                
+                const pScore = this.calcScore(this.pHand);
+                if (pScore > 21) {
+                    setTimeout(() => this.resolve(), 500); // Bust
+                } else if (pScore === 21) {
+                    setTimeout(() => this.stand(), 500); // Auto stand on 21
+                }
+            },
+
+            double() {
+                if(this.state !== 'PLAYER_TURN') return;
+                if(globalBalance < this.betAmount) return showToast("Không đủ lúa để gấp đôi!", true);
+                
+                playSound('chip');
+                globalBalance -= this.betAmount; updateBalance();
+                this.betAmount *= 2;
+                document.getElementById('xd-bet-display').innerText = formatMoney(this.betAmount);
+                
+                this.pHand.push(this.deck.pop());
+                this.renderHands(true);
+                
+                const pScore = this.calcScore(this.pHand);
+                if (pScore > 21) {
+                    setTimeout(() => this.resolve(), 500);
+                } else {
+                    setTimeout(() => this.stand(), 500);
+                }
+            },
+
+            stand() {
+                if(this.state !== 'PLAYER_TURN') return;
+                this.state = 'DEALER_TURN';
+                document.getElementById('xd-controls-play').classList.add('hidden');
+                
+                // Reveal dealer card
+                this.renderHands(false);
+                playSound('chip');
+                
+                setTimeout(() => this.dealerPlay(), 800);
+            },
+
+            dealerPlay() {
+                let dScore = this.calcScore(this.dHand);
+                
+                if (dScore < 17) {
+                    this.dHand.push(this.deck.pop());
+                    this.renderHands(false);
+                    playSound('chip');
+                    setTimeout(() => this.dealerPlay(), 800);
+                } else {
+                    this.resolve();
+                }
+            },
+
+            resolve(playerHasInitialBJ = false) {
+                this.state = 'RESOLVING';
+                document.getElementById('xd-controls-play').classList.add('hidden');
+                
+                // Ensure dealer cards are shown
+                this.renderHands(false);
+                
+                const pScore = this.calcScore(this.pHand);
+                const dScore = this.calcScore(this.dHand);
+                
+                let result = ''; // 'WIN', 'LOSS', 'PUSH', 'BJ'
+                let payout = 0;
+                
+                if (playerHasInitialBJ) {
+                    if (dScore === 21) {
+                        result = 'PUSH'; payout = this.betAmount;
+                    } else {
+                        result = 'BJ'; payout = this.betAmount + (this.betAmount * 1.5);
+                    }
+                } else if (pScore > 21) {
+                    result = 'LOSS';
+                } else if (dScore > 21) {
+                    result = 'WIN'; payout = this.betAmount * 2;
+                } else if (pScore > dScore) {
+                    result = 'WIN'; payout = this.betAmount * 2;
+                } else if (pScore < dScore) {
+                    result = 'LOSS';
+                } else {
+                    result = 'PUSH'; payout = this.betAmount;
+                }
+                
+                this.showResult(result, payout);
+            },
+            
+            showResult(result, payout) {
+                const msgEl = document.getElementById('xd-status-msg');
+                let title = '', colorClass = '', bgClass = '';
+                
+                if (result === 'WIN' || result === 'BJ') {
+                    title = result === 'BJ' ? 'BLACKJACK!' : 'THẮNG LỚN!';
+                    colorClass = 'text-yellow-400 drop-shadow-[0_0_15px_rgba(251,191,36,0.8)]';
+                    playSound('win');
+                    if (result === 'BJ') triggerCoinRain();
+                } else if (result === 'LOSS') {
+                    title = 'QUẮC / THUA';
+                    colorClass = 'text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.8)]';
+                    playSound('lose');
+                } else {
+                    title = 'HÒA NHAY';
+                    colorClass = 'text-slate-300 drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]';
+                    playSound('chip');
+                }
+                
+                msgEl.innerHTML = `
+                    <h1 class="text-4xl font-black ${colorClass} tracking-wider">${title}</h1>
+                    ${payout > 0 ? `<p class="text-white font-bold bg-black/70 border border-slate-500 inline-block px-4 py-1 rounded-full mt-2">+${formatMoney(payout)}</p>` : ''}
+                `;
+                
+                msgEl.classList.remove('opacity-0', 'scale-50');
+                msgEl.classList.add('opacity-100', 'scale-100');
+                
+                if (payout > 0) {
+                    globalBalance += payout;
+                    updateBalance();
+                }
+                
+                setTimeout(() => {
+                    this.state = 'IDLE';
+                    this.betAmount = 0;
+                    document.getElementById('xd-bet-display').innerText = '0';
+                    document.getElementById('xd-controls-bet').classList.remove('hidden');
+                    document.getElementById('xd-status-msg').classList.remove('opacity-100', 'scale-100');
+                    document.getElementById('xd-status-msg').classList.add('opacity-0', 'scale-50');
+                    document.getElementById('xd-player-cards').innerHTML = '';
+                    document.getElementById('xd-dealer-cards').innerHTML = '';
+                    document.getElementById('xd-player-score').classList.remove('opacity-100');
+                    document.getElementById('xd-dealer-score').classList.remove('opacity-100');
+                }, 3000);
+            }
+        };
+
         const CRASH = {
             state: 'IDLE', // IDLE, RUNNING, CASHOUT, CRASHED
             betAmount: 1000,
@@ -968,7 +1337,7 @@
             startTime: 0,
             animationId: null,
             isCashedOut: false,
-            history: [1.15, 2.45, 1.00, 12.30, 4.20], // Lịch sử giả lập ban đầu
+            history: [1.15, 2.45, 1.00, 12.30, 4.20], 
 
             initCanvas() {
                 this.canvas = document.getElementById('crashChart');
@@ -1015,11 +1384,10 @@
                 this.points = [];
                 this.startTime = performance.now();
                 
-                // Thuật toán Casino tạo Crash Point (có tỉ lệ sập luôn ở 1.00x)
                 const e = 100;
                 const h = Math.random();
                 this.crashPoint = Math.max(1.00, (e / (100 - h * 100)) * 0.99); 
-                if(this.crashPoint > 500) this.crashPoint = 500; // Cho phép nổ siêu hũ lên tới 500x
+                if(this.crashPoint > 500) this.crashPoint = 500; 
 
                 document.getElementById('crash-btn-action').innerText = "CHỐT LỜI";
                 document.getElementById('crash-btn-action').classList.remove('from-indigo-600', 'to-blue-600', 'from-gray-500', 'to-gray-600');
@@ -1033,9 +1401,8 @@
                 if(this.state !== 'RUNNING' && this.state !== 'CASHOUT') return;
                 
                 const now = performance.now();
-                const dt = (now - this.startTime) / 1000; // seconds
+                const dt = (now - this.startTime) / 1000; 
                 
-                // Tăng hệ số nhân theo cấp số nhân
                 this.currentMult = 1.00 + (dt * dt * 0.05) + (dt * 0.1); 
                 
                 if(this.currentMult >= this.crashPoint) {
@@ -1077,7 +1444,7 @@
                 this.state = 'CRASHED';
                 cancelAnimationFrame(this.animationId);
                 document.getElementById('crash-mult-display').innerText = this.currentMult.toFixed(2) + 'x';
-                document.getElementById('crash-mult-display').style.color = '#ef4444'; // Đỏ báo nổ
+                document.getElementById('crash-mult-display').style.color = '#ef4444'; 
                 
                 document.getElementById('crash-btn-action').disabled = false;
                 document.getElementById('crash-btn-action').innerText = "ĐẶT CƯỢC NỮA";
@@ -1090,9 +1457,8 @@
                     playSound('boom'); 
                 }
 
-                // Lưu lại lịch sử sau khi nổ
                 this.history.push(this.currentMult);
-                if(this.history.length > 15) this.history.shift(); // Chỉ giữ 15 ván gần nhất để không bị tràn
+                if(this.history.length > 15) this.history.shift(); 
                 this.updateHistoryUI();
 
                 this.drawRunning(true);
@@ -1103,14 +1469,14 @@
                 container.innerHTML = '';
                 this.history.forEach(mult => {
                     const el = document.createElement('div');
-                    let colorClass = 'text-slate-400 bg-slate-800 border-slate-600'; // Xám: Thua (< 2x)
+                    let colorClass = 'text-slate-400 bg-slate-800 border-slate-600'; 
                     
                     if (mult >= 10) {
-                        colorClass = 'text-yellow-400 bg-yellow-900/30 border-yellow-500/50 shadow-[0_0_8px_rgba(234,179,8,0.5)]'; // Vàng: Siêu lãi
+                        colorClass = 'text-yellow-400 bg-yellow-900/30 border-yellow-500/50 shadow-[0_0_8px_rgba(234,179,8,0.5)]'; 
                     } else if (mult >= 2) {
-                        colorClass = 'text-emerald-400 bg-emerald-900/30 border-emerald-500/50'; // Xanh lá: Thắng (>= 2x)
+                        colorClass = 'text-emerald-400 bg-emerald-900/30 border-emerald-500/50'; 
                     } else if (mult < 1.1) {
-                        colorClass = 'text-red-400 bg-red-900/30 border-red-500/50'; // Đỏ: Sập ngay khi cất cánh
+                        colorClass = 'text-red-400 bg-red-900/30 border-red-500/50'; 
                     }
 
                     el.className = `flex-shrink-0 px-3 py-1 rounded-full border ${colorClass} font-mono text-xs font-bold`;
@@ -1118,7 +1484,6 @@
                     container.appendChild(el);
                 });
                 
-                // Trượt thanh ngang tới phần tử mới nhất
                 container.scrollLeft = container.scrollWidth;
             },
             drawIdle() {
@@ -1136,7 +1501,6 @@
                 const ctx = this.ctx; const w = this.width / 2; const h = this.height / 2;
                 ctx.clearRect(0, 0, w, h);
                 
-                // Kẻ lưới
                 ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 1;
                 for(let i=1; i<5; i++) {
                     ctx.beginPath(); ctx.moveTo(0, i * h/5); ctx.lineTo(w, i * h/5); ctx.stroke();
@@ -1145,7 +1509,6 @@
                 
                 if(this.points.length === 0) return;
                 
-                // Mở rộng đồ thị (Dynamic Scale)
                 const maxTime = Math.max(5, this.points[this.points.length-1].x + 1);
                 const maxMult = Math.max(2, this.points[this.points.length-1].y + 0.5);
                 
@@ -1163,7 +1526,6 @@
                 ctx.lineJoin = 'round';
                 ctx.stroke();
                 
-                // Fill màu gradient bên dưới đường cong
                 ctx.lineTo((this.points[this.points.length-1].x / maxTime) * w, h);
                 ctx.lineTo(0, h);
                 const grad = ctx.createLinearGradient(0, 0, 0, h);
