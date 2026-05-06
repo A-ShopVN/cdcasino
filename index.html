@@ -1,0 +1,1838 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CD-CASINO</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;700;900&family=Oswald:wght@400;500;700&display=swap');
+
+        :root {
+            --gold: #fbbf24;
+            --glass-bg: rgba(15, 23, 42, 0.75);
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            background: linear-gradient(-45deg, #020617, #2e1065, #0f172a, #172554, #4c1d95);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            color: white;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { display: none; }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 40px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-super {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.1s, box-shadow 0.1s;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.6), 0 15px 20px rgba(0,0,0,0.4);
+            border-bottom-width: 4px;
+        }
+        .btn-super:active {
+            transform: translateY(8px);
+            box-shadow: 0 0px 0 rgba(0,0,0,0.6), 0 5px 10px rgba(0,0,0,0.4);
+            border-bottom-width: 0px;
+            padding-top: calc(1rem + 4px);
+            padding-bottom: calc(1rem - 4px);
+        }
+        .btn-super::after {
+            content: '';
+            position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        .click-bounce { transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+        .click-bounce:active { transform: scale(0.92); }
+        
+        .game-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.15), transparent);
+            transform: skewX(-25deg); transition: 0.5s; z-index: 10; pointer-events: none;
+        }
+        .game-card:hover::before { left: 200%; }
+        .game-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.6); border-color: var(--gold); }
+
+        .win-coin {
+            position: fixed; z-index: 9999; font-size: 28px; pointer-events: none;
+            animation: fall linear forwards; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
+        }
+        @keyframes fall {
+            0% { transform: translateY(-50px) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 1; transform: translateY(0px) rotate(36deg) scale(1.2); }
+            100% { transform: translateY(110vh) rotate(360deg) scale(1); opacity: 0; }
+        }
+
+        .bowl-cover {
+            position: absolute; top: -10%; left: -10%; width: 120%; height: 120%;
+            background: radial-gradient(circle at 30% 30%, #94a3b8 0%, #334155 50%, #0f172a 100%);
+            border-radius: 50%; box-shadow: 0 30px 40px rgba(0,0,0,0.9);
+            z-index: 20; transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s;
+        }
+        .bowl-open { transform: translateY(-160px) rotateX(45deg) scale(0.8); opacity: 0; pointer-events: none; }
+        .shaking { animation: shakeBowl 0.15s infinite; }
+        @keyframes shakeBowl {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-6px, -4px) rotate(-4deg); }
+            50% { transform: translate(6px, 4px) rotate(4deg); }
+            75% { transform: translate(-6px, 4px) rotate(-2deg); }
+        }
+
+        .card-container { perspective: 1000px; }
+        .card-inner { 
+            position: relative; width: 100%; height: 100%; text-align: center; 
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            transform-style: preserve-3d; box-shadow: 0 4px 8px rgba(0,0,0,0.5); border-radius: 8px;
+        }
+        .card-inner.flipped { transform: rotateY(180deg); }
+        .card-front, .card-back { 
+            position: absolute; width: 100%; height: 100%; 
+            -webkit-backface-visibility: hidden; backface-visibility: hidden; 
+            border-radius: 8px; border: 2px solid white;
+        }
+        .card-back { background: repeating-linear-gradient(45deg,#1e293b,#1e293b 10px,#0f172a 10px,#0f172a 20px); }
+        .card-front { transform: rotateY(180deg); background: white; display: flex; align-items: center; justify-content: center; flex-direction: column;}
+
+        .roulette-window {
+            width: 100%; height: 90px; overflow: hidden; position: relative;
+            background: #0f172a; border: 4px solid #475569; border-radius: 12px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
+        }
+        .roulette-window::after {
+            content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 4px;
+            background: #fbbf24; transform: translateX(-50%); z-index: 10;
+            box-shadow: 0 0 15px #fbbf24, 0 0 5px #fff; border-radius: 2px;
+        }
+        .roulette-track {
+            display: flex; height: 100%; width: max-content;
+            transition: transform 5s cubic-bezier(0.05, 0.85, 0.1, 1);
+        }
+        .r-item {
+            width: 70px; height: 100%; display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 1.8rem; color: white; border-right: 2px solid rgba(255,255,255,0.1);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+        .r-red { background: linear-gradient(135deg, #ef4444, #991b1b); }
+        .r-black { background: linear-gradient(135deg, #334155, #0f172a); }
+        .r-green { background: linear-gradient(135deg, #22c55e, #14532d); }
+
+        .wheel-container { position: relative; width: 240px; height: 240px; margin: 0 auto; }
+        .wheel {
+            width: 100%; height: 100%; border-radius: 50%;
+            border: 8px solid #cbd5e1; box-shadow: 0 0 30px rgba(255,255,255,0.2), inset 0 0 20px rgba(0,0,0,0.5);
+            transition: transform 5s cubic-bezier(0.1, 0.85, 0.15, 1);
+            background: conic-gradient(
+                #ef4444 0deg 60deg,    /* Đỏ: x2 */
+                #3b82f6 60deg 120deg,  /* Xanh: /2 */
+                #22c55e 120deg 180deg, /* Lục: x3 */
+                #eab308 180deg 240deg, /* Vàng: +1000 */
+                #a855f7 240deg 300deg, /* Tím: x5 */
+                #0f172a 300deg 360deg  /* Đen: 0 */
+            );
+            position: relative;
+        }
+        .wheel::after {
+            content:''; position: absolute; inset:0; border-radius: 50%;
+            background: repeating-conic-gradient(from 0deg, transparent 0deg 59deg, rgba(255,255,255,0.4) 59deg 60deg);
+        }
+        .wheel-pointer {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent;
+            border-top: 30px solid #f8fafc; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.8)); z-index: 10;
+        }
+
+        .slot-window {
+            height: 120px; overflow: hidden; position: relative;
+            background: #0f172a; border: 4px solid #f59e0b; border-radius: 12px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.9), 0 0 20px rgba(245,158,11,0.3);
+            display: flex; gap: 4px; padding: 4px;
+        }
+        .slot-reel {
+            flex: 1; background: #1e293b; border-radius: 6px; position: relative; overflow: hidden;
+            border: 1px solid #334155; box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
+        }
+        .slot-strip {
+            display: flex; flex-direction: column; width: 100%; transition: transform 3s cubic-bezier(0.1, 0.8, 0.2, 1.1);
+        }
+        .slot-item {
+            height: 104px; width: 100%; display: flex; align-items: center; justify-content: center;
+            font-size: 4rem; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.5));
+        }
+
+        #ckChart, #crashChart {
+            image-rendering: crisp-edges;
+            box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        .dice-box { perspective: 1000px; width: 45px; height: 45px; }
+        .dice-3d {
+            width: 100%; height: 100%; background: linear-gradient(135deg, #fff, #cbd5e1);
+            border-radius: 8px; box-shadow: inset -2px -2px 6px rgba(0,0,0,0.3), 0 5px 10px rgba(0,0,0,0.5);
+            display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+            padding: 6px; gap: 2px; transform-style: preserve-3d; transition: transform 0.1s;
+        }
+        .dot { background-color: #1e293b; border-radius: 50%; width: 100%; height: 100%; display: none; }
+        .face-1 .dot:nth-child(5) { display: block; background-color: #ef4444; transform: scale(1.4); }
+        .face-2 .dot:nth-child(1), .face-2 .dot:nth-child(9) { display: block; }
+        .face-3 .dot:nth-child(1), .face-3 .dot:nth-child(5), .face-3 .dot:nth-child(9) { display: block; }
+        .face-4 .dot:nth-child(1), .face-4 .dot:nth-child(3), .face-4 .dot:nth-child(7), .face-4 .dot:nth-child(9) { display: block; background-color: #ef4444; }
+        .face-5 .dot:nth-child(1), .face-5 .dot:nth-child(3), .face-5 .dot:nth-child(5), .face-5 .dot:nth-child(7), .face-5 .dot:nth-child(9) { display: block; }
+        .face-6 .dot:nth-child(1), .face-6 .dot:nth-child(3), .face-6 .dot:nth-child(4), .face-6 .dot:nth-child(6), .face-6 .dot:nth-child(7), .face-6 .dot:nth-child(9) { display: block; }
+
+        .xd-coin {
+            width: 36px; height: 36px; border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.4);
+            border: 2px solid rgba(0,0,0,0.2); transition: transform 0.2s;
+        }
+        .xd-red { background: radial-gradient(circle at 30% 30%, #ef4444, #991b1b); }
+        .xd-white { background: radial-gradient(circle at 30% 30%, #ffffff, #94a3b8); }
+
+        .float-text {
+            position: fixed; font-family: 'Roboto Mono', monospace; font-size: 2.5rem; font-weight: 900;
+            pointer-events: none; z-index: 100; animation: floatUp 1.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 0 3px 10px rgba(0,0,0,0.9); transform: translate(-50%, -50%);
+        }
+        @keyframes floatUp {
+            0% { transform: translate(-50%, 0) scale(0.5); opacity: 0; }
+            20% { transform: translate(-50%, -30px) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -150px) scale(0.8); opacity: 0; }
+        }
+
+        .help-btn-float {
+            position: fixed; top: 80px; right: 15px; z-index: 50;
+            width: 36px; height: 36px; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #8b5cf6, #4c1d95);
+            border: 2px solid #c4b5fd; color: white; font-weight: 900; font-size: 1.2rem;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6); cursor: pointer; transition: transform 0.1s;
+        }
+        .help-btn-float:active { transform: scale(0.9); }
+
+        .lobby-feed-box {
+            max-height: 150px; overflow-y: auto; scrollbar-width: none;
+        }
+
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <header class="fixed top-0 left-0 right-0 h-16 glass-panel z-50 flex items-center justify-between px-4 border-b-0 border-slate-700/50 shadow-lg">
+        <button id="btnBack" onclick="goHome()" class="hidden text-slate-200 hover:text-white click-bounce flex items-center gap-1 bg-slate-800/80 px-4 py-1.5 rounded-full shadow-[0_0_10px_rgba(255,255,255,0.1)] border border-slate-600">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7"></path></svg>
+            <span class="font-black tracking-wider text-sm">SẢNH</span>
+        </button>
+        <div id="logoText" class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-yellow-500 to-amber-600 tracking-widest drop-shadow-md">
+            CD-CASINO
+        </div>
+        
+        <div class="flex items-center gap-2 bg-slate-900/90 px-3 py-1.5 rounded-full border border-yellow-500/50 shadow-[0_0_15px_rgba(251,191,36,0.3)]">
+            <span id="globalBalance" class="font-mono font-black text-yellow-400 text-lg drop-shadow-[0_0_5px_rgba(251,191,36,0.5)]">10,000</span>
+            <button onclick="addFunds()" class="ml-1 w-7 h-7 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-white flex items-center justify-center click-bounce shadow-md font-bold text-xl leading-none pb-1 border border-emerald-300">+</button>
+        </div>
+    </header>
+
+    <div id="toast" class="fixed top-20 left-1/2 transform -translate-x-1/2 glass-panel text-white px-6 py-3 rounded-full shadow-[0_10px_25px_rgba(0,0,0,0.8)] opacity-0 transition-all duration-300 pointer-events-none z-[100] font-sans text-sm font-bold text-center border-l-4 border-l-yellow-400">
+        Message
+    </div>
+
+    <div id="help-modal" class="fixed inset-0 bg-slate-900/90 backdrop-blur-sm z-[200] hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-sm rounded-2xl border-2 border-indigo-500/50 shadow-[0_0_30px_rgba(99,102,241,0.5)] flex flex-col overflow-hidden">
+            <div class="bg-gradient-to-r from-indigo-900 to-purple-900 p-4 text-center">
+                <h3 id="help-title" class="text-xl font-black text-white tracking-widest drop-shadow-md">HƯỚNG DẪN</h3>
+            </div>
+            <div id="help-content" class="p-5 text-sm text-slate-300 leading-relaxed max-h-[60vh] overflow-y-auto">
+                <!-- Nội dung hướng dẫn -->
+            </div>
+            <div class="p-4 bg-slate-900/80 border-t border-slate-700 text-center">
+                <button onclick="closeInstructionManual()" class="px-8 py-2 bg-gradient-to-r from-indigo-500 to-purple-500 text-white font-bold rounded-full shadow-lg active:scale-95 transition-transform">ĐÃ HIỂU</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="btn-help" onclick="openInstructionManual()" class="help-btn-float hidden">?</div>
+
+    <main class="flex-1 mt-16 overflow-y-auto pb-56 flex flex-col items-center">
+        
+        <div id="view-lobby" class="w-full max-w-lg p-4 flex flex-col gap-4">
+            
+            <div class="w-full h-32 rounded-2xl bg-gradient-to-r from-rose-900 via-purple-900 to-indigo-900 relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.6)] flex flex-col items-center justify-center border-2 border-purple-500/30">
+                <div class="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')]"></div>
+                <h1 class="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-b from-yellow-200 to-yellow-500 z-10 drop-shadow-[0_2px_5px_rgba(0,0,0,0.8)] tracking-widest italic animate-pulse">SIÊU CASINO</h1>
+                <p class="z-10 text-xs text-indigo-200 uppercase tracking-[0.3em] mt-1 font-bold">Uy tín làm nên thương hiệu</p>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <!-- CRASH GAME THÊM MỚI -->
+                <div onclick="openGame('crash')" class="game-card col-span-2 glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border-2 border-blue-500/50 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                    <div class="h-24 bg-gradient-to-br from-[#020617] to-[#1e3a8a] flex items-center justify-center gap-4 relative overflow-hidden">
+                        <div class="text-4xl drop-shadow-lg z-10 animate-bounce">🚀</div>
+                        <div class="flex flex-col z-10">
+                            <h3 class="font-black text-2xl text-blue-400 tracking-wider">TÀU VŨ TRỤ</h3>
+                            <span class="text-xs text-blue-200 bg-blue-900/50 px-2 py-0.5 rounded-full border border-blue-500/30 self-start mt-1">Crash X - Chốt lời tay</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openGame('chungkhoan')" class="game-card col-span-2 glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border-2 border-emerald-500/50 shadow-[0_0_20px_rgba(16,185,129,0.3)]">
+                    <div class="h-24 bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center gap-4 relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-20 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+PHBhdGggZD0iTTAgNDBMMTAgMTBMMjAgMjBMMzAgMEw0MCAzMFY0MEgwWiIgZmlsbD0iIzIyYzU1ZSIvPjwvc3ZnPg==')] bg-repeat-x animate-[slide_10s_linear_infinite]"></div>
+                        <div class="text-4xl drop-shadow-lg z-10">📈</div>
+                        <div class="flex flex-col z-10">
+                            <h3 class="font-black text-2xl text-emerald-400 tracking-wider">CHỨNG KHOÁN</h3>
+                            <span class="text-xs text-emerald-200 bg-emerald-900/50 px-2 py-0.5 rounded-full border border-emerald-500/30 self-start mt-1">Dự đoán Nến 5s</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openGame('nohu')" class="game-card col-span-2 glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border-2 border-yellow-500/50 shadow-[0_0_20px_rgba(234,179,8,0.3)]">
+                    <div class="h-24 bg-gradient-to-r from-amber-900 to-orange-900 flex items-center justify-center gap-4 text-5xl relative overflow-hidden">
+                        <span class="drop-shadow-lg">🎰</span>
+                        <div class="flex flex-col">
+                            <h3 class="font-black text-xl text-yellow-400 tracking-wider">NỔ HŨ ĐẠI GIA</h3>
+                            <span class="text-xs text-yellow-200 uppercase">Jackpot x50 Tiền Cược</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openGame('vongquay')" class="game-card glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border border-pink-500/30">
+                    <div class="h-20 bg-gradient-to-r from-fuchsia-900 to-pink-900 flex items-center justify-center">
+                        <span class="drop-shadow-lg text-4xl">🎡</span>
+                    </div>
+                    <div class="p-2 text-center bg-slate-900/90">
+                        <h3 class="font-bold text-sm text-pink-400">Vòng Quay</h3>
+                    </div>
+                </div>
+
+                <div onclick="openGame('roulette')" class="game-card glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border border-emerald-500/30">
+                    <div class="h-20 bg-gradient-to-br from-emerald-900 to-slate-900 flex items-center justify-center gap-1">
+                        <div class="w-6 h-6 rounded bg-red-500 text-white font-black flex items-center justify-center text-xs transform -rotate-12">7</div>
+                        <div class="w-8 h-8 rounded bg-green-500 text-white font-black flex items-center justify-center text-sm z-10">0</div>
+                        <div class="w-6 h-6 rounded bg-slate-800 text-white font-black flex items-center justify-center text-xs transform rotate-12 border border-slate-600">8</div>
+                    </div>
+                    <div class="p-2 text-center bg-slate-900/90">
+                        <h3 class="font-bold text-sm text-emerald-400">Roulette</h3>
+                    </div>
+                </div>
+
+                <div onclick="openGame('taixiu')" class="game-card glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border border-blue-500/30">
+                    <div class="h-20 bg-gradient-to-br from-blue-900 to-red-900 flex items-center justify-center gap-2">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-red-600 font-black text-xl rotate-12 shadow-lg border-b-4 border-slate-300">T</div>
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-blue-600 font-black text-xl -rotate-12 shadow-lg border-b-4 border-slate-300">X</div>
+                    </div>
+                    <div class="p-2 text-center bg-slate-900/90">
+                        <h3 class="font-bold text-sm text-blue-400">Tài Xỉu 3D</h3>
+                    </div>
+                </div>
+
+                <div onclick="openGame('xocdia')" class="game-card glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border border-rose-500/30">
+                    <div class="h-20 bg-gradient-to-br from-rose-900 to-slate-900 flex items-center justify-center">
+                        <div class="relative w-12 h-12 bg-slate-800 rounded-full border-4 border-slate-500 flex flex-wrap p-0.5 gap-0.5 shadow-[0_0_15px_rgba(0,0,0,0.8)]">
+                            <div class="w-4 h-4 rounded-full bg-red-500 shadow-inner"></div><div class="w-4 h-4 rounded-full bg-red-500 shadow-inner"></div>
+                            <div class="w-4 h-4 rounded-full bg-white shadow-inner"></div><div class="w-4 h-4 rounded-full bg-white shadow-inner"></div>
+                        </div>
+                    </div>
+                    <div class="p-2 text-center bg-slate-900/90">
+                        <h3 class="font-bold text-sm text-rose-400">Xóc Đĩa VIP</h3>
+                    </div>
+                </div>
+
+                <div onclick="openGame('baucua')" class="game-card glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border border-orange-500/30">
+                    <div class="h-20 bg-gradient-to-br from-orange-900 to-red-900 flex items-center justify-center gap-1">
+                        <div class="text-2xl filter drop-shadow-lg">🦌</div><div class="text-2xl filter drop-shadow-lg">🦀</div><div class="text-2xl filter drop-shadow-lg">🐟</div>
+                    </div>
+                    <div class="p-2 text-center bg-slate-900/90">
+                        <h3 class="font-bold text-sm text-orange-400">Bầu Cua</h3>
+                    </div>
+                </div>
+
+                <div onclick="openGame('baicao')" class="game-card glass-panel rounded-2xl overflow-hidden cursor-pointer click-bounce border border-yellow-500/30">
+                    <div class="h-20 bg-gradient-to-r from-amber-900 to-orange-900 flex items-center justify-center gap-[-5px]">
+                        <div class="w-6 h-10 bg-white rounded shadow-lg text-red-600 font-bold flex flex-col justify-center items-center rotate-[-15deg] z-10 text-[10px]">A♥</div>
+                        <div class="w-6 h-10 bg-white rounded shadow-xl text-slate-900 font-bold flex flex-col justify-center items-center z-20 -mt-2 scale-110 text-[10px]">K♠</div>
+                        <div class="w-6 h-10 bg-white rounded shadow-lg text-red-600 font-bold flex flex-col justify-center items-center rotate-[15deg] z-10 text-[10px]">9♦</div>
+                    </div>
+                    <div class="p-2 text-center bg-slate-900/90">
+                        <h3 class="font-bold text-sm text-yellow-400">Bài Cào 3 Lá</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full glass-panel rounded-xl p-3 border border-slate-600/50 mt-2">
+                <h3 class="text-xs font-bold text-slate-400 mb-2 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> HOẠT ĐỘNG GẦN ĐÂY
+                </h3>
+                <div id="lobby-feed" class="lobby-feed-box flex flex-col gap-2">
+                    <!-- Live feed list -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TÀU VŨ TRỤ (CRASH) VIEW -->
+        <div id="view-crash" class="hidden w-full max-w-lg p-2 flex flex-col items-center">
+            <h2 class="text-2xl font-black text-blue-400 tracking-widest mb-2 drop-shadow-md">TÀU VŨ TRỤ (CRASH)</h2>
+            
+            <div id="crash-chart-container" class="w-full p-2 bg-[#0b1120] border-2 border-slate-700 rounded-xl shadow-2xl relative mb-4 overflow-hidden h-[300px]">
+                <canvas id="crashChart" width="450" height="280" class="w-full h-full bg-[#0b1120] absolute inset-0 z-0"></canvas>
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+                    <span id="crash-mult-display" class="text-6xl font-black text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.5)] tracking-tighter">1.00x</span>
+                </div>
+            </div>
+
+            <div class="w-full glass-panel p-3 rounded-xl border border-slate-600 mb-4">
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-slate-400">TIỀN CƯỢC:</span>
+                    <div class="flex items-center gap-1">
+                        <button onclick="CRASH.adjBet(-1000)" class="w-8 h-8 rounded bg-slate-700 hover:bg-slate-600 font-bold border border-slate-500">-</button>
+                        <input type="text" id="crash-bet-input" readonly value="1,000" class="w-24 bg-slate-900 border border-slate-600 rounded py-1 text-center font-mono font-bold text-yellow-400 outline-none">
+                        <button onclick="CRASH.adjBet(1000)" class="w-8 h-8 rounded bg-slate-700 hover:bg-slate-600 font-bold border border-slate-500">+</button>
+                        <button onclick="CRASH.setBetAll()" class="px-2 py-1 h-8 rounded bg-yellow-600 hover:bg-yellow-500 text-slate-900 font-black text-xs ml-1">ALL</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full px-2">
+                <button onclick="CRASH.action()" id="crash-btn-action" class="w-full py-4 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-xl font-black text-xl text-white btn-super uppercase tracking-widest border-blue-800 transition-all">ĐẶT CƯỢC</button>
+            </div>
+        </div>
+
+        <!-- CHỨNG KHOÁN -->
+        <div id="view-chungkhoan" class="hidden w-full max-w-lg p-2 flex flex-col items-center">
+            <h2 class="text-2xl font-black text-emerald-400 tracking-widest mb-2 drop-shadow-md">BTC/USD</h2>
+            
+            <div id="ck-chart-container" class="w-full p-2 bg-[#131722] border-2 border-slate-700 rounded-xl shadow-2xl relative mb-4 overflow-hidden">
+                <div class="absolute top-4 left-4 text-xs font-mono text-slate-400 z-10">BINANCE:BTCUSD</div>
+                <canvas id="ckChart" width="450" height="280" class="w-full h-auto bg-[#131722] relative z-0"></canvas>
+            </div>
+
+            <div class="w-full glass-panel p-3 rounded-xl border border-slate-600 mb-4">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="text-xs font-bold text-slate-400">THỜI GIAN:</span>
+                    <div class="flex gap-2 bg-slate-900 p-1 rounded-lg border border-slate-700">
+                        <button id="ck-t-5" onclick="CK.setTime(5)" class="ck-time-btn px-4 py-1 rounded bg-emerald-600 text-white font-bold text-xs shadow-md transition-colors">5s</button>
+                        <button id="ck-t-10" onclick="CK.setTime(10)" class="ck-time-btn px-4 py-1 rounded text-slate-400 font-bold text-xs hover:text-white transition-colors">10s</button>
+                        <button id="ck-t-15" onclick="CK.setTime(15)" class="ck-time-btn px-4 py-1 rounded text-slate-400 font-bold text-xs hover:text-white transition-colors">15s</button>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center">
+                    <span class="text-xs font-bold text-slate-400">TIỀN CƯỢC:</span>
+                    <div class="flex items-center gap-1">
+                        <button onclick="CK.adjBet(-1000)" class="w-8 h-8 rounded bg-slate-700 hover:bg-slate-600 font-bold border border-slate-500">-</button>
+                        <input type="text" id="ck-bet-input" readonly value="1,000" class="w-24 bg-slate-900 border border-slate-600 rounded py-1 text-center font-mono font-bold text-yellow-400 outline-none">
+                        <button onclick="CK.adjBet(1000)" class="w-8 h-8 rounded bg-slate-700 hover:bg-slate-600 font-bold border border-slate-500">+</button>
+                        <button onclick="CK.setBetAll()" class="px-2 py-1 h-8 rounded bg-yellow-600 hover:bg-yellow-500 text-slate-900 font-black text-xs ml-1">ALL</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full grid grid-cols-2 gap-4">
+                <button onclick="CK.placeBet('UP')" id="ck-zone-UP" class="glass-panel border-2 border-emerald-600/50 rounded-xl p-3 text-center cursor-pointer click-bounce relative flex flex-col justify-center bg-emerald-900/20 hover:border-emerald-400 transition-colors shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                    <div class="text-3xl mb-1">📈</div>
+                    <h2 class="text-xl font-black text-emerald-500 drop-shadow-md">TĂNG</h2>
+                    <p class="text-[10px] text-emerald-200 mt-1 uppercase">1 Ăn 1.95</p>
+                </button>
+                <button onclick="CK.placeBet('DOWN')" id="ck-zone-DOWN" class="glass-panel border-2 border-rose-600/50 rounded-xl p-3 text-center cursor-pointer click-bounce relative flex flex-col justify-center bg-rose-900/20 hover:border-rose-400 transition-colors shadow-[0_0_15px_rgba(225,29,72,0.2)]">
+                    <div class="text-3xl mb-1">📉</div>
+                    <h2 class="text-xl font-black text-rose-500 drop-shadow-md">GIẢM</h2>
+                    <p class="text-[10px] text-rose-200 mt-1 uppercase">1 Ăn 1.95</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- NỔ HŨ -->
+        <div id="view-nohu" class="hidden w-full max-w-lg p-4 flex flex-col items-center">
+            <h2 class="text-2xl font-black text-yellow-400 tracking-widest mb-6 drop-shadow-md">SLOTS NỔ HŨ</h2>
+            
+            <div class="w-full bg-gradient-to-b from-yellow-600 to-yellow-900 p-2 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.8)] border-2 border-yellow-400">
+                <div class="slot-window">
+                    <div class="slot-reel"><div id="reel1" class="slot-strip"></div></div>
+                    <div class="slot-reel"><div id="reel2" class="slot-strip"></div></div>
+                    <div class="slot-reel"><div id="reel3" class="slot-strip"></div></div>
+                </div>
+            </div>
+
+            <div class="w-full mt-8 glass-panel p-4 rounded-xl border border-yellow-500/30">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-sm font-bold text-slate-300">TIỀN CƯỢC:</span>
+                    <span id="nh-bet-display" class="font-mono text-3xl font-black text-yellow-400">0</span>
+                </div>
+                <div class="flex justify-between text-[10px] text-slate-400 font-bold border-t border-slate-700 pt-2">
+                    <span>2 hình: x2</span>
+                    <span>3 hình: x10</span>
+                    <span class="text-yellow-400">3 số 7️⃣: x50 (JACKPOT)</span>
+                </div>
+            </div>
+
+            <div class="w-full mt-6 flex gap-3 justify-center px-2">
+                <button onclick="NH.action()" id="nh-btn-action" class="flex-1 py-4 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-xl font-black text-xl text-slate-900 btn-super uppercase tracking-widest border-orange-700">QUAY SLOTS</button>
+                <button onclick="NH.clearBet()" id="nh-btn-clear" class="px-6 glass-panel border-2 border-red-500/50 rounded-xl text-red-400 font-bold click-bounce text-sm bg-red-900/20">HỦY</button>
+            </div>
+        </div>
+
+        <!-- ROULETTE -->
+        <div id="view-roulette" class="hidden w-full max-w-lg p-2 flex flex-col items-center">
+            <h2 class="text-2xl font-black text-emerald-400 tracking-widest mb-4 drop-shadow-md">ROULETTE CHÂU ÂU</h2>
+            
+            <div class="roulette-window w-full shadow-2xl">
+                <div id="rl-track" class="roulette-track"></div>
+            </div>
+
+            <div class="w-full mt-6 grid grid-cols-3 gap-3">
+                <div onclick="RL.placeBet('red')" id="rl-zone-red" class="glass-panel border-2 border-red-500/50 rounded-xl p-3 text-center cursor-pointer click-bounce relative h-24 flex flex-col justify-center bg-red-900/20">
+                    <h2 class="text-2xl font-black text-red-500 drop-shadow-md">ĐỎ</h2>
+                    <p class="text-[10px] text-red-200 mt-1 uppercase">1 Ăn 2</p>
+                    <div id="rl-val-red" class="absolute top-1 right-1 text-yellow-400 font-mono text-xs font-bold hidden bg-black/80 px-2 py-0.5 rounded shadow">0</div>
+                </div>
+                <div onclick="RL.placeBet('green')" id="rl-zone-green" class="glass-panel border-2 border-green-500/50 rounded-xl p-3 text-center cursor-pointer click-bounce relative h-24 flex flex-col justify-center bg-green-900/20">
+                    <h2 class="text-2xl font-black text-green-400 drop-shadow-md">XANH</h2>
+                    <p class="text-[10px] text-green-200 mt-1 uppercase">1 Ăn 14</p>
+                    <div id="rl-val-green" class="absolute top-1 right-1 text-yellow-400 font-mono text-xs font-bold hidden bg-black/80 px-2 py-0.5 rounded shadow">0</div>
+                </div>
+                <div onclick="RL.placeBet('black')" id="rl-zone-black" class="glass-panel border-2 border-slate-500/50 rounded-xl p-3 text-center cursor-pointer click-bounce relative h-24 flex flex-col justify-center bg-slate-800/50">
+                    <h2 class="text-2xl font-black text-slate-300 drop-shadow-md">ĐEN</h2>
+                    <p class="text-[10px] text-slate-400 mt-1 uppercase">1 Ăn 2</p>
+                    <div id="rl-val-black" class="absolute top-1 right-1 text-yellow-400 font-mono text-xs font-bold hidden bg-black/80 px-2 py-0.5 rounded shadow">0</div>
+                </div>
+            </div>
+
+            <div class="w-full mt-6 flex gap-3 justify-center px-2">
+                <button onclick="RL.action()" id="rl-btn-action" class="flex-1 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl font-black text-xl text-white btn-super uppercase tracking-widest border-emerald-700">QUAY NGAY</button>
+                <button onclick="RL.clearBets()" class="px-6 glass-panel border-2 border-red-500/50 rounded-xl text-red-400 font-bold click-bounce text-sm bg-red-900/20">HỦY</button>
+            </div>
+        </div>
+
+        <!-- VÒNG QUAY -->
+        <div id="view-vongquay" class="hidden w-full max-w-lg p-2 flex flex-col items-center">
+            <h2 class="text-2xl font-black text-pink-400 tracking-widest mb-6 drop-shadow-md">VÒNG QUAY NHÂN PHẨM</h2>
+            <div class="wheel-container"><div class="wheel-pointer"></div><div id="vq-wheel" class="wheel"></div></div>
+            <div class="w-full mt-8 glass-panel p-4 rounded-xl border border-pink-500/30 bg-slate-900/80">
+                <div class="flex items-center justify-between mb-4">
+                    <span class="text-sm font-bold text-slate-300">TIỀN CƯỢC:</span>
+                    <span id="vq-bet-display" class="font-mono text-3xl font-black text-yellow-400 drop-shadow-md">0</span>
+                </div>
+                <div class="grid grid-cols-3 gap-2 text-[10px] text-center font-bold">
+                    <div class="bg-red-500/20 text-red-400 p-1 rounded border border-red-500/50">Đỏ: x2</div>
+                    <div class="bg-blue-500/20 text-blue-400 p-1 rounded border border-blue-500/50">Xanh: /2</div>
+                    <div class="bg-green-500/20 text-green-400 p-1 rounded border border-green-500/50">Lục: x3</div>
+                    <div class="bg-yellow-500/20 text-yellow-400 p-1 rounded border border-yellow-500/50">Vàng: +1000</div>
+                    <div class="bg-purple-500/20 text-purple-400 p-1 rounded border border-purple-500/50">Tím: x5</div>
+                    <div class="bg-slate-800 text-slate-400 p-1 rounded border border-slate-600">Đen: Mất trắng</div>
+                </div>
+            </div>
+            <div class="w-full mt-6 flex gap-3 justify-center px-2">
+                <button onclick="VQ.action()" id="vq-btn-action" class="flex-1 py-4 bg-gradient-to-r from-pink-600 to-rose-500 rounded-xl font-black text-xl text-white btn-super uppercase tracking-widest border-pink-800">QUAY</button>
+                <button onclick="VQ.clearBet()" id="vq-btn-clear" class="px-6 glass-panel border-2 border-red-500/50 rounded-xl text-red-400 font-bold click-bounce text-sm bg-red-900/20">HỦY</button>
+            </div>
+        </div>
+
+        <!-- BÀI CÀO -->
+        <div id="view-baicao" class="hidden w-full max-w-lg p-4 flex flex-col items-center h-full">
+            <div class="w-full glass-panel p-5 rounded-2xl border-t-4 border-t-red-500 flex flex-col items-center relative shadow-2xl bg-slate-900/80">
+                <span class="absolute top-2 left-3 text-xs font-black text-red-400 tracking-widest bg-red-950 px-2 py-1 rounded">NHÀ CÁI</span>
+                <div id="bai-dealer-cards" class="flex gap-4 h-28 items-center mt-4 perspective-1000"></div>
+                <div id="bai-dealer-score" class="mt-4 font-black text-2xl text-red-400 opacity-0 transition-opacity bg-black/80 px-6 py-1 rounded-full border border-red-500 shadow-[0_0_15px_rgba(239,68,68,0.5)]">0 Điểm</div>
+            </div>
+            <div class="my-3 font-black italic text-4xl text-yellow-500 drop-shadow-[0_0_15px_rgba(234,179,8,0.8)]">VS</div>
+            <div class="w-full glass-panel p-5 rounded-2xl border-b-4 border-b-emerald-500 flex flex-col items-center relative shadow-[0_0_30px_rgba(16,185,129,0.2)] bg-slate-900/80">
+                <span class="absolute top-2 left-3 text-xs font-black text-emerald-400 tracking-widest bg-emerald-950 px-2 py-1 rounded">BẠN</span>
+                <div id="bai-player-cards" class="flex gap-4 h-28 items-center mt-4 perspective-1000"></div>
+                <div id="bai-player-score" class="mt-4 font-black text-2xl text-emerald-400 opacity-0 transition-opacity bg-black/80 px-6 py-1 rounded-full border border-emerald-500 shadow-[0_0_15px_rgba(16,185,129,0.5)]">0 Điểm</div>
+            </div>
+            <div class="w-full mt-6 glass-panel p-4 rounded-xl flex items-center justify-between border border-yellow-500/30">
+                <span class="text-sm font-bold text-slate-300">TIỀN CƯỢC:</span>
+                <span id="bai-bet-display" class="font-mono text-3xl font-black text-yellow-400 drop-shadow-md">0</span>
+            </div>
+            <div class="w-full mt-4 flex gap-3 justify-center px-2">
+                <button onclick="BAI.deal()" id="bai-btn-action" class="flex-1 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl font-black text-xl text-white btn-super uppercase tracking-widest border-indigo-800">CHIA BÀI</button>
+                <button onclick="BAI.clearBet()" id="bai-btn-clear" class="px-6 glass-panel border-2 border-red-500/50 rounded-xl text-red-400 font-bold click-bounce text-sm bg-red-900/20">HỦY</button>
+            </div>
+        </div>
+
+        <!-- TÀI XỈU -->
+        <div id="view-taixiu" class="hidden w-full max-w-lg p-2 flex flex-col items-center">
+            <div class="relative w-52 h-52 mt-2 mx-auto">
+                <div class="absolute inset-0 bg-slate-800 rounded-full border-8 border-slate-600 shadow-[inset_0_10px_30px_rgba(0,0,0,0.9)] flex items-center justify-center">
+                    <div id="tx-result-overlay" class="absolute inset-0 bg-black/80 rounded-full flex flex-col items-center justify-center z-15 opacity-0 transition-opacity duration-300">
+                        <span id="tx-sum" class="text-7xl font-black text-white drop-shadow-[0_0_20px_#fff]">12</span>
+                    </div>
+                    <div class="flex gap-2 relative z-10">
+                        <div class="dice-box"><div id="tx-dice1" class="dice-3d face-1"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+                        <div class="dice-box mt-8"><div id="tx-dice2" class="dice-3d face-2"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+                        <div class="dice-box"><div id="tx-dice3" class="dice-3d face-3"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+                    </div>
+                </div>
+                <div id="tx-bowl" class="bowl-cover bowl-open"></div>
+            </div>
+            <div class="w-full grid grid-cols-2 gap-3 mt-8">
+                <div onclick="TX.placeBet('xiu')" id="tx-zone-xiu" class="glass-panel border-2 border-slate-600 rounded-xl p-4 text-center cursor-pointer click-bounce relative h-28 flex flex-col justify-center bg-blue-900/10 hover:border-blue-500 transition-colors">
+                    <h2 class="text-4xl font-black text-blue-400 drop-shadow-md">XỈU</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase">4 - 10 (1:1)</p>
+                    <div id="tx-val-xiu" class="absolute top-2 right-2 text-yellow-400 font-mono font-bold text-sm hidden bg-black/80 px-2 py-0.5 rounded">0</div>
+                </div>
+                <div onclick="TX.placeBet('tai')" id="tx-zone-tai" class="glass-panel border-2 border-slate-600 rounded-xl p-4 text-center cursor-pointer click-bounce relative h-28 flex flex-col justify-center bg-red-900/10 hover:border-red-500 transition-colors">
+                    <h2 class="text-4xl font-black text-red-500 drop-shadow-md">TÀI</h2>
+                    <p class="text-xs text-slate-400 mt-1 uppercase">11 - 17 (1:1)</p>
+                    <div id="tx-val-tai" class="absolute top-2 right-2 text-yellow-400 font-mono font-bold text-sm hidden bg-black/80 px-2 py-0.5 rounded">0</div>
+                </div>
+                <div onclick="TX.placeBet('bao')" id="tx-zone-bao" class="col-span-2 bg-gradient-to-r from-purple-900/80 to-fuchsia-900/80 border-2 border-purple-500/50 rounded-xl p-3 text-center cursor-pointer click-bounce relative flex items-center justify-center gap-4 shadow-lg hover:border-purple-400 transition-colors">
+                    <h2 class="text-3xl font-black text-fuchsia-300 tracking-widest drop-shadow-md">BÃO</h2>
+                    <p class="text-xs text-fuchsia-200">3 viên giống nhau (1:30)</p>
+                    <div id="tx-val-bao" class="absolute top-2 right-2 text-yellow-400 font-mono font-bold text-sm hidden bg-black/80 px-2 py-0.5 rounded">0</div>
+                </div>
+            </div>
+            <div class="w-full mt-6 flex gap-3 justify-center px-2">
+                <button onclick="TX.action()" id="tx-btn-action" class="flex-1 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl font-black text-xl text-white btn-super uppercase tracking-widest border-emerald-800">XÓC ĐĨA</button>
+                <button onclick="TX.clearBets()" class="px-6 glass-panel border-2 border-red-500/50 rounded-xl text-red-400 font-bold click-bounce text-sm bg-red-900/20">HỦY</button>
+            </div>
+        </div>
+
+        <!-- XÓC ĐĨA -->
+        <div id="view-xocdia" class="hidden w-full max-w-lg p-2 flex flex-col items-center">
+            <div class="relative w-52 h-52 mt-2 mx-auto">
+                <div class="absolute inset-0 bg-[#8b0000] rounded-full border-8 border-yellow-600/80 shadow-[inset_0_10px_30px_rgba(0,0,0,0.9)] flex items-center justify-center">
+                    <div id="xd-grid" class="grid grid-cols-2 gap-2 relative z-10 transition-transform duration-300">
+                        <div id="xd-c1" class="xd-coin xd-red"></div><div id="xd-c2" class="xd-coin xd-white"></div>
+                        <div id="xd-c3" class="xd-coin xd-red"></div><div id="xd-c4" class="xd-coin xd-white"></div>
+                    </div>
+                </div>
+                <div id="xd-bowl" class="bowl-cover bowl-open bg-[radial-gradient(circle_at_30%_30%,#e2e8f0_0%,#94a3b8_50%,#475569_100%)]"></div>
+            </div>
+            <div class="w-full mt-8 grid grid-cols-4 gap-2">
+                <div onclick="XD.placeBet('chan')" id="xd-zone-chan" class="col-span-2 glass-panel rounded-xl p-3 text-center cursor-pointer click-bounce relative h-24 flex flex-col justify-center border-b-4 border-b-rose-500 hover:bg-rose-900/20 transition-colors">
+                    <h2 class="text-3xl font-black text-rose-400 drop-shadow-md">CHẴN</h2>
+                    <p class="text-[10px] text-slate-300 mt-1">4Đ | 4T | 2Đ-2T (1:1)</p>
+                    <div id="xd-val-chan" class="absolute top-1 right-1 text-yellow-400 font-mono text-xs font-bold hidden bg-black/80 px-1.5 rounded">0</div>
+                </div>
+                <div onclick="XD.placeBet('le')" id="xd-zone-le" class="col-span-2 glass-panel rounded-xl p-3 text-center cursor-pointer click-bounce relative h-24 flex flex-col justify-center border-b-4 border-b-sky-500 hover:bg-sky-900/20 transition-colors">
+                    <h2 class="text-3xl font-black text-sky-400 drop-shadow-md">LẺ</h2>
+                    <p class="text-[10px] text-slate-300 mt-1">3Đ-1T | 3T-1Đ (1:1)</p>
+                    <div id="xd-val-le" class="absolute top-1 right-1 text-yellow-400 font-mono text-xs font-bold hidden bg-black/80 px-1.5 rounded">0</div>
+                </div>
+                <div onclick="XD.placeBet('4t')" id="xd-zone-4t" class="glass-panel rounded-lg p-2 text-center cursor-pointer click-bounce relative h-16 flex flex-col justify-center items-center hover:bg-slate-700 transition-colors">
+                    <div class="flex gap-0.5 mb-1"><div class="w-3 h-3 rounded-full bg-white"></div><div class="w-3 h-3 rounded-full bg-white"></div><div class="w-3 h-3 rounded-full bg-white"></div><div class="w-3 h-3 rounded-full bg-white"></div></div>
+                    <span class="text-[10px] font-bold text-slate-300">1:15</span>
+                    <div id="xd-val-4t" class="absolute top-0 right-0 text-yellow-400 font-mono text-[9px] hidden bg-black/80 px-1">0</div>
+                </div>
+                <div onclick="XD.placeBet('3t1d')" id="xd-zone-3t1d" class="glass-panel rounded-lg p-2 text-center cursor-pointer click-bounce relative h-16 flex flex-col justify-center items-center hover:bg-slate-700 transition-colors">
+                    <div class="flex gap-0.5 mb-1"><div class="w-3 h-3 rounded-full bg-white"></div><div class="w-3 h-3 rounded-full bg-white"></div><div class="w-3 h-3 rounded-full bg-white"></div><div class="w-3 h-3 rounded-full bg-red-500"></div></div>
+                    <span class="text-[10px] font-bold text-slate-300">1:3.5</span>
+                    <div id="xd-val-3t1d" class="absolute top-0 right-0 text-yellow-400 font-mono text-[9px] hidden bg-black/80 px-1">0</div>
+                </div>
+                <div onclick="XD.placeBet('3d1t')" id="xd-zone-3d1t" class="glass-panel rounded-lg p-2 text-center cursor-pointer click-bounce relative h-16 flex flex-col justify-center items-center hover:bg-slate-700 transition-colors">
+                    <div class="flex gap-0.5 mb-1"><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-white"></div></div>
+                    <span class="text-[10px] font-bold text-slate-300">1:3.5</span>
+                    <div id="xd-val-3d1t" class="absolute top-0 right-0 text-yellow-400 font-mono text-[9px] hidden bg-black/80 px-1">0</div>
+                </div>
+                <div onclick="XD.placeBet('4d')" id="xd-zone-4d" class="glass-panel rounded-lg p-2 text-center cursor-pointer click-bounce relative h-16 flex flex-col justify-center items-center hover:bg-slate-700 transition-colors">
+                    <div class="flex gap-0.5 mb-1"><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-red-500"></div></div>
+                    <span class="text-[10px] font-bold text-slate-300">1:15</span>
+                    <div id="xd-val-4d" class="absolute top-0 right-0 text-yellow-400 font-mono text-[9px] hidden bg-black/80 px-1">0</div>
+                </div>
+            </div>
+            <div class="w-full mt-6 flex gap-3 justify-center px-2">
+                <button onclick="XD.action()" id="xd-btn-action" class="flex-1 py-4 bg-gradient-to-r from-rose-600 to-red-600 rounded-xl font-black text-xl text-white btn-super uppercase tracking-widest border-rose-800">XÓC ĐĨA</button>
+                <button onclick="XD.clearBets()" class="px-6 glass-panel border-2 border-red-500/50 rounded-xl text-red-400 font-bold click-bounce text-sm bg-red-900/20">HỦY</button>
+            </div>
+        </div>
+
+        <!-- BẦU CUA -->
+        <div id="view-baucua" class="hidden w-full max-w-lg p-2 flex flex-col items-center">
+            <div class="relative w-52 h-52 mt-2 mx-auto">
+                <div class="absolute inset-0 bg-orange-900 rounded-full border-8 border-yellow-600/80 shadow-[inset_0_10px_30px_rgba(0,0,0,0.9)] flex items-center justify-center">
+                    <div id="bc-dice-container" class="flex gap-2 relative z-10 transition-transform duration-300">
+                        <div id="bc-d1" class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-3xl shadow-lg border-b-4 border-slate-300">🦌</div>
+                        <div id="bc-d2" class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-3xl shadow-lg mt-8 border-b-4 border-slate-300">🦀</div>
+                        <div id="bc-d3" class="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-3xl shadow-lg border-b-4 border-slate-300">🐟</div>
+                    </div>
+                </div>
+                <div id="bc-bowl" class="bowl-cover bowl-open bg-[radial-gradient(circle_at_30%_30%,#ea580c_0%,#9a3412_50%,#450a0a_100%)]"></div>
+            </div>
+            <div class="w-full mt-8 grid grid-cols-3 gap-2">
+                <div onclick="BC.placeBet('nai')" id="bc-zone-nai" class="glass-panel rounded-xl p-2 text-center cursor-pointer click-bounce relative h-20 flex flex-col justify-center border-b-2 border-b-orange-500 bg-orange-900/10 hover:bg-orange-800/30 transition-colors">
+                    <div class="text-3xl">🦌</div><span class="text-[10px] font-bold text-slate-300">Nai</span>
+                    <div id="bc-val-nai" class="absolute top-1 right-1 text-yellow-400 font-mono text-[9px] font-bold hidden bg-black/80 px-1 rounded shadow">0</div>
+                </div>
+                <div onclick="BC.placeBet('bau')" id="bc-zone-bau" class="glass-panel rounded-xl p-2 text-center cursor-pointer click-bounce relative h-20 flex flex-col justify-center border-b-2 border-b-orange-500 bg-orange-900/10 hover:bg-orange-800/30 transition-colors">
+                    <div class="text-3xl">🍈</div><span class="text-[10px] font-bold text-slate-300">Bầu</span>
+                    <div id="bc-val-bau" class="absolute top-1 right-1 text-yellow-400 font-mono text-[9px] font-bold hidden bg-black/80 px-1 rounded shadow">0</div>
+                </div>
+                <div onclick="BC.placeBet('ga')" id="bc-zone-ga" class="glass-panel rounded-xl p-2 text-center cursor-pointer click-bounce relative h-20 flex flex-col justify-center border-b-2 border-b-orange-500 bg-orange-900/10 hover:bg-orange-800/30 transition-colors">
+                    <div class="text-3xl">🐓</div><span class="text-[10px] font-bold text-slate-300">Gà</span>
+                    <div id="bc-val-ga" class="absolute top-1 right-1 text-yellow-400 font-mono text-[9px] font-bold hidden bg-black/80 px-1 rounded shadow">0</div>
+                </div>
+                <div onclick="BC.placeBet('ca')" id="bc-zone-ca" class="glass-panel rounded-xl p-2 text-center cursor-pointer click-bounce relative h-20 flex flex-col justify-center border-b-2 border-b-orange-500 bg-orange-900/10 hover:bg-orange-800/30 transition-colors">
+                    <div class="text-3xl">🐟</div><span class="text-[10px] font-bold text-slate-300">Cá</span>
+                    <div id="bc-val-ca" class="absolute top-1 right-1 text-yellow-400 font-mono text-[9px] font-bold hidden bg-black/80 px-1 rounded shadow">0</div>
+                </div>
+                <div onclick="BC.placeBet('cua')" id="bc-zone-cua" class="glass-panel rounded-xl p-2 text-center cursor-pointer click-bounce relative h-20 flex flex-col justify-center border-b-2 border-b-orange-500 bg-orange-900/10 hover:bg-orange-800/30 transition-colors">
+                    <div class="text-3xl">🦀</div><span class="text-[10px] font-bold text-slate-300">Cua</span>
+                    <div id="bc-val-cua" class="absolute top-1 right-1 text-yellow-400 font-mono text-[9px] font-bold hidden bg-black/80 px-1 rounded shadow">0</div>
+                </div>
+                <div onclick="BC.placeBet('tom')" id="bc-zone-tom" class="glass-panel rounded-xl p-2 text-center cursor-pointer click-bounce relative h-20 flex flex-col justify-center border-b-2 border-b-orange-500 bg-orange-900/10 hover:bg-orange-800/30 transition-colors">
+                    <div class="text-3xl">🦐</div><span class="text-[10px] font-bold text-slate-300">Tôm</span>
+                    <div id="bc-val-tom" class="absolute top-1 right-1 text-yellow-400 font-mono text-[9px] font-bold hidden bg-black/80 px-1 rounded shadow">0</div>
+                </div>
+            </div>
+            <div class="w-full mt-6 flex gap-3 justify-center px-2">
+                <button onclick="BC.action()" id="bc-btn-action" class="flex-1 py-4 bg-gradient-to-r from-orange-600 to-red-600 rounded-xl font-black text-xl text-white btn-super uppercase tracking-widest border-orange-800">LẮC BẦU CUA</button>
+                <button onclick="BC.clearBets()" class="px-6 glass-panel border-2 border-red-500/50 rounded-xl text-red-400 font-bold click-bounce text-sm bg-red-900/20">HỦY</button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- THANH CHIP CHUNG -->
+    <div id="global-chip-selector" class="hidden fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-slate-800/90 backdrop-blur-md border border-slate-600 p-2 rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.8)] z-40 flex gap-2">
+        <button onclick="selectGlobalChip(100, true)" id="g-chip-100" class="global-chip w-12 h-12 rounded-full bg-slate-700 border-2 border-slate-400 text-white font-black text-sm shadow-md click-bounce transition-all"><span class="relative z-10">100</span></button>
+        <button onclick="selectGlobalChip(500, true)" id="g-chip-500" class="global-chip w-12 h-12 rounded-full bg-blue-800 border-2 border-blue-400 text-white font-black text-sm shadow-md click-bounce transition-all"><span class="relative z-10">500</span></button>
+        <button onclick="selectGlobalChip(1000, true)" id="g-chip-1000" class="global-chip w-12 h-12 rounded-full bg-purple-800 border-2 border-purple-400 text-white font-black text-sm shadow-md click-bounce transition-all"><span class="relative z-10">1K</span></button>
+        <button onclick="selectGlobalChip(5000, true)" id="g-chip-5000" class="global-chip w-12 h-12 rounded-full bg-red-800 border-2 border-red-400 text-white font-black text-sm shadow-md click-bounce transition-all"><span class="relative z-10">5K</span></button>
+    </div>
+
+    <script>
+        let globalBalance = localStorage.getItem('vcasino_balance');
+        if (globalBalance === null) {
+            globalBalance = 10000;
+            localStorage.setItem('vcasino_balance', globalBalance);
+        } else {
+            globalBalance = parseInt(globalBalance);
+        }
+
+        let selectedChip = 100;
+        let currentView = 'lobby';
+
+        const elBalance = document.getElementById('globalBalance');
+        const elToast = document.getElementById('toast');
+        const elBtnBack = document.getElementById('btnBack');
+        const elLogo = document.getElementById('logoText');
+        const chipSelector = document.getElementById('global-chip-selector');
+
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(type) {
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            const now = audioCtx.currentTime;
+            
+            if(type === 'chip') {
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.type = 'sine'; osc.frequency.setValueAtTime(900, now);
+                gain.gain.setValueAtTime(0.15, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                osc.start(now); osc.stop(now + 0.1);
+            } else if(type === 'shake' || type === 'spin') {
+                for(let i=0; i<8; i++) {
+                    setTimeout(() => {
+                        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                        o.type = 'triangle'; o.frequency.setValueAtTime(200 + Math.random()*300, audioCtx.currentTime);
+                        o.connect(g); g.connect(audioCtx.destination);
+                        g.gain.setValueAtTime(0.1, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+                        o.start(audioCtx.currentTime); o.stop(audioCtx.currentTime + 0.05);
+                    }, i*60);
+                }
+            } else if(type === 'win') {
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.type = 'sine'; osc.frequency.setValueAtTime(523.25, now);
+                osc.frequency.setValueAtTime(659.25, now + 0.1); osc.frequency.setValueAtTime(783.99, now + 0.2);
+                gain.gain.setValueAtTime(0.3, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.5);
+                osc.start(now); osc.stop(now + 0.5);
+            } else if(type === 'lose') {
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(200, now); osc.frequency.exponentialRampToValueAtTime(50, now + 0.4);
+                gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now); osc.stop(now + 0.4);
+            } else if(type === 'jackpot') {
+                for(let i=0; i<15; i++) {
+                    setTimeout(() => {
+                        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+                        o.type = 'square'; o.frequency.setValueAtTime(400 + i*50, audioCtx.currentTime);
+                        o.connect(g); g.connect(audioCtx.destination);
+                        g.gain.setValueAtTime(0.2, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+                        o.start(audioCtx.currentTime); o.stop(audioCtx.currentTime + 0.1);
+                    }, i*100);
+                }
+            } else if(type === 'boom') {
+                const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(150, now); osc.frequency.exponentialRampToValueAtTime(10, now + 0.3);
+                gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                osc.start(now); osc.stop(now + 0.3);
+            }
+        }
+
+        function formatMoney(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+        function updateBalance() { 
+            elBalance.innerText = formatMoney(globalBalance); 
+            localStorage.setItem('vcasino_balance', globalBalance); 
+        }
+        function showToast(msg, isError=false) {
+            elToast.innerText = msg;
+            if(isError) elToast.classList.replace('border-l-yellow-400', 'border-l-red-500');
+            else elToast.classList.replace('border-l-red-500', 'border-l-yellow-400');
+            elToast.classList.remove('opacity-0', '-translate-y-4');
+            setTimeout(() => elToast.classList.add('opacity-0', '-translate-y-4'), 2500);
+        }
+        function createFloatingText(text, x, y, isWin) {
+            const el = document.createElement('div');
+            el.className = `float-text ${isWin ? 'text-green-400' : 'text-red-400'}`;
+            el.innerText = text; el.style.left = `${x}px`; el.style.top = `${y}px`;
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 1200);
+        }
+        function triggerCoinRain(amountStr = '') {
+            playSound('jackpot');
+            if(amountStr) showToast(`THẮNG ĐẬM! +${amountStr}`);
+            for(let i=0; i<50; i++) {
+                setTimeout(() => {
+                    let coin = document.createElement('div');
+                    coin.innerHTML = '🪙'; coin.className = 'win-coin';
+                    coin.style.left = Math.random() * 100 + 'vw';
+                    coin.style.animationDuration = (Math.random() * 1 + 1.5) + 's';
+                    document.body.appendChild(coin);
+                    setTimeout(() => coin.remove(), 2500);
+                }, i * 40);
+            }
+        }
+        function addFunds() {
+            if(globalBalance < 1000) {
+                globalBalance += 10000; updateBalance();
+                showToast("Nhận thành công 10,000 vốn khởi nghiệp!"); playSound('win');
+            } else { showToast("Vốn còn nhiều, cứ từ từ gỡ!", true); }
+        }
+
+        function selectGlobalChip(val, isUserClick = false) {
+            document.querySelectorAll('.global-chip').forEach(c => {
+                c.style.borderColor = ''; c.style.boxShadow = ''; c.style.transform = 'scale(1)';
+            });
+            const btn = document.getElementById(`g-chip-${val}`);
+            if (btn) {
+                btn.style.borderColor = 'var(--gold)'; 
+                btn.style.boxShadow = '0 0 15px rgba(251,191,36,0.8)'; 
+                btn.style.transform = 'scale(1.1) translateY(-4px)';
+            }
+            selectedChip = val;
+            
+            if (isUserClick) {
+                playSound('chip');
+                if(currentView === 'baicao') BAI.addBet();
+                if(currentView === 'vongquay') VQ.addBet();
+                if(currentView === 'nohu') NH.addBet();
+            }
+        }
+
+        function hideAllViews() {
+            ['lobby', 'taixiu', 'xocdia', 'baicao', 'roulette', 'vongquay', 'nohu', 'chungkhoan', 'baucua', 'crash'].forEach(v => {
+                const el = document.getElementById(`view-${v}`);
+                if(el) el.classList.add('hidden');
+            });
+        }
+
+        const helpData = {
+            'taixiu': '<b>LUẬT CHƠI TÀI XỈU:</b><br><br>- Xóc 3 viên xí ngầu.<br>- Tổng từ 4 đến 10 là <b>XỈU</b> (1 ăn 1).<br>- Tổng từ 11 đến 17 là <b>TÀI</b> (1 ăn 1).<br>- Nếu ra 3 viên giống nhau là <b>BÃO</b>, nhà cái ăn hết Tài Xỉu. Bạn cược trúng Bão thì 1 ăn 30.<br><br><i>Lưu ý: Không được phép cược đồng thời cả Tài và Xỉu.</i>',
+            'xocdia': '<b>LUẬT CHƠI XÓC ĐĨA:</b><br><br>- Xóc 4 đồng xu (Đỏ/Trắng).<br>- <b>CHẴN</b>: 4 Đỏ, 4 Trắng, 2 Đỏ 2 Trắng (1 ăn 1).<br>- <b>LẺ</b>: 3 Đỏ 1 Trắng, 3 Trắng 1 Đỏ (1 ăn 1).<br>- Có thể cược cụ thể các cửa như 4 Đỏ (1 ăn 15), 3 Đỏ (1 ăn 3.5)...<br><br><i>Lưu ý: Cấm đặt đồng thời Chẵn và Lẻ.</i>',
+            'baucua': '<b>LUẬT CHƠI BẦU CUA:</b><br><br>- Gồm 6 linh vật: Nai, Bầu, Gà, Cá, Cua, Tôm.<br>- Đặt cược vào con vật bạn tin sẽ ra.<br>- Mở bát ra con gì, bạn thắng số tiền tương ứng x số lượng con vật đó.<br><br><i>Lưu ý: Để tránh đặt bừa bãi, hệ thống chỉ cho phép đặt tối đa 3 con vật trong một ván.</i>',
+            'roulette': '<b>LUẬT CHƠI ROULETTE (CSGO STYLE):</b><br><br>- Băng chuyền có 15 ô số: 7 Đỏ, 7 Đen và 1 Xanh lá (số 0).<br>- Cược ĐỎ hoặc ĐEN: Tỉ lệ 1 ăn 2 (nhân đôi).<br>- Cược XANH: Tỉ lệ siêu cao 1 ăn 14 (nhân 15 lần).<br><br><i>Lưu ý: Cấm đặt đồng thời Đỏ và Đen.</i>',
+            'vongquay': '<b>LUẬT VÒNG QUAY NHÂN PHẨM:</b><br><br>- Nạp tiền và quay bánh xe số phận.<br>- Màu Đỏ: x2 Tiền<br>- Màu Xanh: Bị chia đôi tiền<br>- Màu Lục: x3 Tiền<br>- Màu Vàng: Nhận +1000$ Bonus<br>- Màu Tím: x5 Tiền (Siêu lời)<br>- Màu Đen: Mất trắng toàn bộ tiền cược.',
+            'nohu': '<b>LUẬT CHƠI NỔ HŨ (SLOTS):</b><br><br>- Chọn mức cược và bấm QUAY.<br>- Trúng 2 biểu tượng bất kỳ giống nhau: Hoàn vốn (x2).<br>- Trúng 3 biểu tượng giống nhau (Hoa quả, Kim cương...): Thắng x10 tiền cược.<br>- Trúng 3 số 7️⃣: <b>JACKPOT x50 TIỀN CƯỢC!</b>',
+            'baicao': '<b>LUẬT CHƠI BÀI CÀO 3 LÁ:</b><br><br>- Đặt cược và hệ thống sẽ chia 3 lá bài cho bạn và 3 lá cho Nhà Cái.<br>- Tính tổng điểm hàng đơn vị (J, Q, K = 10đ -> 0đ).<br>- Ai cao điểm hơn thì thắng. Nếu 9 điểm (Nút) sẽ có hiệu ứng đặc biệt!<br>- Bằng điểm thì Hòa, hoàn lại tiền cược.',
+            'chungkhoan': '<b>LUẬT TRADE CHỨNG KHOÁN:</b><br><br>- Quan sát biểu đồ Nến Nhật BTC/USD di chuyển.<br>- Đặt cược dự đoán giá sẽ <b>TĂNG</b> hay <b>GIẢM</b>.<br>- Lệnh sẽ khớp ngay lập tức. Sau thời gian bạn chọn (5s/10s/15s), nếu giá chốt khớp với dự đoán, bạn thắng (1 ăn 1.95).',
+            'crash': '<b>LUẬT CHƠI TÀU VŨ TRỤ (CRASH):</b><br><br>- Bạn chọn mức cược và bấm ĐẶT CƯỢC.<br>- Tàu vũ trụ sẽ cất cánh, kéo theo hệ số nhân (Multiplier) tăng dần từ 1.00x.<br>- Bạn phải bấm <b>CHỐT LỜI</b> trước khi tàu nổ tung (Crashed).<br>- Nếu chốt lời thành công, bạn nhận: Tiền cược x Hệ số lúc chốt.<br>- Nếu tàu nổ trước khi bạn chốt, bạn mất tiền cược.<br><br><i>Lưu ý: Tàu có thể nổ ngay tại 1.00x!</i>'
+        };
+
+        function openInstructionManual() {
+            if (!currentView || currentView === 'lobby') return;
+            const content = helpData[currentView];
+            if (content) {
+                document.getElementById('help-content').innerHTML = content;
+                document.getElementById('help-modal').classList.remove('hidden');
+            }
+        }
+        function closeInstructionManual() {
+            document.getElementById('help-modal').classList.add('hidden');
+        }
+
+        function openGame(gameId) {
+            if(TX.hasBets() || XD.hasBets() || BAI.hasBets() || RL.hasBets() || VQ.hasBets() || NH.hasBets() || CK.hasBets() || CRASH.state === 'RUNNING') {
+                showToast("Vui lòng đợi kết thúc cược hiện tại trước khi chuyển!", true); return;
+            }
+            hideAllViews(); currentView = gameId;
+            const viewEl = document.getElementById(`view-${gameId}`);
+            if(viewEl) viewEl.classList.remove('hidden');
+            
+            elBtnBack.classList.remove('hidden'); elLogo.classList.add('hidden');
+            
+            if(['roulette', 'baicao', 'taixiu', 'xocdia', 'vongquay', 'nohu', 'baucua'].includes(gameId)) {
+                chipSelector.classList.remove('hidden');
+                selectGlobalChip(selectedChip, false);
+            } else {
+                chipSelector.classList.add('hidden');
+            }
+
+            document.getElementById('btn-help').classList.remove('hidden');
+
+            let seenTutorial = localStorage.getItem('tutorial_seen_' + gameId);
+            if (!seenTutorial) {
+                setTimeout(() => { openInstructionManual(); }, 300);
+                localStorage.setItem('tutorial_seen_' + gameId, 'true');
+            }
+            
+            if(gameId === 'chungkhoan') {
+                CK.initCanvas();
+            }
+            if(gameId === 'crash') {
+                CRASH.initCanvas();
+            }
+        }
+
+        function goHome() {
+            if(TX.hasBets() || XD.hasBets() || BAI.hasBets() || RL.hasBets() || VQ.hasBets() || NH.hasBets() || CK.hasBets() || CRASH.state === 'RUNNING') {
+                showToast("Vui lòng hủy cược trước khi thoát sảnh!", true); return;
+            }
+            hideAllViews(); currentView = 'lobby';
+            document.getElementById('view-lobby').classList.remove('hidden');
+            elBtnBack.classList.add('hidden'); elLogo.classList.remove('hidden');
+            chipSelector.classList.add('hidden');
+            document.getElementById('btn-help').classList.add('hidden');
+        }
+
+        const fakeNames = ['hoang***', 'vip_pro88', 'tuan_anh', 'linhnga9x', 'game_thu', 'bac_gau', 'huan_hoa_hong', 'tai_phiet', 'soi_don_doc', 'vu_casino', 'lan_ngoc'];
+        const fakeGames = ['Tài Xỉu', 'Xóc Đĩa', 'Roulette', 'Vòng Quay', 'Bài Cào', 'Bầu Cua', 'Nổ Hũ', 'Chứng Khoán', 'Tàu Vũ Trụ'];
+        
+        function spawnFakePlayer() {
+            setTimeout(spawnFakePlayer, Math.random() * 3000 + 2000); 
+            const name = fakeNames[Math.floor(Math.random() * fakeNames.length)];
+            const game = fakeGames[Math.floor(Math.random() * fakeGames.length)];
+            const isWin = Math.random() > 0.4; 
+            
+            let amt = 0;
+            if(isWin) amt = (Math.floor(Math.random() * 50) + 5) * 1000; 
+            else amt = (Math.floor(Math.random() * 10) + 1) * 1000; 
+
+            const feed = document.getElementById('lobby-feed');
+            if(!feed) return;
+
+            const el = document.createElement('div');
+            el.className = `text-[11px] text-slate-300 px-2 py-1.5 rounded bg-slate-800/50 border-l-2 ${isWin ? 'border-l-green-400' : 'border-l-slate-400'} flex justify-between items-center`;
+            
+            if (isWin) {
+                el.innerHTML = `<span><span class="font-bold text-white">👤 ${name}</span> thắng <span class="text-green-400 font-bold">${formatMoney(amt)}</span></span><span class="text-[9px] text-slate-500">${game}</span>`;
+            } else {
+                el.innerHTML = `<span><span class="font-bold text-white">👤 ${name}</span> cược <span class="text-yellow-400 font-bold">${formatMoney(amt)}</span></span><span class="text-[9px] text-slate-500">${game}</span>`;
+            }
+            
+            feed.prepend(el);
+            if(feed.children.length > 5) feed.removeChild(feed.lastChild);
+        }
+        setTimeout(spawnFakePlayer, 1000);
+
+        // --- GAME CRASH ---
+        const CRASH = {
+            state: 'IDLE', // IDLE, RUNNING, CASHOUT, CRASHED
+            betAmount: 1000,
+            currentMult: 1.00,
+            crashPoint: 1.00,
+            canvas: null, ctx: null, width: 0, height: 0,
+            points: [],
+            startTime: 0,
+            animationId: null,
+            isCashedOut: false,
+            history: [1.15, 2.45, 1.00, 12.30, 4.20], // Lịch sử giả lập ban đầu
+
+            initCanvas() {
+                this.canvas = document.getElementById('crashChart');
+                if(!this.canvas) return;
+                this.ctx = this.canvas.getContext('2d');
+                const rect = this.canvas.getBoundingClientRect();
+                this.canvas.width = rect.width * 2;
+                this.canvas.height = rect.height * 2;
+                this.width = this.canvas.width;
+                this.height = this.canvas.height;
+                this.ctx.scale(2, 2);
+                this.updateHistoryUI();
+                this.drawIdle();
+                document.getElementById('crash-bet-input').value = formatMoney(this.betAmount);
+            },
+            adjBet(amt) {
+                if(this.state !== 'IDLE' && this.state !== 'CRASHED') return;
+                this.betAmount += amt;
+                if(this.betAmount < 100) this.betAmount = 100;
+                if(this.betAmount > globalBalance) this.betAmount = globalBalance;
+                document.getElementById('crash-bet-input').value = formatMoney(this.betAmount);
+                playSound('chip');
+            },
+            setBetAll() {
+                if(this.state !== 'IDLE' && this.state !== 'CRASHED') return;
+                this.betAmount = globalBalance > 0 ? globalBalance : 100;
+                document.getElementById('crash-bet-input').value = formatMoney(this.betAmount);
+                playSound('chip');
+            },
+            action() {
+                if(this.state === 'IDLE' || this.state === 'CRASHED') {
+                    if(this.betAmount > globalBalance || globalBalance <= 0) return showToast("Không đủ lúa!", true);
+                    playSound('chip');
+                    globalBalance -= this.betAmount; updateBalance();
+                    this.isCashedOut = false;
+                    this.startRound();
+                } else if (this.state === 'RUNNING') {
+                    this.cashOut();
+                }
+            },
+            startRound() {
+                this.state = 'RUNNING';
+                this.currentMult = 1.00;
+                this.points = [];
+                this.startTime = performance.now();
+                
+                // Thuật toán Casino tạo Crash Point (có tỉ lệ sập luôn ở 1.00x)
+                const e = 100;
+                const h = Math.random();
+                this.crashPoint = Math.max(1.00, (e / (100 - h * 100)) * 0.99); 
+                if(this.crashPoint > 500) this.crashPoint = 500; // Cho phép nổ siêu hũ lên tới 500x
+
+                document.getElementById('crash-btn-action').innerText = "CHỐT LỜI";
+                document.getElementById('crash-btn-action').classList.remove('from-indigo-600', 'to-blue-600', 'from-gray-500', 'to-gray-600');
+                document.getElementById('crash-btn-action').classList.add('from-orange-500', 'to-red-500');
+                document.getElementById('crash-mult-display').style.color = '#fff';
+                
+                playSound('spin');
+                this.tick();
+            },
+            tick() {
+                if(this.state !== 'RUNNING' && this.state !== 'CASHOUT') return;
+                
+                const now = performance.now();
+                const dt = (now - this.startTime) / 1000; // seconds
+                
+                // Tăng hệ số nhân theo cấp số nhân
+                this.currentMult = 1.00 + (dt * dt * 0.05) + (dt * 0.1); 
+                
+                if(this.currentMult >= this.crashPoint) {
+                    this.currentMult = this.crashPoint;
+                    this.crash();
+                } else {
+                    this.points.push({x: dt, y: this.currentMult});
+                    document.getElementById('crash-mult-display').innerText = this.currentMult.toFixed(2) + 'x';
+                    
+                    if(this.state === 'RUNNING') {
+                        const currentWin = this.betAmount * this.currentMult;
+                        document.getElementById('crash-btn-action').innerText = `CHỐT LỜI (${formatMoney(Math.floor(currentWin))})`;
+                    }
+                    
+                    this.drawRunning();
+                    this.animationId = requestAnimationFrame(() => this.tick());
+                }
+            },
+            cashOut() {
+                if(this.state !== 'RUNNING' || this.isCashedOut) return;
+                this.isCashedOut = true;
+                this.state = 'CASHOUT';
+                
+                const winAmt = Math.floor(this.betAmount * this.currentMult);
+                globalBalance += winAmt; updateBalance();
+                
+                document.getElementById('crash-btn-action').innerText = `ĐÃ CHỐT: ${this.currentMult.toFixed(2)}x`;
+                document.getElementById('crash-btn-action').disabled = true;
+                document.getElementById('crash-btn-action').classList.replace('from-orange-500', 'from-gray-500');
+                document.getElementById('crash-btn-action').classList.replace('to-red-500', 'to-gray-600');
+                
+                playSound('win');
+                triggerCoinRain();
+                
+                const rect = document.getElementById('crashChart').getBoundingClientRect();
+                createFloatingText(`+${formatMoney(winAmt)}`, rect.left + rect.width/2, rect.top + rect.height/2, true);
+            },
+            crash() {
+                this.state = 'CRASHED';
+                cancelAnimationFrame(this.animationId);
+                document.getElementById('crash-mult-display').innerText = this.currentMult.toFixed(2) + 'x';
+                document.getElementById('crash-mult-display').style.color = '#ef4444'; // Đỏ báo nổ
+                
+                document.getElementById('crash-btn-action').disabled = false;
+                document.getElementById('crash-btn-action').innerText = "ĐẶT CƯỢC NỮA";
+                document.getElementById('crash-btn-action').classList.remove('from-orange-500', 'from-gray-500', 'to-red-500', 'to-gray-600');
+                document.getElementById('crash-btn-action').classList.add('from-indigo-600', 'to-blue-600');
+                
+                if(!this.isCashedOut) {
+                    playSound('lose');
+                } else {
+                    playSound('boom'); 
+                }
+
+                // Lưu lại lịch sử sau khi nổ
+                this.history.push(this.currentMult);
+                if(this.history.length > 15) this.history.shift(); // Chỉ giữ 15 ván gần nhất để không bị tràn
+                this.updateHistoryUI();
+
+                this.drawRunning(true);
+            },
+            updateHistoryUI() {
+                const container = document.getElementById('crash-history');
+                if(!container) return;
+                container.innerHTML = '';
+                this.history.forEach(mult => {
+                    const el = document.createElement('div');
+                    let colorClass = 'text-slate-400 bg-slate-800 border-slate-600'; // Xám: Thua (< 2x)
+                    
+                    if (mult >= 10) {
+                        colorClass = 'text-yellow-400 bg-yellow-900/30 border-yellow-500/50 shadow-[0_0_8px_rgba(234,179,8,0.5)]'; // Vàng: Siêu lãi
+                    } else if (mult >= 2) {
+                        colorClass = 'text-emerald-400 bg-emerald-900/30 border-emerald-500/50'; // Xanh lá: Thắng (>= 2x)
+                    } else if (mult < 1.1) {
+                        colorClass = 'text-red-400 bg-red-900/30 border-red-500/50'; // Đỏ: Sập ngay khi cất cánh
+                    }
+
+                    el.className = `flex-shrink-0 px-3 py-1 rounded-full border ${colorClass} font-mono text-xs font-bold`;
+                    el.innerText = mult.toFixed(2) + 'x';
+                    container.appendChild(el);
+                });
+                
+                // Trượt thanh ngang tới phần tử mới nhất
+                container.scrollLeft = container.scrollWidth;
+            },
+            drawIdle() {
+                const ctx = this.ctx; const w = this.width / 2; const h = this.height / 2;
+                ctx.clearRect(0, 0, w, h);
+                ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 1;
+                for(let i=1; i<5; i++) {
+                    ctx.beginPath(); ctx.moveTo(0, i * h/5); ctx.lineTo(w, i * h/5); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(i * w/5, 0); ctx.lineTo(i * w/5, h); ctx.stroke();
+                }
+                document.getElementById('crash-mult-display').innerText = '1.00x';
+                document.getElementById('crash-mult-display').style.color = '#fff';
+            },
+            drawRunning(isCrashed = false) {
+                const ctx = this.ctx; const w = this.width / 2; const h = this.height / 2;
+                ctx.clearRect(0, 0, w, h);
+                
+                // Kẻ lưới
+                ctx.strokeStyle = '#1e293b'; ctx.lineWidth = 1;
+                for(let i=1; i<5; i++) {
+                    ctx.beginPath(); ctx.moveTo(0, i * h/5); ctx.lineTo(w, i * h/5); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(i * w/5, 0); ctx.lineTo(i * w/5, h); ctx.stroke();
+                }
+                
+                if(this.points.length === 0) return;
+                
+                // Mở rộng đồ thị (Dynamic Scale)
+                const maxTime = Math.max(5, this.points[this.points.length-1].x + 1);
+                const maxMult = Math.max(2, this.points[this.points.length-1].y + 0.5);
+                
+                ctx.beginPath();
+                ctx.moveTo(0, h);
+                
+                for(let p of this.points) {
+                    let px = (p.x / maxTime) * w;
+                    let py = h - ((p.y - 1) / (maxMult - 1)) * (h - 20); 
+                    ctx.lineTo(px, py);
+                }
+                
+                ctx.strokeStyle = isCrashed ? '#ef4444' : '#38bdf8';
+                ctx.lineWidth = 4;
+                ctx.lineJoin = 'round';
+                ctx.stroke();
+                
+                // Fill màu gradient bên dưới đường cong
+                ctx.lineTo((this.points[this.points.length-1].x / maxTime) * w, h);
+                ctx.lineTo(0, h);
+                const grad = ctx.createLinearGradient(0, 0, 0, h);
+                grad.addColorStop(0, isCrashed ? 'rgba(239,68,68,0.3)' : 'rgba(56,189,248,0.3)');
+                grad.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = grad;
+                ctx.fill();
+            }
+        };
+
+        const RL = {
+            state: 'WAITING', bets: { red:0, green:0, black:0 },
+            items: [],
+            init() {
+                const track = document.getElementById('rl-track');
+                if(!track) return;
+                track.innerHTML = ''; this.items = [];
+                for(let i=0; i<100; i++) {
+                    let type = Math.floor(Math.random()*15); 
+                    let colorClass = type === 0 ? 'r-green' : (type <= 7 ? 'r-red' : 'r-black');
+                    let num = type === 0 ? '0' : (type <= 7 ? type : type); 
+                    let el = document.createElement('div');
+                    el.className = `r-item ${colorClass}`; el.innerText = type===0 ? '★' : type;
+                    track.appendChild(el); this.items.push(type === 0 ? 'green' : (type <= 7 ? 'red' : 'black'));
+                }
+                track.style.transform = `translateX(0px)`;
+            },
+            hasBets() { return Object.values(this.bets).some(v => v > 0); },
+            placeBet(z) {
+                if(this.state !== 'WAITING') return;
+                if(z === 'red' && this.bets.black > 0) return showToast("Đã cược ĐEN, cấm cược ĐỎ!", true);
+                if(z === 'black' && this.bets.red > 0) return showToast("Đã cược ĐỎ, cấm cược ĐEN!", true);
+
+                if(globalBalance < selectedChip) return showToast("Không đủ lúa!", true);
+                playSound('chip'); globalBalance -= selectedChip; updateBalance(); this.bets[z] += selectedChip;
+                document.getElementById(`rl-zone-${z}`).style.borderColor = 'var(--gold)';
+                document.getElementById(`rl-val-${z}`).innerText = formatMoney(this.bets[z]);
+                document.getElementById(`rl-val-${z}`).classList.remove('hidden');
+            },
+            clearBets() {
+                if(this.state !== 'WAITING') return;
+                globalBalance += Object.values(this.bets).reduce((a,b)=>a+b, 0); updateBalance();
+                this.bets = { red:0, green:0, black:0 }; this.clearUI();
+            },
+            action() {
+                if(this.state !== 'WAITING') return;
+                if(!this.hasBets()) return showToast("Vui lòng cược trước!", true);
+                this.state = 'SPINNING'; 
+                const btn = document.getElementById('rl-btn-action'); btn.disabled = true; btn.innerText = "ĐANG QUAY...";
+                playSound('spin');
+
+                this.init();
+                const targetIndex = 80; const resultColor = this.items[targetIndex];
+                const track = document.getElementById('rl-track');
+                const offset = (targetIndex * 70) - 250 + 35 + (Math.random()*40 - 20); 
+                
+                setTimeout(() => {
+                    track.style.transform = `translateX(-${offset}px)`;
+                    setTimeout(() => {
+                        this.calcResult(resultColor);
+                        setTimeout(() => {
+                            this.clearUI(); this.state = 'WAITING'; btn.disabled = false; btn.innerText = "QUAY TIẾP";
+                        }, 2000);
+                    }, 5000);
+                }, 100);
+            },
+            calcResult(res) {
+                let win = 0; let winState = false;
+                Object.keys(this.bets).forEach(z => {
+                    if(this.bets[z] === 0) return;
+                    const rect = document.getElementById(`rl-zone-${z}`).getBoundingClientRect();
+                    if(z === res) {
+                        let mult = (z === 'green') ? 15 : 2; 
+                        let prize = this.bets[z] * mult; win += prize; winState = true;
+                        createFloatingText(`+${formatMoney(prize-this.bets[z])}`, rect.left+rect.width/2, rect.top, true);
+                    } else { createFloatingText(`-${formatMoney(this.bets[z])}`, rect.left+rect.width/2, rect.top, false); }
+                });
+                globalBalance += win; updateBalance();
+                if(winState) { if(res==='green') triggerCoinRain(); else playSound('win'); } else playSound('lose');
+                this.bets = { red:0, green:0, black:0 };
+            },
+            clearUI() { ['red','green','black'].forEach(z => { document.getElementById(`rl-zone-${z}`).style.borderColor = ''; document.getElementById(`rl-val-${z}`).classList.add('hidden'); }); }
+        };
+        RL.init();
+
+        const VQ = {
+            state: 'IDLE', betAmount: 0, currentRot: 0,
+            hasBets() { return this.betAmount > 0; },
+            addBet() { if(this.state !== 'IDLE') return; if(globalBalance < selectedChip) return; globalBalance -= selectedChip; updateBalance(); this.betAmount += selectedChip; document.getElementById('vq-bet-display').innerText = formatMoney(this.betAmount); playSound('chip'); },
+            clearBet() { if(this.state !== 'IDLE') return; globalBalance += this.betAmount; updateBalance(); this.betAmount = 0; document.getElementById('vq-bet-display').innerText = '0'; },
+            action() {
+                if(this.state !== 'IDLE') return; if(this.betAmount <= 0) return showToast("Đặt cược đi bạn!", true);
+                this.state = 'SPINNING'; playSound('spin');
+                const btn = document.getElementById('vq-btn-action'); btn.disabled = true; btn.innerText = "ĐANG QUAY...";
+                document.getElementById('vq-btn-clear').classList.add('hidden');
+
+                const wheel = document.getElementById('vq-wheel');
+                const extraRot = Math.floor(Math.random() * 360) + 1800; 
+                this.currentRot += extraRot; wheel.style.transform = `rotate(${this.currentRot}deg)`;
+
+                setTimeout(() => {
+                    const finalAngle = this.currentRot % 360;
+                    const stopAngle = (360 - finalAngle) % 360;
+                    const slice = Math.floor(stopAngle / 60);
+                    this.calcResult(slice);
+                    
+                    setTimeout(() => {
+                        this.state = 'IDLE'; btn.disabled = false; btn.innerText = "QUAY TIẾP";
+                        document.getElementById('vq-btn-clear').classList.remove('hidden');
+                        this.betAmount = 0; document.getElementById('vq-bet-display').innerText = '0';
+                    }, 2000);
+                }, 5000);
+            },
+            calcResult(slice) {
+                let win = 0; let msg = ""; let isWin = false;
+                if(slice === 0) { win = this.betAmount * 2; isWin=true; msg="ĐỎ: x2 Tiền"; }
+                else if(slice === 1) { win = Math.floor(this.betAmount / 2); isWin=false; msg="XANH: Bị chia đôi"; }
+                else if(slice === 2) { win = this.betAmount * 3; isWin=true; msg="LỤC: x3 Tiền"; }
+                else if(slice === 3) { win = this.betAmount + 1000; isWin=true; msg="VÀNG: +1000$ Bonus"; }
+                else if(slice === 4) { win = this.betAmount * 5; isWin=true; msg="TÍM: x5 Tiền!"; triggerCoinRain(); }
+                else { win = 0; isWin=false; msg="ĐEN: Mất trắng!"; }
+
+                globalBalance += win; updateBalance();
+                if(isWin) playSound('win'); else playSound('lose');
+                const rect = document.getElementById('vq-wheel').getBoundingClientRect();
+                createFloatingText(win >= this.betAmount ? `+${formatMoney(win-this.betAmount)}` : `-${formatMoney(this.betAmount-win)}`, rect.left+rect.width/2, rect.top+rect.height/2, win >= this.betAmount);
+                showToast(msg, !isWin);
+            }
+        };
+
+        const BAI = {
+            state: 'IDLE', betAmount: 0,
+            hasBets() { return this.betAmount > 0; },
+            addBet() { if(this.state !== 'IDLE') return; if(globalBalance < selectedChip) return; globalBalance -= selectedChip; updateBalance(); this.betAmount += selectedChip; document.getElementById('bai-bet-display').innerText = formatMoney(this.betAmount); },
+            clearBet() { if(this.state !== 'IDLE') return; globalBalance += this.betAmount; updateBalance(); this.betAmount = 0; document.getElementById('bai-bet-display').innerText = '0'; },
+            getDeck() { let d = []; for(let s of ['♠', '♣', '♥', '♦']) for(let v of ['A','2','3','4','5','6','7','8','9','10','J','Q','K']) d.push({s, v}); for(let i=d.length-1; i>0; i--) { const j=Math.floor(Math.random()*(i+1)); [d[i], d[j]]=[d[j], d[i]]; } return d; },
+            calcScore(c) { let sum = 0; c.forEach(x => { if(['J','Q','K'].includes(x.v)) sum+=10; else if(x.v==='A') sum+=1; else sum+=parseInt(x.v); }); return sum % 10; },
+            initUI() {
+                const pBox = document.getElementById('bai-player-cards'); if(!pBox) return;
+                const dBox = document.getElementById('bai-dealer-cards'); dBox.innerHTML=''; pBox.innerHTML='';
+                for(let i=0; i<3; i++) {
+                    pBox.innerHTML += `<div class="card-container w-[70px] h-[100px]"><div id="p-card-${i}" class="card-inner"><div class="card-back"></div><div id="p-card-val-${i}" class="card-front"></div></div></div>`;
+                    dBox.innerHTML += `<div class="card-container w-[70px] h-[100px]"><div id="d-card-${i}" class="card-inner"><div class="card-back"></div><div id="d-card-val-${i}" class="card-front"></div></div></div>`;
+                }
+            },
+            resetCards() {
+                for(let i=0; i<3; i++) { document.getElementById(`p-card-${i}`).classList.remove('flipped'); document.getElementById(`d-card-${i}`).classList.remove('flipped'); }
+                document.getElementById('bai-player-score').classList.remove('opacity-100'); document.getElementById('bai-dealer-score').classList.remove('opacity-100');
+            },
+            renderCard(type, idx, c) {
+                const valEl = document.getElementById(`${type}-card-val-${idx}`);
+                valEl.innerHTML = `<div class="font-bold ${['♥','♦'].includes(c.s)?'text-red-600':'text-slate-900'} text-2xl">${c.v}</div><div class="${['♥','♦'].includes(c.s)?'text-red-600':'text-slate-900'} text-3xl">${c.s}</div>`;
+                document.getElementById(`${type}-card-${idx}`).classList.add('flipped');
+            },
+            deal() {
+                if(this.state !== 'IDLE') return; if(this.betAmount <= 0) return showToast("Vui lòng đặt cược trước!", true);
+                this.state = 'DEALING'; document.getElementById('bai-btn-action').innerText = "ĐANG CHIA..."; document.getElementById('bai-btn-clear').classList.add('hidden');
+                this.resetCards(); const deck = this.getDeck(); 
+                const pH = [deck.pop(), deck.pop(), deck.pop()]; const dH = [deck.pop(), deck.pop(), deck.pop()];
+                let delay = 0;
+                for(let i=0; i<3; i++) {
+                    setTimeout(() => { playSound('chip'); this.renderCard('p', i, pH[i]); }, delay += 400);
+                    setTimeout(() => { playSound('chip'); this.renderCard('d', i, dH[i]); }, delay += 400);
+                }
+                setTimeout(() => {
+                    const pS = this.calcScore(pH); const dS = this.calcScore(dH);
+                    document.getElementById('bai-player-score').innerText = `${pS} Điểm`; document.getElementById('bai-player-score').classList.add('opacity-100');
+                    document.getElementById('bai-dealer-score').innerText = `${dS} Điểm`; document.getElementById('bai-dealer-score').classList.add('opacity-100');
+                    
+                    if(pS > dS) { playSound('win'); globalBalance += this.betAmount*2; updateBalance(); showToast(`THẮNG! (${pS} > ${dS})`); if(pS === 9) triggerCoinRain(); }
+                    else if(pS < dS) { playSound('lose'); showToast(`THUA! (${dS} > ${pS})`, true); }
+                    else { playSound('chip'); globalBalance += this.betAmount; updateBalance(); showToast(`HÒA! Hoàn tiền.`); }
+                    
+                    setTimeout(() => { this.betAmount = 0; document.getElementById('bai-bet-display').innerText = '0'; document.getElementById('bai-btn-clear').classList.remove('hidden'); document.getElementById('bai-btn-action').innerText = "CHIA BÀI NỮA"; this.state = 'IDLE'; }, 2000);
+                }, delay += 500);
+            }
+        };
+        BAI.initUI();
+
+        const TX = {
+            state: 'WAITING', bets: { tai: 0, xiu: 0, bao: 0 },
+            hasBets() { return this.bets.tai > 0 || this.bets.xiu > 0 || this.bets.bao > 0; },
+            placeBet(z) {
+                if(this.state !== 'WAITING') return; 
+                if(z === 'tai' && this.bets.xiu > 0) return showToast("Đã cược XỈU, cấm cược TÀI!", true);
+                if(z === 'xiu' && this.bets.tai > 0) return showToast("Đã cược TÀI, cấm cược XỈU!", true);
+                if(globalBalance < selectedChip) return showToast("Không đủ lúa!", true);
+                playSound('chip'); globalBalance -= selectedChip; updateBalance(); this.bets[z] += selectedChip;
+                document.getElementById(`tx-zone-${z}`).style.borderColor = 'var(--gold)';
+                document.getElementById(`tx-val-${z}`).innerText = formatMoney(this.bets[z]); document.getElementById(`tx-val-${z}`).classList.remove('hidden');
+            },
+            clearBets() { if(this.state !== 'WAITING') return; globalBalance += (this.bets.tai + this.bets.xiu + this.bets.bao); updateBalance(); this.bets = {tai:0, xiu:0, bao:0}; this.clearUI(); },
+            setDice(id, val) { const d = document.getElementById(`tx-dice${id}`); d.className = `dice-3d face-${val}`; d.style.transform = `rotateZ(${(Math.random()-0.5)*40}deg)`; },
+            action() {
+                if(this.state !== 'WAITING') return; if(!this.hasBets()) return showToast("Đặt cược đi đã!", true);
+                this.state = 'SHAKING'; document.getElementById('tx-btn-action').innerText = "ĐANG LẮC...";
+                document.getElementById('tx-bowl').classList.remove('bowl-open'); document.getElementById('tx-result-overlay').classList.remove('opacity-100');
+                
+                setTimeout(() => {
+                    document.getElementById('tx-bowl').classList.add('shaking'); playSound('shake');
+                    setTimeout(() => {
+                        document.getElementById('tx-bowl').classList.remove('shaking');
+                        const d1 = Math.floor(Math.random()*6)+1, d2 = Math.floor(Math.random()*6)+1, d3 = Math.floor(Math.random()*6)+1;
+                        this.setDice(1, d1); this.setDice(2, d2); this.setDice(3, d3);
+                        const sum = d1+d2+d3; const isBao = (d1===d2 && d2===d3);
+                        
+                        document.getElementById('tx-bowl').classList.add('bowl-open');
+                        setTimeout(() => {
+                            document.getElementById('tx-sum').innerText = sum;
+                            document.getElementById('tx-sum').style.color = isBao ? '#e879f9' : (sum>=11 ? '#f87171' : '#60a5fa');
+                            document.getElementById('tx-result-overlay').classList.add('opacity-100');
+                            this.calcResult(sum >= 11 ? 'tai' : 'xiu', isBao);
+                            setTimeout(() => { this.clearUI(); this.state = 'WAITING'; document.getElementById('tx-btn-action').innerText = "XÓC TIẾP"; }, 2500);
+                        }, 600);
+                    }, 1000);
+                }, 300);
+            },
+            calcResult(res, isBao) {
+                let win = 0; let winState = false;
+                ['tai', 'xiu', 'bao'].forEach(z => {
+                    if(this.bets[z] === 0) return;
+                    const rect = document.getElementById(`tx-zone-${z}`).getBoundingClientRect();
+                    if(z === 'bao') {
+                        if(isBao) { win += this.bets.bao * 31; winState = true; createFloatingText(`+${this.bets.bao*30}`, rect.left+rect.width/2, rect.top, true); }
+                        else { createFloatingText(`-${this.bets.bao}`, rect.left+rect.width/2, rect.top, false); }
+                    } else {
+                        if(!isBao && z === res) { win += this.bets[z]*2; winState = true; createFloatingText(`+${this.bets[z]}`, rect.left+rect.width/2, rect.top, true); }
+                        else { createFloatingText(`-${this.bets[z]}`, rect.left+rect.width/2, rect.top, false); }
+                    }
+                });
+                globalBalance += win; updateBalance();
+                if(winState) { if(isBao) triggerCoinRain(); else playSound('win'); } else playSound('lose');
+                this.bets = {tai:0, xiu:0, bao:0};
+            },
+            clearUI() { ['tai','xiu','bao'].forEach(z => { document.getElementById(`tx-zone-${z}`).style.borderColor = ''; document.getElementById(`tx-val-${z}`).classList.add('hidden'); }); }
+        };
+
+        const XD = {
+            state: 'WAITING', bets: { chan:0, le:0, '4t':0, '3t1d':0, '3d1t':0, '4d':0 },
+            hasBets() { return Object.values(this.bets).some(v => v > 0); },
+            placeBet(zone) {
+                if(this.state !== 'WAITING') return; 
+                if(zone === 'chan' && this.bets.le > 0) return showToast("Đã cược LẺ, cấm cược CHẴN!", true);
+                if(zone === 'le' && this.bets.chan > 0) return showToast("Đã cược CHẴN, cấm cược LẺ!", true);
+                if(globalBalance < selectedChip) return showToast("Không đủ lúa!", true);
+                playSound('chip'); globalBalance -= selectedChip; updateBalance(); this.bets[zone] += selectedChip;
+                document.getElementById(`xd-zone-${zone}`).style.borderColor = 'var(--gold)';
+                document.getElementById(`xd-val-${zone}`).innerText = formatMoney(this.bets[zone]); document.getElementById(`xd-val-${zone}`).classList.remove('hidden');
+            },
+            clearBets() { if(this.state !== 'WAITING') return; globalBalance += Object.values(this.bets).reduce((a,b)=>a+b, 0); updateBalance(); this.bets = { chan:0, le:0, '4t':0, '3t1d':0, '3d1t':0, '4d':0 }; this.clearUI(); },
+            action() {
+                if(this.state !== 'WAITING') return; if(!this.hasBets()) return showToast("Đặt cược đi đã bạn ơi!", true);
+                this.state = 'SHAKING'; 
+                const btn = document.getElementById('xd-btn-action'); btn.disabled = true; btn.innerText = "ĐANG XÓC...";
+                const bowl = document.getElementById('xd-bowl'); const grid = document.getElementById('xd-grid');
+                bowl.classList.remove('bowl-open');
+                
+                setTimeout(() => {
+                    bowl.classList.add('shaking'); playSound('shake');
+                    grid.style.transform = `rotate(${Math.random()*360}deg)`;
+                    setTimeout(() => {
+                        bowl.classList.remove('shaking');
+                        let resultArr = [Math.round(Math.random()), Math.round(Math.random()), Math.round(Math.random()), Math.round(Math.random())];
+                        let redCount = resultArr.reduce((a,b)=>a+b, 0);
+                        for(let i=0; i<4; i++) { document.getElementById(`xd-c${i+1}`).className = `xd-coin ${resultArr[i] === 1 ? 'xd-red' : 'xd-white'}`; }
+                        
+                        bowl.classList.add('bowl-open');
+                        setTimeout(() => {
+                            this.calcResult(redCount);
+                            setTimeout(() => { this.clearUI(); this.state = 'WAITING'; btn.disabled = false; btn.innerText = "XÓC LẠI"; }, 3000);
+                        }, 600);
+                    }, 1000);
+                }, 300);
+            },
+            calcResult(redCount) {
+                let win = 0; let winState = false; const isChan = (redCount % 2 === 0);
+                const payLogic = { chan: { win: isChan, ratio: 2 }, le: { win: !isChan, ratio: 2 }, '4t': { win: redCount === 0, ratio: 16 }, '3t1d': { win: redCount === 1, ratio: 4.5 }, '3d1t': { win: redCount === 3, ratio: 4.5 }, '4d': { win: redCount === 4, ratio: 16 } };
+                Object.keys(this.bets).forEach(zone => {
+                    if(this.bets[zone] === 0) return;
+                    const rect = document.getElementById(`xd-zone-${zone}`).getBoundingClientRect();
+                    if(payLogic[zone].win) { let prize = this.bets[zone] * payLogic[zone].ratio; win += prize; winState = true; createFloatingText(`+${formatMoney(prize-this.bets[zone])}`, rect.left+rect.width/2, rect.top, true); }
+                    else { createFloatingText(`-${formatMoney(this.bets[zone])}`, rect.left+rect.width/2, rect.top, false); }
+                });
+                globalBalance += win; updateBalance();
+                if(winState) { if(win > 10000) triggerCoinRain(); else playSound('win'); } else { playSound('lose'); }
+                this.bets = { chan:0, le:0, '4t':0, '3t1d':0, '3d1t':0, '4d':0 };
+            },
+            clearUI() { Object.keys(this.bets).forEach(z => { document.getElementById(`xd-zone-${z}`).style.borderColor = ''; document.getElementById(`xd-val-${z}`).classList.add('hidden'); }); }
+        };
+
+        const BC = {
+            state: 'WAITING', bets: { nai:0, bau:0, ga:0, ca:0, cua:0, tom:0 },
+            faces: ['🦌', '🍈', '🐓', '🐟', '🦀', '🦐'], keys: ['nai', 'bau', 'ga', 'ca', 'cua', 'tom'],
+            hasBets() { return Object.values(this.bets).some(v => v > 0); },
+            placeBet(zone) {
+                if(this.state !== 'WAITING') return; 
+                let activeZones = Object.keys(this.bets).filter(k => this.bets[k] > 0);
+                if(this.bets[zone] === 0 && activeZones.length >= 3) return showToast("Chỉ được đặt tối đa 3 linh vật!", true);
+                if(globalBalance < selectedChip) return showToast("Không đủ lúa!", true);
+                playSound('chip'); globalBalance -= selectedChip; updateBalance(); this.bets[zone] += selectedChip;
+                document.getElementById(`bc-zone-${zone}`).style.borderColor = 'var(--gold)';
+                document.getElementById(`bc-val-${zone}`).innerText = formatMoney(this.bets[zone]); document.getElementById(`bc-val-${zone}`).classList.remove('hidden');
+            },
+            clearBets() { if(this.state !== 'WAITING') return; globalBalance += Object.values(this.bets).reduce((a,b)=>a+b, 0); updateBalance(); this.bets = { nai:0, bau:0, ga:0, ca:0, cua:0, tom:0 }; this.clearUI(); },
+            action() {
+                if(this.state !== 'WAITING') return; if(!this.hasBets()) return showToast("Đặt cược đi đã bạn ơi!", true);
+                this.state = 'SHAKING'; 
+                const btn = document.getElementById('bc-btn-action'); btn.disabled = true; btn.innerText = "ĐANG LẮC...";
+                const bowl = document.getElementById('bc-bowl'); const grid = document.getElementById('bc-dice-container');
+                bowl.classList.remove('bowl-open');
+                setTimeout(() => {
+                    bowl.classList.add('shaking'); playSound('shake');
+                    grid.style.transform = `rotate(${Math.random()*360}deg)`;
+                    setTimeout(() => {
+                        bowl.classList.remove('shaking');
+                        let resIdx = [Math.floor(Math.random()*6), Math.floor(Math.random()*6), Math.floor(Math.random()*6)];
+                        document.getElementById('bc-d1').innerText = this.faces[resIdx[0]];
+                        document.getElementById('bc-d2').innerText = this.faces[resIdx[1]];
+                        document.getElementById('bc-d3').innerText = this.faces[resIdx[2]];
+                        bowl.classList.add('bowl-open');
+                        setTimeout(() => {
+                            this.calcResult(resIdx);
+                            setTimeout(() => { this.clearUI(); this.state = 'WAITING'; btn.disabled = false; btn.innerText = "LẮC LẠI"; }, 3000);
+                        }, 600);
+                    }, 1000);
+                }, 300);
+            },
+            calcResult(resIdx) {
+                let winTotal = 0; let isWin = false; let counts = {};
+                resIdx.forEach(idx => { let k = this.keys[idx]; counts[k] = (counts[k] || 0) + 1; });
+                this.keys.forEach(k => {
+                    if(this.bets[k] > 0) {
+                        const rect = document.getElementById(`bc-zone-${k}`).getBoundingClientRect();
+                        if(counts[k]) {
+                            let prize = this.bets[k] + (this.bets[k] * counts[k]);
+                            winTotal += prize; isWin = true;
+                            createFloatingText(`+${formatMoney(prize - this.bets[k])}`, rect.left+rect.width/2, rect.top, true);
+                        } else { createFloatingText(`-${formatMoney(this.bets[k])}`, rect.left+rect.width/2, rect.top, false); }
+                    }
+                });
+                globalBalance += winTotal; updateBalance();
+                if(isWin) { if(winTotal > 10000) triggerCoinRain(); else playSound('win'); } else { playSound('lose'); }
+                this.bets = { nai:0, bau:0, ga:0, ca:0, cua:0, tom:0 };
+            },
+            clearUI() { this.keys.forEach(z => { document.getElementById(`bc-zone-${z}`).style.borderColor = ''; document.getElementById(`bc-val-${z}`).classList.add('hidden'); }); }
+        };
+
+        const NH = {
+            state: 'IDLE', betAmount: 0,
+            symbols: ['🍒', '🔔', '🍀', '💎', '7️⃣'],
+            hasBets() { return this.betAmount > 0; },
+            addBet() { if(this.state !== 'IDLE') return; if(globalBalance < selectedChip) return; globalBalance -= selectedChip; updateBalance(); this.betAmount += selectedChip; document.getElementById('nh-bet-display').innerText = formatMoney(this.betAmount); playSound('chip'); },
+            clearBet() { if(this.state !== 'IDLE') return; globalBalance += this.betAmount; updateBalance(); this.betAmount = 0; document.getElementById('nh-bet-display').innerText = '0'; },
+            
+            buildReel(reelId) {
+                const strip = document.getElementById(reelId); if(!strip) return; strip.innerHTML = '';
+                for(let i=0; i<20; i++) {
+                    let sym = this.symbols[Math.floor(Math.random() * this.symbols.length)];
+                    strip.innerHTML += `<div class="slot-item">${sym}</div>`;
+                }
+            },
+            action() {
+                if(this.state !== 'IDLE') return; if(this.betAmount <= 0) return showToast("Chưa cược tiền!", true);
+                this.state = 'SPINNING'; playSound('spin');
+                const btn = document.getElementById('nh-btn-action'); btn.disabled = true; btn.innerText = "ĐANG QUAY...";
+                document.getElementById('nh-btn-clear').classList.add('hidden');
+
+                this.buildReel('reel1'); this.buildReel('reel2'); this.buildReel('reel3');
+
+                const r1 = document.getElementById('reel1'); const r2 = document.getElementById('reel2'); const r3 = document.getElementById('reel3');
+                
+                const stop1 = Math.floor(Math.random() * 5) + 10;
+                const stop2 = Math.floor(Math.random() * 5) + 10;
+                const stop3 = Math.floor(Math.random() * 5) + 10;
+
+                const res1 = r1.children[stop1].innerText;
+                const res2 = r2.children[stop2].innerText;
+                const res3 = r3.children[stop3].innerText;
+
+                setTimeout(() => r1.style.transform = `translateY(-${stop1 * 104}px)`, 50);
+                setTimeout(() => r2.style.transform = `translateY(-${stop2 * 104}px)`, 300);
+                setTimeout(() => r3.style.transform = `translateY(-${stop3 * 104}px)`, 550);
+
+                setTimeout(() => {
+                    this.calcResult(res1, res2, res3);
+                    setTimeout(() => {
+                        this.state = 'IDLE'; btn.disabled = false; btn.innerText = "QUAY TIẾP";
+                        document.getElementById('nh-btn-clear').classList.remove('hidden');
+                        
+                        [r1, r2, r3].forEach((r, idx) => {
+                            r.style.transition = 'none';
+                            r.style.transform = 'translateY(0)';
+                            r.innerHTML = `<div class="slot-item">${[res1, res2, res3][idx]}</div>`;
+                            r.offsetHeight; 
+                            r.style.transition = 'transform 3s cubic-bezier(0.1, 0.8, 0.2, 1.1)';
+                        });
+                        this.betAmount = 0; document.getElementById('nh-bet-display').innerText = '0';
+                    }, 2000);
+                }, 3600);
+            },
+            calcResult(r1, r2, r3) {
+                let win = 0; let isWin = false;
+                if(r1 === r2 && r2 === r3) {
+                    if(r1 === '7️⃣') { win = this.betAmount * 50; triggerCoinRain(); showToast("JACKPOT x50!!!!"); } 
+                    else { win = this.betAmount * 10; showToast("NỔ HŨ x10!"); }
+                    isWin = true;
+                } else if(r1 === r2 || r2 === r3 || r1 === r3) {
+                    win = this.betAmount * 2; isWin = true; showToast("Hoàn vốn x2!");
+                }
+
+                if(isWin) { globalBalance += win; updateBalance(); playSound('win'); } else { playSound('lose'); showToast("Chúc bạn may mắn lần sau!", true); }
+            }
+        };
+
+        const CK = {
+            state: 'IDLE', betAmount: 0, betType: null, entryPrice: 0, timer: 0,
+            canvas: null, ctx: null, width: 0, height: 0,
+            candles: [], currentPrice: 81500,
+            intervalId: null, tickCount: 0,
+            ckTime: 5, ckBet: 1000,
+
+            initCanvas() {
+                this.canvas = document.getElementById('ckChart');
+                if(!this.canvas) return;
+                this.ctx = this.canvas.getContext('2d');
+                
+                const rect = this.canvas.getBoundingClientRect();
+                this.canvas.width = rect.width * 2;
+                this.canvas.height = rect.height * 2;
+                this.width = this.canvas.width;
+                this.height = this.canvas.height;
+                this.ctx.scale(2, 2);
+
+                if(this.candles.length === 0) {
+                    let p = 81000;
+                    for(let i=0; i<20; i++) {
+                        let open = p;
+                        let close = open + (Math.random() - 0.5) * 200;
+                        let high = Math.max(open, close) + Math.random() * 100;
+                        let low = Math.min(open, close) - Math.random() * 100;
+                        let volume = Math.random() * 100;
+                        this.candles.push({open, close, high, low, volume, color: close >= open ? '#089981' : '#f23645'});
+                        p = close;
+                    }
+                    this.currentPrice = p;
+                }
+                
+                if(!this.intervalId) {
+                    this.intervalId = setInterval(() => this.tick(), 1000); 
+                }
+                
+                document.getElementById('ck-bet-input').value = formatMoney(this.ckBet);
+                this.drawChart();
+            },
+
+            setTime(t) {
+                if(this.state !== 'IDLE') return showToast("Không thể đổi thời gian khi đang có lệnh!", true);
+                this.ckTime = t;
+                [5, 10, 15].forEach(time => {
+                    let btn = document.getElementById(`ck-t-${time}`);
+                    if(time === t) {
+                        btn.className = "ck-time-btn px-4 py-1 rounded bg-emerald-600 text-white font-bold text-xs shadow-md transition-colors";
+                    } else {
+                        btn.className = "ck-time-btn px-4 py-1 rounded text-slate-400 font-bold text-xs hover:text-white transition-colors";
+                    }
+                });
+                playSound('chip');
+            },
+
+            adjBet(amt) {
+                if(this.state !== 'IDLE') return;
+                this.ckBet += amt;
+                if(this.ckBet < 100) this.ckBet = 100;
+                if(this.ckBet > globalBalance) this.ckBet = globalBalance;
+                document.getElementById('ck-bet-input').value = formatMoney(this.ckBet);
+                playSound('chip');
+            },
+
+            setBetAll() {
+                if(this.state !== 'IDLE') return;
+                this.ckBet = globalBalance > 0 ? globalBalance : 100;
+                document.getElementById('ck-bet-input').value = formatMoney(this.ckBet);
+                playSound('chip');
+            },
+
+            tick() {
+                let change = (Math.random() - 0.5) * 80;
+                this.currentPrice += change;
+                let lastCandle = this.candles[this.candles.length - 1];
+                
+                lastCandle.close = this.currentPrice;
+                if(this.currentPrice > lastCandle.high) lastCandle.high = this.currentPrice;
+                if(this.currentPrice < lastCandle.low) lastCandle.low = this.currentPrice;
+                lastCandle.color = lastCandle.close >= lastCandle.open ? '#089981' : '#f23645';
+
+                this.tickCount++;
+
+                if(this.tickCount % 5 === 0) {
+                    this.candles.push({
+                        open: this.currentPrice, close: this.currentPrice,
+                        high: this.currentPrice, low: this.currentPrice,
+                        volume: Math.random() * 100, color: '#089981'
+                    });
+                    if(this.candles.length > 30) this.candles.shift(); 
+                }
+
+                if(this.state === 'RUNNING') {
+                    this.timer--;
+                    if(this.timer <= 0) {
+                        this.resolveBet();
+                    }
+                }
+
+                this.drawChart();
+            },
+
+            drawChart() {
+                if(!this.ctx) return;
+                const ctx = this.ctx; const w = this.width / 2; const h = this.height / 2;
+                
+                ctx.clearRect(0, 0, w, h);
+
+                ctx.strokeStyle = '#1e222d'; ctx.lineWidth = 1;
+                for(let i=1; i<5; i++) {
+                    ctx.beginPath(); ctx.moveTo(0, i * h/5); ctx.lineTo(w, i * h/5); ctx.stroke();
+                }
+
+                let minP = Math.min(...this.candles.map(c => c.low)) - 100;
+                let maxP = Math.max(...this.candles.map(c => c.high)) + 100;
+                let range = maxP - minP;
+
+                const candleWidth = (w - 60) / 30; 
+                const spacing = candleWidth * 0.2;
+                const bodyWidth = candleWidth - spacing;
+
+                this.candles.forEach((c, i) => {
+                    let x = i * candleWidth;
+                    let yOpen = h - ((c.open - minP) / range) * (h - 30); 
+                    let yClose = h - ((c.close - minP) / range) * (h - 30);
+                    let yHigh = h - ((c.high - minP) / range) * (h - 30);
+                    let yLow = h - ((c.low - minP) / range) * (h - 30);
+
+                    ctx.fillStyle = c.color;
+                    ctx.strokeStyle = c.color;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(x + candleWidth/2, yHigh);
+                    ctx.lineTo(x + candleWidth/2, yLow);
+                    ctx.stroke();
+
+                    let bodyHeight = Math.abs(yOpen - yClose);
+                    let bodyY = Math.min(yOpen, yClose);
+                    if(bodyHeight < 1) bodyHeight = 1; 
+                    ctx.fillRect(x + spacing/2, bodyY, bodyWidth, bodyHeight);
+
+                    ctx.globalAlpha = 0.3;
+                    let volHeight = (c.volume / 100) * 30;
+                    ctx.fillRect(x + spacing/2, h - volHeight, bodyWidth, volHeight);
+                    ctx.globalAlpha = 1.0;
+                });
+
+                let currentY = h - ((this.currentPrice - minP) / range) * (h - 30);
+                ctx.strokeStyle = this.candles[this.candles.length-1].color;
+                ctx.setLineDash([2, 2]);
+                ctx.beginPath(); ctx.moveTo(0, currentY); ctx.lineTo(w, currentY); ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.fillStyle = ctx.strokeStyle;
+                ctx.beginPath(); ctx.arc((this.candles.length-1) * candleWidth + candleWidth/2, currentY, 3, 0, Math.PI*2); ctx.fill();
+
+                ctx.fillStyle = '#1e222d'; ctx.fillRect(w - 60, currentY - 10, 60, 20);
+                ctx.fillStyle = '#ffffff'; ctx.font = '10px Roboto Mono'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+                ctx.fillText(this.currentPrice.toFixed(2), w - 30, currentY);
+
+                if(this.state === 'RUNNING') {
+                    let entryY = h - ((this.entryPrice - minP) / range) * (h - 30);
+                    ctx.strokeStyle = this.betType === 'UP' ? '#10b981' : '#f43f5e'; 
+                    ctx.setLineDash([4, 4]); ctx.lineWidth = 2;
+                    ctx.beginPath(); ctx.moveTo(0, entryY); ctx.lineTo(w, entryY); ctx.stroke();
+                    ctx.setLineDash([]); ctx.lineWidth = 1;
+                    
+                    ctx.fillStyle = this.betType === 'UP' ? 'rgba(16,185,129,0.2)' : 'rgba(244,63,94,0.2)'; 
+                    ctx.fillRect(0, entryY - 15, 60, 15);
+                    ctx.fillStyle = this.betType === 'UP' ? '#10b981' : '#f43f5e'; 
+                    ctx.textAlign = 'left';
+                    ctx.fillText('ENTRY', 5, entryY - 7);
+
+                    ctx.fillStyle = 'rgba(0,0,0,0.8)'; ctx.fillRect(w/2 - 30, 10, 60, 30);
+                    ctx.fillStyle = '#fff'; ctx.font = '16px bold'; ctx.textAlign = 'center';
+                    ctx.fillText(this.timer + 's', w/2, 25);
+                }
+            },
+
+            hasBets() { return this.state === 'RUNNING'; },
+            
+            placeBet(type) {
+                if(this.state !== 'IDLE') return showToast("Đang có lệnh chạy, vui lòng chờ!", true);
+                if(this.ckBet > globalBalance || globalBalance <= 0) return showToast("Không đủ lúa!", true);
+                
+                playSound('chip'); 
+                globalBalance -= this.ckBet; 
+                updateBalance(); 
+                
+                this.betAmount = this.ckBet; 
+                this.betType = type;
+
+                this.startTrade();
+            },
+
+            startTrade() {
+                this.state = 'RUNNING';
+                this.entryPrice = this.currentPrice;
+                this.timer = this.ckTime; 
+                showToast(`ĐÃ VÀO LỆNH ${this.betType === 'UP' ? 'TĂNG' : 'GIẢM'} (${this.timer}s)`);
+                playSound('spin');
+            },
+
+            resolveBet() {
+                this.state = 'IDLE';
+                let win = false;
+                
+                if(this.betType === 'UP' && this.currentPrice > this.entryPrice) win = true;
+                if(this.betType === 'DOWN' && this.currentPrice < this.entryPrice) win = true;
+
+                document.getElementById('ck-zone-UP').style.borderColor = '';
+                document.getElementById('ck-zone-DOWN').style.borderColor = '';
+
+                if(win) {
+                    let prize = this.betAmount * 1.95;
+                    globalBalance += prize; updateBalance();
+                    this.showWinEffect(prize, true);
+                    playSound('win'); triggerCoinRain();
+                } else {
+                    this.showWinEffect(this.betAmount, false);
+                    playSound('lose');
+                }
+
+                this.betAmount = 0; this.betType = null;
+            },
+
+            showWinEffect(amount, isWin) {
+                const container = document.getElementById('ck-chart-container');
+                const overlay = document.createElement('div');
+                
+                if (isWin) {
+                    overlay.className = 'absolute inset-0 bg-emerald-500/40 z-20 flex flex-col items-center justify-center transition-opacity duration-300';
+                    overlay.innerHTML = `
+                        <span class="text-6xl font-black text-white drop-shadow-[0_0_20px_#10b981] animate-bounce">+${formatMoney(amount)}</span>
+                        <span class="text-emerald-100 font-bold tracking-widest mt-2 uppercase">WIN WIN WIN!</span>
+                    `;
+                } else {
+                    overlay.className = 'absolute inset-0 bg-rose-600/40 z-20 flex flex-col items-center justify-center transition-opacity duration-300';
+                    overlay.innerHTML = `
+                        <span class="text-6xl font-black text-white drop-shadow-[0_0_20px_#e11d48] scale-150 opacity-0 animate-[ping_0.5s_ease-out_forwards] absolute">LOSS</span>
+                        <span class="text-5xl font-black text-rose-200 drop-shadow-[0_0_10px_rgba(0,0,0,0.8)] relative z-10">-${formatMoney(amount)}</span>
+                    `;
+                }
+                
+                container.appendChild(overlay);
+                setTimeout(() => {
+                    overlay.style.opacity = '0';
+                    setTimeout(() => overlay.remove(), 300);
+                }, 2000);
+            }
+        };
+
+        updateBalance();
+        document.body.addEventListener('touchstart', () => { if(audioCtx.state === 'suspended') audioCtx.resume(); }, {once:true});
+        document.body.addEventListener('click', () => { if(audioCtx.state === 'suspended') audioCtx.resume(); }, {once:true});
+    </script>
+</body>
+</html>
