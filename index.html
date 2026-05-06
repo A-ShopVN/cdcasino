@@ -953,18 +953,46 @@
             housePool = parseInt(housePool);
         }
 
+        // HÀM ANIMATION CHẠY SỐ MƯỢT MÀ NHƯ YOUTUBE / CASINO
+        function animateCounter(el, start, end, prefix = "", duration = 1500) {
+            if (!el) return;
+            let startTimestamp = null;
+            if (el.animationId) cancelAnimationFrame(el.animationId); // Hủy nếu đang có animation cũ chạy
+            
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                // Hiệu ứng chậm dần về cuối (cubic ease-out)
+                const ease = 1 - Math.pow(1 - progress, 4);
+                const current = Math.floor(start + (end - start) * ease);
+                
+                el.innerText = prefix + formatMoney(current);
+                
+                if (progress < 1) {
+                    el.animationId = window.requestAnimationFrame(step);
+                } else {
+                    el.innerText = prefix + formatMoney(end); // Đảm bảo số cuối cùng chính xác
+                }
+            };
+            el.animationId = window.requestAnimationFrame(step);
+        }
+
         setTimeout(() => {
             const el = document.getElementById('hp-val');
-            if(el) el.innerText = formatMoney(housePool);
+            if(el) {
+                // Load lần đầu: Chạy từ mốc nhỏ lên để tạo hiệu ứng ảo diệu
+                animateCounter(el, housePool - 12345678, housePool, "", 2500);
+            }
         }, 100);
 
         function updateHousePool(amt) {
+            let startVal = housePool;
             housePool += amt;
             if (housePool < 0) housePool = 0;
             localStorage.setItem('vcasino_housepool', housePool);
             const el = document.getElementById('hp-val');
             if (el) {
-                el.innerText = formatMoney(housePool);
+                animateCounter(el, startVal, housePool, "", 1500);
                 el.classList.add('text-white', 'scale-[1.03]');
                 setTimeout(() => el.classList.remove('text-white', 'scale-[1.03]'), 150);
             }
@@ -1025,8 +1053,11 @@
         }
 
         function formatMoney(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+        
         function updateBalance() { 
-            elBalance.innerText = formatMoney(globalBalance); 
+            let startVal = parseInt(elBalance.innerText.replace(/,/g, '')) || 0;
+            // Chạy số mượt cho Tổng Vốn của người chơi
+            animateCounter(elBalance, startVal, globalBalance, "", 1000);
             localStorage.setItem('vcasino_balance', globalBalance); 
             updateContributionUI();
         }
@@ -1037,23 +1068,25 @@
             const valText = document.getElementById('user-contribution-val');
             if (!statusText || !valText) return;
 
+            let startVal = parseInt(valText.innerText.replace(/,/g, '').replace(/\+/g, '').replace(/-/g, '')) || 0;
+
             if (contribution > 0) {
                 // Đang thua lỗ
                 statusText.innerText = "ĐÃ CỐNG NẠP";
                 statusText.className = "text-xs font-black text-rose-400 uppercase tracking-widest font-oswald";
-                valText.innerText = "-" + formatMoney(contribution);
+                animateCounter(valText, startVal, contribution, "-", 1000);
                 valText.className = "font-mono text-xl font-black text-rose-400 drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]";
             } else if (contribution < 0) {
                 // Đang lời
                 statusText.innerText = "ĐANG HÚT MÁU";
                 statusText.className = "text-xs font-black text-emerald-400 uppercase tracking-widest font-oswald";
-                valText.innerText = "+" + formatMoney(Math.abs(contribution));
+                animateCounter(valText, startVal, Math.abs(contribution), "+", 1000);
                 valText.className = "font-mono text-xl font-black text-emerald-400 drop-shadow-[0_0_8px_rgba(16,185,129,0.6)]";
             } else {
                 // Hòa
                 statusText.innerText = "HÒA VỐN";
                 statusText.className = "text-xs font-black text-slate-400 uppercase tracking-widest font-oswald";
-                valText.innerText = "0";
+                animateCounter(valText, startVal, 0, "", 1000);
                 valText.className = "font-mono text-xl font-black text-slate-400";
             }
         }
