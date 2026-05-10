@@ -420,6 +420,18 @@
                 </div>
             </div>
 
+            <!-- PK -->
+                 <div onclick="openGame('pk_lobby')" style="--hover-color: #ef4444" class="game-card col-span-2 glass-panel rounded-2xl cursor-pointer click-bounce border border-red-500/30 mt-2">
+                    <div class="h-28 bg-gradient-to-br from-red-950 to-orange-900 flex items-center justify-center gap-5 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 w-32 h-32 bg-red-500/20 rounded-full blur-2xl"></div>
+                        <div class="text-5xl drop-shadow-[0_0_15px_rgba(239,68,68,0.8)] z-10 font-black italic">⚔️</div>
+                        <div class="flex flex-col z-10">
+                            <h3 class="font-black text-3xl text-white font-oswald tracking-wider drop-shadow-md">ĐẤU TRƯỜNG PK</h3>
+                            <span class="text-xs text-red-100 bg-red-950/80 px-3 py-1 rounded-full border border-red-400/50 self-start mt-1 shadow-sm font-bold">Tổng hợp Game 1vs1</span>
+                        </div>
+                    </div>
+                </div>
+
             <div class="grid grid-cols-2 gap-4 mt-2">
                 <!-- XÌ DÁCH -->
                 <div onclick="openGame('xidach')" style="--hover-color: #14b8a6" class="game-card col-span-2 glass-panel rounded-2xl cursor-pointer click-bounce border border-teal-500/30">
@@ -1029,6 +1041,486 @@
                 <button onclick="BC.clearBets()" class="px-6 glass-panel border-2 border-red-500/50 rounded-2xl text-red-400 font-bold click-bounce text-sm hover:bg-red-500/10">HỦY</button>
             </div>
         </div>
+
+
+        <div id="view-pk_lobby" class="hidden w-full max-w-lg p-4 flex flex-col items-center">
+            <div class="w-full h-32 rounded-3xl bg-gradient-to-r from-red-900 via-orange-900 to-red-900 relative overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.8)] flex flex-col items-center justify-center border border-red-500/30 mb-6">
+                <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9IiNmZmYiLz48L3N2Zz4=')] opacity-20 mix-blend-overlay animate-pulse"></div>
+                <h1 class="text-4xl font-black text-white z-10 tracking-widest italic font-oswald drop-shadow-[0_5px_5px_rgba(239,68,68,0.8)]">SẢNH PK VIP</h1>
+                <p class="z-10 text-[10px] text-yellow-200 uppercase tracking-[0.2em] mt-1 font-bold bg-black/50 px-3 py-1 rounded-full border border-yellow-500/30 shadow-lg">Khô máu 1vs1 - Chân ái</p>
+            </div>
+
+            <div class="w-full grid grid-cols-2 gap-4">
+                
+                <div onclick="openGame('pk_xucxac')" style="--hover-color: #ef4444" class="game-card col-span-2 glass-panel rounded-2xl cursor-pointer click-bounce border border-red-500/30">
+                    <div class="h-24 bg-gradient-to-br from-red-900 to-slate-900 flex items-center justify-center gap-4 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 w-24 h-24 bg-red-500/20 rounded-full blur-xl"></div>
+                        <div class="flex gap-1 z-10">
+                            <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center text-red-600 font-black text-2xl shadow-lg border-b-4 border-slate-300 rotate-[-10deg]">🎲</div>
+                            <div class="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-white font-black text-2xl shadow-lg border-b-4 border-slate-600 rotate-[10deg]">🎲</div>
+                        </div>
+                        <div class="flex flex-col z-10">
+                            <h3 class="font-black text-2xl text-white font-oswald tracking-wider drop-shadow-md">PK XÚC XẮC</h3>
+                            <span class="text-[10px] text-red-200 bg-red-950/80 px-2 py-0.5 rounded-full border border-red-400/50 self-start mt-1 shadow-sm font-bold uppercase">Đổ điểm phân cao thấp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openGame('pk_baucua')" style="--hover-color: #eab308" class="game-card glass-panel rounded-2xl cursor-pointer click-bounce border border-yellow-500/30 flex flex-col">
+                    <div class="h-20 bg-gradient-to-br from-yellow-900 to-slate-900 flex items-center justify-center relative">
+                        <div class="absolute inset-0 bg-yellow-500/10 blur-xl"></div>
+                        <span class="drop-shadow-[0_0_15px_rgba(234,179,8,0.8)] text-4xl z-10 flex gap-1">🦀 🎃</span>
+                    </div>
+                    <div class="p-2 text-center bg-black/60 border-t border-white/5">
+                        <h3 class="font-black text-[11px] text-yellow-300 font-oswald uppercase">PK BẦU CUA</h3>
+                    </div>
+                </div>
+                <div onclick="openGame('pk_xidach')" style="--hover-color: #14b8a6" class="game-card glass-panel rounded-2xl cursor-pointer click-bounce border border-teal-500/30 flex flex-col">
+    <div class="h-20 bg-gradient-to-br from-[#022c22] to-slate-900 flex items-center justify-center relative">
+        <div class="absolute inset-0 bg-teal-500/10 blur-xl"></div>
+        <span class="drop-shadow-[0_0_15px_rgba(20,184,166,0.8)] text-4xl z-10 flex gap-1">🃏</span>
+    </div>
+    <div class="p-2 text-center bg-black/60 border-t border-white/5">
+        <h3 class="font-black text-[11px] text-teal-300 font-oswald uppercase">PK XÌ DÁCH</h3>
+    </div>
+</div>
+
+                <div onclick="openGame('pk_oantuti')" style="--hover-color: #a855f7" class="game-card col-span-2 glass-panel rounded-2xl cursor-pointer click-bounce border border-purple-500/30">
+                    <div class="h-24 bg-gradient-to-br from-purple-900 to-slate-900 flex items-center justify-center gap-4 relative overflow-hidden">
+                        <div class="absolute right-0 top-0 w-24 h-24 bg-purple-500/20 rounded-full blur-xl"></div>
+                        <div class="flex gap-2 z-10 text-4xl drop-shadow-lg">✌️ ✊ ✋</div>
+                        <div class="flex flex-col z-10">
+                            <h3 class="font-black text-2xl text-white font-oswald tracking-wider drop-shadow-md">OẲN TÙ TÌ</h3>
+                            <span class="text-[10px] text-purple-200 bg-purple-950/80 px-2 py-0.5 rounded-full border border-purple-400/50 self-start mt-1 shadow-sm font-bold uppercase">Cược liên hoàn - Phòng Kín</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <button onclick="goHome()" class="w-full mt-6 py-3 bg-slate-800 rounded-xl font-black text-slate-300 border border-slate-600 hover:bg-slate-700 click-bounce transition-colors text-sm">VỀ SẢNH CHÍNH</button>
+        </div>
+
+
+    <div id="view-pk_xucxac" class="hidden w-full max-w-lg p-3 flex flex-col items-center">
+            <h2 class="text-3xl font-black text-white font-oswald tracking-widest mb-3 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)]">PK TÀI XỈU 1VS1</h2>
+
+            <div id="pk-lobby" class="w-full">
+                <div class="glass-panel p-4 rounded-2xl mb-3 border border-red-500/30">
+                    <h3 class="font-black text-red-400 mb-3 text-center uppercase tracking-widest text-sm">Tạo Phòng Mới</h3>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-2 px-2">
+                            <input type="checkbox" id="pk-is-private" onchange="document.getElementById('pk-pass-container').classList.toggle('hidden', !this.checked)" class="w-5 h-5 accent-red-500 cursor-pointer">
+                            <label for="pk-is-private" class="text-xs font-bold text-slate-300 cursor-pointer">Phòng Kín (Cần Mật Khẩu)</label>
+                        </div>
+                        <div id="pk-pass-container" class="hidden">
+                            <input type="number" id="pk-create-pass" placeholder="Nhập mã PIN 4 số (VD: 1234)" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" class="w-full bg-black/60 border border-slate-600 rounded-xl py-3 px-4 font-mono font-bold text-white text-sm outline-none focus:border-red-500 text-center tracking-widest">
+                        </div>
+                        <button onclick="PK.createRoom()" class="w-full bg-gradient-to-r from-red-600 to-orange-600 rounded-xl font-black text-white py-3 shadow-[0_0_15px_rgba(239,68,68,0.4)] click-bounce mt-1">TẠO PHÒNG TRỐNG</button>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mb-4">
+                    <input type="text" id="pk-search-code" placeholder="NHẬP MÃ PHÒNG (VD: A1B2)" class="flex-1 bg-blue-950/40 border border-blue-500/50 rounded-xl py-2 px-4 font-mono font-bold text-white text-sm outline-none uppercase text-center">
+                    <button onclick="PK.searchRoom()" class="px-6 bg-blue-600 rounded-xl font-black text-white shadow-md hover:bg-blue-500 click-bounce text-xs">TÌM MÃ</button>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-4 min-h-[250px]">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-3">
+                        <h3 class="text-xs font-black text-slate-300 uppercase tracking-widest">Danh Sách Bàn</h3>
+                        <button onclick="PK.listenRooms()" class="text-[10px] bg-slate-700 px-2 py-1 rounded text-white font-bold hover:bg-slate-600 click-bounce">LÀM MỚI</button>
+                    </div>
+                    <div id="pk-room-list" class="flex flex-col gap-2 max-h-[350px] overflow-y-auto modal-scroll">
+                        <div class="text-center text-slate-500 text-xs py-4 font-bold">Đang tải danh sách...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pk-room" class="hidden w-full">
+                <div class="glass-panel p-3 rounded-3xl border-2 border-red-500/50 relative overflow-hidden bg-gradient-to-b from-[#0f172a] to-black shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
+                    <div class="absolute top-2 left-3 z-20 bg-black/80 px-2 py-1 rounded border border-white/20">
+                        <span id="pk-room-code-display" class="text-xs font-mono font-black text-yellow-400">---</span>
+                    </div>
+
+                    <div class="flex justify-between items-start mt-8 mb-4 border-b border-white/10 pb-4 relative z-10 px-2">
+                        <div class="text-center w-[35%] flex flex-col items-center">
+                            <div class="text-[9px] text-slate-400 font-bold mb-1 bg-black/50 px-2 py-0.5 rounded-full border border-red-500/50">CHỦ PHÒNG</div>
+                            <div id="pk-host-name" class="font-black text-red-400 truncate text-sm uppercase w-full">HOST</div>
+                            <div id="pk-host-status" class="text-[9px] font-black px-2 py-0.5 rounded mt-1 border bg-slate-800 text-slate-400 border-slate-600">ĐANG CHỌN...</div>
+                        </div>
+                        <div class="text-center w-[30%] flex flex-col items-center justify-center">
+                            <div class="text-[9px] text-yellow-400 font-bold mb-0.5">TỔNG BÀN</div>
+                            <div id="pk-room-pot" class="font-mono text-xl font-black text-yellow-400 drop-shadow-md">0</div>
+                            <div id="pk-room-pin" class="text-[9px] font-mono text-rose-400 mt-1 hidden tracking-widest">PIN: 1234</div>
+                        </div>
+                        <div class="text-center w-[35%] flex flex-col items-center">
+                            <div class="text-[9px] text-slate-400 font-bold mb-1 bg-black/50 px-2 py-0.5 rounded-full border border-blue-500/50">ĐỐI THỦ</div>
+                            <div id="pk-joiner-name" class="font-black text-blue-400 truncate text-sm uppercase w-full">ĐANG CHỜ...</div>
+                            <div id="pk-joiner-status" class="text-[9px] font-black px-2 py-0.5 rounded mt-1 border bg-slate-800 text-slate-400 border-slate-600 hidden">ĐANG CHỌN...</div>
+                        </div>
+                    </div>
+
+                    <div class="relative w-48 h-48 mx-auto mb-4 bg-slate-900 rounded-full border-[8px] border-[#334155] shadow-[inset_0_10px_20px_rgba(0,0,0,0.9)] flex items-center justify-center">
+                        <div id="pk-tx-result-overlay" class="absolute inset-0 bg-black/70 rounded-full flex items-center justify-center z-20 opacity-0 transition-opacity">
+                            <span id="pk-tx-sum" class="text-6xl font-black text-white font-oswald drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">12</span>
+                        </div>
+                        <div class="flex gap-1.5 relative z-10">
+                            <div class="dice-box w-10 h-10"><div id="pk-dice1" class="dice-3d face-1"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+                            <div class="dice-box w-10 h-10 mt-6"><div id="pk-dice2" class="dice-3d face-1"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+                            <div class="dice-box w-10 h-10"><div id="pk-dice3" class="dice-3d face-1"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
+                        </div>
+                        <div id="pk-bowl" class="bowl-cover bowl-open bg-[radial-gradient(circle_at_30%_30%,#e2e8f0_0%,#94a3b8_50%,#475569_100%)]"></div>
+                    </div>
+
+                    <div id="pk-control-panel">
+                        <div class="grid grid-cols-2 gap-3 px-2">
+                            <div onclick="PK.selectSide('xiu')" id="pk-zone-xiu" class="glass-panel border-2 border-blue-500/30 rounded-2xl p-3 text-center cursor-pointer click-bounce hover:bg-blue-900/30 transition-all flex flex-col justify-center bg-blue-900/10">
+                                <h2 class="text-3xl font-black text-blue-400 font-oswald">XỈU</h2>
+                                <p class="text-[9px] text-blue-200 mt-1 uppercase font-bold">Tổng 4 - 10</p>
+                            </div>
+                            <div onclick="PK.selectSide('tai')" id="pk-zone-tai" class="glass-panel border-2 border-red-500/30 rounded-2xl p-3 text-center cursor-pointer click-bounce hover:bg-red-900/30 transition-all flex flex-col justify-center bg-red-900/10">
+                                <h2 class="text-3xl font-black text-red-500 font-oswald">TÀI</h2>
+                                <p class="text-[9px] text-red-200 mt-1 uppercase font-bold">Tổng 11 - 17</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 px-2">
+                            <input type="number" id="pk-room-bet-input" placeholder="Gõ tiền cược vào đây (Min 1K)..." class="w-full bg-black/60 border border-slate-600 rounded-xl py-3 px-4 font-mono font-bold text-yellow-400 text-base outline-none focus:border-yellow-500 text-center shadow-inner">
+                        </div>
+                        
+                        <div class="mt-3 px-2">
+                            <button onclick="PK.toggleReady()" id="pk-btn-ready" class="w-full py-4 bg-blue-600 rounded-xl font-black text-white hover:bg-blue-500 click-bounce shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all text-xl tracking-wider">ĐẶT CƯỢC & SẴN SÀNG</button>
+                        </div>
+                    </div>
+
+                    <div id="pk-status-text" class="text-center font-black text-lg text-slate-300 font-oswald animate-pulse bg-black/50 py-2 rounded-xl border border-white/5 mt-4">VUI LÒNG ĐẶT CƯỢC VÀ CHỌN CỬA</div>
+                </div>
+
+                <div id="pk-end-panel" class="hidden w-full mt-4">
+                    <button id="pk-btn-req-rematch" onclick="PK.requestRematch()" class="w-full py-3 bg-blue-600 rounded-xl font-black text-white hover:bg-blue-500 click-bounce mb-2 shadow-[0_0_15px_rgba(37,99,235,0.4)]">YÊU CẦU CHƠI LẠI</button>
+                    
+                    <div id="pk-wait-rematch" class="hidden w-full mb-2">
+                        <div class="text-center font-black text-lg text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse border-2 border-red-500/50 bg-red-900/20 py-3 rounded-xl">ĐANG CHỜ ĐỐI THỦ CHẤP NHẬN...</div>
+                    </div>
+
+                    <div id="pk-group-rematch" class="hidden flex flex-col gap-2 mb-2">
+                        <div class="text-center font-black text-lg text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse mb-2">ĐỐI THỦ MUỐN THÁCH ĐẤU LẠI!</div>
+                        <div class="flex gap-2">
+                            <button onclick="PK.acceptRematch()" class="flex-1 py-3 bg-emerald-600 rounded-xl font-black text-white hover:bg-emerald-500 click-bounce shadow-[0_0_15px_rgba(16,185,129,0.4)]">CHẤP NHẬN ĐẤU</button>
+                            <button onclick="PK.leaveRoom()" class="flex-1 py-3 bg-rose-600 rounded-xl font-black text-white hover:bg-rose-500 click-bounce shadow-[0_0_15px_rgba(225,29,72,0.4)]">TỪ CHỐI</button>
+                        </div>
+                    </div>
+
+                    <button id="pk-btn-leave" onclick="PK.leaveRoom()" class="w-full py-3 bg-slate-800 rounded-xl font-black text-slate-300 border border-slate-600 hover:bg-rose-900 click-bounce">THOÁT PHÒNG</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-pk_baucua" class="hidden w-full max-w-lg p-3 flex flex-col items-center">
+            <h2 class="text-3xl font-black text-white font-oswald tracking-widest mb-3 drop-shadow-[0_0_10px_rgba(234,179,8,0.8)]">PK BẦU CUA</h2>
+
+            <div id="pk-bc-lobby" class="w-full">
+                <div class="glass-panel p-4 rounded-2xl mb-3 border border-yellow-500/30">
+                    <h3 class="font-black text-yellow-400 mb-3 text-center uppercase tracking-widest text-sm">Tạo Phòng Mới</h3>
+                    <div class="flex flex-col gap-3">
+                        <div class="flex items-center gap-2 px-2">
+                            <input type="checkbox" id="pk-bc-is-private" onchange="document.getElementById('pk-bc-pass-container').classList.toggle('hidden', !this.checked)" class="w-5 h-5 accent-yellow-500 cursor-pointer">
+                            <label for="pk-bc-is-private" class="text-xs font-bold text-slate-300 cursor-pointer">Phòng Kín (Cần Mật Khẩu)</label>
+                        </div>
+                        <div id="pk-bc-pass-container" class="hidden">
+                            <input type="number" id="pk-bc-create-pass" placeholder="Nhập mã PIN 4 số (VD: 1234)" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" class="w-full bg-black/60 border border-slate-600 rounded-xl py-3 px-4 font-mono font-bold text-white text-sm outline-none focus:border-yellow-500 text-center tracking-widest">
+                        </div>
+                        <button onclick="PK_BC.createRoom()" class="w-full bg-gradient-to-r from-yellow-600 to-amber-700 rounded-xl font-black text-slate-900 py-3 shadow-[0_0_15px_rgba(234,179,8,0.4)] click-bounce mt-1">TẠO PHÒNG TRỐNG</button>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mb-4">
+                    <input type="text" id="pk-bc-search-code" placeholder="NHẬP MÃ PHÒNG (VD: A1B2)" class="flex-1 bg-blue-950/40 border border-blue-500/50 rounded-xl py-2 px-4 font-mono font-bold text-white text-sm outline-none uppercase text-center">
+                    <button onclick="PK_BC.searchRoom()" class="px-6 bg-blue-600 rounded-xl font-black text-white shadow-md hover:bg-blue-500 click-bounce text-xs">TÌM MÃ</button>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-4 min-h-[250px]">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-3">
+                        <h3 class="text-xs font-black text-slate-300 uppercase tracking-widest">Danh Sách Bàn</h3>
+                        <button onclick="PK_BC.listenRooms()" class="text-[10px] bg-slate-700 px-2 py-1 rounded text-white font-bold hover:bg-slate-600 click-bounce">LÀM MỚI</button>
+                    </div>
+                    <div id="pk-bc-room-list" class="flex flex-col gap-2 max-h-[350px] overflow-y-auto modal-scroll">
+                        <div class="text-center text-slate-500 text-xs py-4 font-bold">Đang tải danh sách...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pk-bc-room" class="hidden w-full">
+                <div class="glass-panel p-3 rounded-3xl border-2 border-yellow-500/50 relative overflow-hidden bg-gradient-to-b from-[#1e293b] to-black shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
+                    <div class="absolute top-2 left-3 z-20 bg-black/80 px-2 py-1 rounded border border-white/20">
+                        <span id="pk-bc-room-code-display" class="text-xs font-mono font-black text-yellow-400">---</span>
+                    </div>
+
+                    <div class="flex justify-between items-start mt-8 mb-4 border-b border-white/10 pb-4 relative z-10 px-2">
+                        <div class="text-center w-[35%] flex flex-col items-center">
+                            <div class="text-[9px] text-slate-400 font-bold mb-1 bg-black/50 px-2 py-0.5 rounded-full border border-red-500/50">CHỦ PHÒNG</div>
+                            <div id="pk-bc-host-name" class="font-black text-yellow-400 truncate text-sm uppercase w-full">HOST</div>
+                            <div id="pk-bc-host-status" class="text-[9px] font-black px-2 py-0.5 rounded mt-1 border bg-slate-800 text-slate-400 border-slate-600">ĐANG CHỌN...</div>
+                        </div>
+                        <div class="text-center w-[30%] flex flex-col items-center justify-center">
+                            <div class="text-[9px] text-yellow-400 font-bold mb-0.5">TỔNG BÀN</div>
+                            <div id="pk-bc-room-pot" class="font-mono text-xl font-black text-yellow-400 drop-shadow-md">0</div>
+                            <div id="pk-bc-room-pin" class="text-[9px] font-mono text-rose-400 mt-1 hidden tracking-widest">PIN: 1234</div>
+                        </div>
+                        <div class="text-center w-[35%] flex flex-col items-center">
+                            <div class="text-[9px] text-slate-400 font-bold mb-1 bg-black/50 px-2 py-0.5 rounded-full border border-blue-500/50">ĐỐI THỦ</div>
+                            <div id="pk-bc-joiner-name" class="font-black text-blue-400 truncate text-sm uppercase w-full">ĐANG CHỜ...</div>
+                            <div id="pk-bc-joiner-status" class="text-[9px] font-black px-2 py-0.5 rounded mt-1 border bg-slate-800 text-slate-400 border-slate-600 hidden">ĐANG CHỌN...</div>
+                        </div>
+                    </div>
+
+                    <div class="relative w-48 h-48 mx-auto mb-4 bg-slate-900 rounded-full border-[8px] border-[#334155] shadow-[inset_0_10px_20px_rgba(0,0,0,0.9)] flex items-center justify-center">
+                        <div id="pk-bc-result-overlay" class="absolute inset-0 bg-black/70 rounded-full flex flex-col items-center justify-center z-20 opacity-0 transition-opacity">
+                            <div class="text-xl font-black text-yellow-400 mb-1 uppercase tracking-widest drop-shadow-md" id="pk-bc-winner-text">KẾT QUẢ</div>
+                        </div>
+                        <div class="flex gap-2 relative z-10">
+                            <div id="pk-bc-dice1" class="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-3xl shadow-lg border-b-4 border-slate-300">❓</div>
+                            <div id="pk-bc-dice2" class="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-3xl shadow-lg border-b-4 border-slate-300 mt-6">❓</div>
+                            <div id="pk-bc-dice3" class="w-12 h-12 bg-white rounded-lg flex items-center justify-center text-3xl shadow-lg border-b-4 border-slate-300">❓</div>
+                        </div>
+                        <div id="pk-bc-bowl" class="bowl-cover bowl-open bg-[radial-gradient(circle_at_30%_30%,#e2e8f0_0%,#94a3b8_50%,#475569_100%)]"></div>
+                    </div>
+
+                    <div id="pk-bc-control-panel">
+                        <div class="grid grid-cols-3 gap-2 px-2">
+                            <div onclick="PK_BC.selectSide('nai')" id="pk-bc-zone-nai" class="glass-panel border border-white/10 rounded-xl py-2 flex flex-col items-center justify-start cursor-pointer click-bounce hover:bg-white/10 transition-all min-h-[90px] relative">
+                                <span class="text-3xl drop-shadow-md mt-1">🦌</span><span class="text-[9px] font-bold text-slate-300 mt-1">NAI</span>
+                                <div id="pk-bc-bets-nai" class="w-full flex flex-col gap-0.5 mt-1 px-1 absolute bottom-1"></div>
+                            </div>
+                            <div onclick="PK_BC.selectSide('bau')" id="pk-bc-zone-bau" class="glass-panel border border-white/10 rounded-xl py-2 flex flex-col items-center justify-start cursor-pointer click-bounce hover:bg-white/10 transition-all min-h-[90px] relative">
+                                <span class="text-3xl drop-shadow-md mt-1">🎃</span><span class="text-[9px] font-bold text-slate-300 mt-1">BẦU</span>
+                                <div id="pk-bc-bets-bau" class="w-full flex flex-col gap-0.5 mt-1 px-1 absolute bottom-1"></div>
+                            </div>
+                            <div onclick="PK_BC.selectSide('ga')" id="pk-bc-zone-ga" class="glass-panel border border-white/10 rounded-xl py-2 flex flex-col items-center justify-start cursor-pointer click-bounce hover:bg-white/10 transition-all min-h-[90px] relative">
+                                <span class="text-3xl drop-shadow-md mt-1">🐓</span><span class="text-[9px] font-bold text-slate-300 mt-1">GÀ</span>
+                                <div id="pk-bc-bets-ga" class="w-full flex flex-col gap-0.5 mt-1 px-1 absolute bottom-1"></div>
+                            </div>
+                            <div onclick="PK_BC.selectSide('ca')" id="pk-bc-zone-ca" class="glass-panel border border-white/10 rounded-xl py-2 flex flex-col items-center justify-start cursor-pointer click-bounce hover:bg-white/10 transition-all min-h-[90px] relative">
+                                <span class="text-3xl drop-shadow-md mt-1">🐟</span><span class="text-[9px] font-bold text-slate-300 mt-1">CÁ</span>
+                                <div id="pk-bc-bets-ca" class="w-full flex flex-col gap-0.5 mt-1 px-1 absolute bottom-1"></div>
+                            </div>
+                            <div onclick="PK_BC.selectSide('cua')" id="pk-bc-zone-cua" class="glass-panel border border-white/10 rounded-xl py-2 flex flex-col items-center justify-start cursor-pointer click-bounce hover:bg-white/10 transition-all min-h-[90px] relative">
+                                <span class="text-3xl drop-shadow-md mt-1">🦀</span><span class="text-[9px] font-bold text-slate-300 mt-1">CUA</span>
+                                <div id="pk-bc-bets-cua" class="w-full flex flex-col gap-0.5 mt-1 px-1 absolute bottom-1"></div>
+                            </div>
+                            <div onclick="PK_BC.selectSide('tom')" id="pk-bc-zone-tom" class="glass-panel border border-white/10 rounded-xl py-2 flex flex-col items-center justify-start cursor-pointer click-bounce hover:bg-white/10 transition-all min-h-[90px] relative">
+                                <span class="text-3xl drop-shadow-md mt-1">🦐</span><span class="text-[9px] font-bold text-slate-300 mt-1">TÔM</span>
+                                <div id="pk-bc-bets-tom" class="w-full flex flex-col gap-0.5 mt-1 px-1 absolute bottom-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="mt-3 px-2">
+                            <input type="number" id="pk-bc-room-bet-input" placeholder="Tiền cược MỖI CON (Min 1K)..." class="w-full bg-black/60 border border-slate-600 rounded-xl py-3 px-4 font-mono font-bold text-yellow-400 text-sm outline-none focus:border-yellow-500 text-center shadow-inner">
+                        </div>
+                        
+                        <div class="mt-3 px-2">
+                            <button onclick="PK_BC.toggleReady()" id="pk-bc-btn-ready" class="w-full py-4 bg-blue-600 rounded-xl font-black text-white hover:bg-blue-500 click-bounce shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all text-xl tracking-wider">ĐẶT CƯỢC & SẴN SÀNG</button>
+                        </div>
+                    </div>
+
+                    <div id="pk-bc-status-text" class="text-center font-black text-lg text-slate-300 font-oswald animate-pulse bg-black/50 py-2 rounded-xl border border-white/5 mt-4">CHỌN TỐI ĐA 3 CON & ĐẶT CƯỢC</div>
+                </div>
+
+                <div id="pk-bc-end-panel" class="hidden w-full mt-4">
+                    <button id="pk-bc-btn-req-rematch" onclick="PK_BC.requestRematch()" class="w-full py-3 bg-blue-600 rounded-xl font-black text-white hover:bg-blue-500 click-bounce mb-2 shadow-[0_0_15px_rgba(37,99,235,0.4)]">YÊU CẦU CHƠI LẠI</button>
+                    
+                    <div id="pk-bc-wait-rematch" class="hidden w-full mb-2">
+                        <div class="text-center font-black text-lg text-red-500 drop-shadow-[0_0_10px_rgba(239,68,68,0.8)] animate-pulse border-2 border-red-500/50 bg-red-900/20 py-3 rounded-xl mb-2">ĐANG CHỜ ĐỐI THỦ CHẤP NHẬN...</div>
+                    </div>
+
+                    <div id="pk-bc-group-rematch" class="hidden flex flex-col gap-2 mb-2">
+                        <div class="text-center font-black text-lg text-emerald-400 drop-shadow-[0_0_10px_rgba(16,185,129,0.8)] animate-pulse mb-2">ĐỐI THỦ MUỐN THÁCH ĐẤU LẠI!</div>
+                        <div class="flex gap-2">
+                            <button onclick="PK_BC.acceptRematch()" class="flex-1 py-3 bg-emerald-600 rounded-xl font-black text-white hover:bg-emerald-500 click-bounce shadow-[0_0_15px_rgba(16,185,129,0.4)]">CHẤP NHẬN ĐẤU</button>
+                            <button onclick="PK_BC.leaveRoom()" class="flex-1 py-3 bg-rose-600 rounded-xl font-black text-white hover:bg-rose-500 click-bounce shadow-[0_0_15px_rgba(225,29,72,0.4)]">TỪ CHỐI</button>
+                        </div>
+                    </div>
+
+                    <button id="pk-bc-btn-leave" onclick="PK_BC.leaveRoom()" class="w-full py-3 bg-slate-800 rounded-xl font-black text-slate-300 border border-slate-600 hover:bg-rose-900 click-bounce">THOÁT PHÒNG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- oan tu ti -->
+         <div id="view-pk_oantuti" class="hidden w-full max-w-lg p-3 flex flex-col items-center">
+            <h2 class="text-3xl font-black text-white font-oswald tracking-widest mb-3 drop-shadow-[0_0_10px_rgba(168,85,247,0.8)]">OẲN TÙ TÌ</h2>
+
+            <div id="pk-ott-lobby" class="w-full">
+                <div class="glass-panel p-4 rounded-2xl mb-3 border border-purple-500/30">
+                    <h3 class="font-black text-purple-400 mb-3 text-center uppercase tracking-widest text-sm">Tạo Kèo Mới</h3>
+                    <div class="flex flex-col gap-3">
+                        <input type="number" id="pk-ott-create-bet" placeholder="Mức Cược (Min 1K)..." class="w-full bg-black/60 border border-slate-600 rounded-xl py-3 px-4 font-mono font-bold text-yellow-400 text-sm outline-none focus:border-purple-500 transition-colors">
+                        <div class="flex items-center gap-2 px-2">
+                            <input type="checkbox" id="pk-ott-is-private" onchange="document.getElementById('pk-ott-pass-container').classList.toggle('hidden', !this.checked)" class="w-5 h-5 accent-purple-500 cursor-pointer">
+                            <label for="pk-ott-is-private" class="text-xs font-bold text-slate-300 cursor-pointer">Phòng Kín (Cần Mật Khẩu)</label>
+                        </div>
+                        <div id="pk-ott-pass-container" class="hidden">
+                            <input type="number" id="pk-ott-create-pass" placeholder="Nhập 4 số PIN (VD: 1234)" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" class="w-full bg-black/60 border border-slate-600 rounded-xl py-3 px-4 font-mono font-bold text-white text-sm outline-none focus:border-purple-500 text-center tracking-widest">
+                        </div>
+                        <button onclick="PK_OTT.createRoom()" class="w-full bg-gradient-to-r from-purple-600 to-fuchsia-600 rounded-xl font-black text-white py-3 shadow-[0_0_15px_rgba(168,85,247,0.4)] click-bounce mt-1">TẠO PHÒNG & VÀO BÀN</button>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 mb-4">
+                    <input type="text" id="pk-ott-search-code" placeholder="TÌM MÃ PHÒNG (VD: A1B2)" class="flex-1 bg-blue-950/40 border border-blue-500/50 rounded-xl py-2 px-4 font-mono font-bold text-white text-sm outline-none focus:border-blue-400 transition-colors uppercase text-center placeholder-slate-500">
+                    <button onclick="PK_OTT.searchRoom()" class="px-6 bg-blue-600 rounded-xl font-black text-white shadow-md hover:bg-blue-500 click-bounce text-xs border border-blue-400">TÌM MÃ</button>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-4 min-h-[250px]">
+                    <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-3">
+                        <h3 class="text-xs font-black text-slate-300 uppercase tracking-widest">Danh Sách Bàn Cược</h3>
+                        <button onclick="PK_OTT.listenRooms()" class="text-[10px] bg-slate-700 px-2 py-1 rounded text-white font-bold hover:bg-slate-600 click-bounce">LÀM MỚI</button>
+                    </div>
+                    <div id="pk-ott-room-list" class="flex flex-col gap-2 max-h-[350px] overflow-y-auto modal-scroll">
+                        <div class="text-center text-slate-500 text-xs py-4 font-bold">Đang tải danh sách...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="pk-ott-room" class="hidden w-full">
+                <div class="glass-panel p-4 rounded-3xl border-2 border-purple-500/50 relative overflow-hidden bg-gradient-to-b from-[#1e1b4b] to-black shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
+                    <div class="absolute top-2 left-3 z-20 bg-black/80 px-2 py-1 rounded border border-white/20 shadow-md">
+                        <span class="text-[9px] text-slate-400 font-bold uppercase tracking-widest block leading-none">Mã Phòng</span>
+                        <span id="pk-ott-room-code-display" class="text-xs font-mono font-black text-yellow-400 leading-none">---</span>
+                    </div>
+
+                    <div class="flex justify-between items-start mt-6 mb-6 border-b border-white/10 pb-4">
+                        <div class="text-center w-[35%] flex flex-col items-center">
+                            <div class="text-[10px] text-slate-400 font-bold mb-1 bg-black/50 px-2 py-0.5 rounded-full">CHỦ PHÒNG</div>
+                            <div id="pk-ott-host-name" class="font-black text-purple-400 truncate text-sm uppercase w-full mt-1">HOST</div>
+                        </div>
+                        <div class="text-center w-[30%] flex flex-col items-center">
+                            <div class="text-[10px] text-yellow-400 font-bold">MỖI VÁN</div>
+                            <div id="pk-ott-room-bet" class="font-mono text-xl font-black text-yellow-400 drop-shadow-md">0</div>
+                            <div id="pk-ott-room-pin" class="text-[10px] font-mono text-rose-400 mt-1 hidden tracking-widest">PIN: 1234</div>
+                        </div>
+                        <div class="text-center w-[35%] flex flex-col items-center">
+                            <div class="text-[10px] text-slate-400 font-bold mb-1 bg-black/50 px-2 py-0.5 rounded-full">ĐỐI THỦ</div>
+                            <div id="pk-ott-joiner-name" class="font-black text-blue-400 truncate text-sm uppercase w-full mt-1">ĐANG CHỜ...</div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center mb-6 h-32 relative px-2">
+                        <div id="pk-ott-host-display" class="w-24 h-24 bg-black/50 rounded-2xl flex items-center justify-center text-5xl border-2 border-slate-700 transition-all duration-300 transform-style-3d shadow-inner">❓</div>
+                        <div class="text-2xl font-black text-slate-600 italic animate-pulse">VS</div>
+                        <div id="pk-ott-joiner-display" class="w-24 h-24 bg-black/50 rounded-2xl flex items-center justify-center text-5xl border-2 border-slate-700 transition-all duration-300 transform-style-3d shadow-inner">❓</div>
+                    </div>
+
+                    <div id="pk-ott-status-text" class="text-center font-black text-lg text-slate-300 font-oswald animate-pulse bg-black/50 py-2 rounded-xl border border-white/5 mb-2">ĐANG CHỜ ĐỐI THỦ...</div>
+
+                    <div id="pk-ott-action-panel" class="hidden flex gap-2 justify-center mt-4">
+                        <button onclick="PK_OTT.makeChoice('keo')" class="flex-1 bg-slate-800 hover:bg-slate-700 border-2 border-slate-600 rounded-xl py-4 text-4xl click-bounce transition-transform">✌️</button>
+                        <button onclick="PK_OTT.makeChoice('bua')" class="flex-1 bg-slate-800 hover:bg-slate-700 border-2 border-slate-600 rounded-xl py-4 text-4xl click-bounce transition-transform">✊</button>
+                        <button onclick="PK_OTT.makeChoice('bao')" class="flex-1 bg-slate-800 hover:bg-slate-700 border-2 border-slate-600 rounded-xl py-4 text-4xl click-bounce transition-transform">✋</button>
+                    </div>
+                </div>
+
+                <div id="pk-ott-end-panel" class="hidden w-full mt-4">
+                    <button id="pk-ott-btn-req-rematch" onclick="PK_OTT.requestRematch()" class="w-full py-3 bg-blue-600 rounded-xl font-black text-white hover:bg-blue-500 click-bounce mb-2 shadow-[0_0_15px_rgba(37,99,235,0.4)]">YÊU CẦU CHƠI LẠI</button>
+                    <div id="pk-ott-group-rematch" class="hidden flex gap-2 mb-2">
+                        <button onclick="PK_OTT.acceptRematch()" class="flex-1 py-3 bg-emerald-600 rounded-xl font-black text-white hover:bg-emerald-500 click-bounce shadow-[0_0_15px_rgba(16,185,129,0.4)]">CHẤP NHẬN ĐẤU</button>
+                        <button onclick="PK_OTT.leaveRoom()" class="flex-1 py-3 bg-rose-600 rounded-xl font-black text-white hover:bg-rose-500 click-bounce shadow-[0_0_15px_rgba(225,29,72,0.4)]">TỪ CHỐI</button>
+                    </div>
+                    <button id="pk-ott-btn-leave" onclick="PK_OTT.leaveRoom()" class="w-full py-3 bg-slate-800 rounded-xl font-black text-slate-300 border border-slate-600 hover:bg-rose-900 click-bounce">THOÁT PHÒNG</button>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div id="view-pk_xidach" class="hidden w-full max-w-lg p-3 flex flex-col items-center">
+    <h2 class="text-3xl font-black text-white font-oswald tracking-widest mb-3 drop-shadow-[0_0_10px_rgba(20,184,166,0.8)]">PK XÌ DÁCH</h2>
+
+    <div id="pk-xd-lobby" class="w-full">
+        <div class="glass-panel p-4 rounded-2xl mb-3 border border-teal-500/30">
+            <h3 class="font-black text-teal-400 mb-3 text-center uppercase tracking-widest text-sm">Tạo Kèo Mới</h3>
+            <div class="flex flex-col gap-3">
+                <input type="number" id="pk-xd-create-bet" placeholder="Mức Cược (Min 1K)..." class="w-full bg-black/60 border border-slate-600 rounded-xl py-3 px-4 font-mono font-bold text-yellow-400 text-sm outline-none focus:border-teal-500 transition-colors text-center">
+                <div class="flex items-center gap-2 px-2">
+                    <input type="checkbox" id="pk-xd-is-private" onchange="document.getElementById('pk-xd-pass-container').classList.toggle('hidden', !this.checked)" class="w-5 h-5 accent-teal-500 cursor-pointer">
+                    <label for="pk-xd-is-private" class="text-xs font-bold text-slate-300 cursor-pointer">Phòng Kín (Cần Mật Khẩu)</label>
+                </div>
+                <div id="pk-xd-pass-container" class="hidden">
+                    <input type="number" id="pk-xd-create-pass" placeholder="Nhập 4 số PIN (VD: 1234)" oninput="if(this.value.length > 4) this.value = this.value.slice(0,4);" class="w-full bg-black/60 border border-slate-600 rounded-xl py-3 px-4 font-mono font-bold text-white text-sm outline-none focus:border-teal-500 text-center tracking-widest">
+                </div>
+                <button onclick="PK_XD.createRoom()" class="w-full bg-gradient-to-r from-teal-600 to-emerald-700 rounded-xl font-black text-white py-3 shadow-[0_0_15px_rgba(20,184,166,0.4)] click-bounce mt-1">TẠO PHÒNG & VÀO BÀN</button>
+            </div>
+        </div>
+
+        <div class="flex gap-2 mb-4">
+            <input type="text" id="pk-xd-search-code" placeholder="TÌM MÃ PHÒNG (VD: A1B2)" class="flex-1 bg-blue-950/40 border border-blue-500/50 rounded-xl py-2 px-4 font-mono font-bold text-white text-sm outline-none uppercase text-center placeholder-slate-500 focus:border-blue-400">
+            <button onclick="PK_XD.searchRoom()" class="px-6 bg-blue-600 rounded-xl font-black text-white shadow-md hover:bg-blue-500 click-bounce text-xs">TÌM MÃ</button>
+        </div>
+
+        <div class="glass-panel rounded-2xl p-4 min-h-[250px]">
+            <div class="flex justify-between items-center border-b border-white/10 pb-2 mb-3">
+                <h3 class="text-xs font-black text-slate-300 uppercase tracking-widest">Danh Sách Bàn</h3>
+                <button onclick="PK_XD.listenRooms()" class="text-[10px] bg-slate-700 px-2 py-1 rounded text-white font-bold hover:bg-slate-600 click-bounce">LÀM MỚI</button>
+            </div>
+            <div id="pk-xd-room-list" class="flex flex-col gap-2 max-h-[350px] overflow-y-auto modal-scroll">
+                <div class="text-center text-slate-500 text-xs py-4 font-bold">Đang tải danh sách...</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="pk-xd-room" class="hidden w-full">
+        <div class="glass-panel p-4 rounded-3xl border-2 border-teal-500/50 relative overflow-hidden bg-gradient-to-b from-[#022c22] to-black shadow-[0_15px_30px_rgba(0,0,0,0.8)]">
+            <div class="absolute top-2 left-3 z-20 bg-black/80 px-2 py-1 rounded border border-white/20 shadow-md flex gap-2">
+                <span class="text-xs font-mono font-black text-yellow-400 leading-none mt-0.5" id="pk-xd-room-code-display">---</span>
+                <span id="pk-xd-room-pin" class="text-[10px] font-mono text-rose-400 hidden tracking-widest border-l border-white/20 pl-2">PIN: 1234</span>
+            </div>
+
+            <div class="w-full flex flex-col items-center mt-10 relative">
+                <div class="flex justify-between w-full px-2 mb-2">
+                    <span class="text-[10px] text-rose-400 font-bold bg-rose-950/50 px-2 py-0.5 rounded border border-rose-500/50 uppercase">ĐỐI THỦ</span>
+                    <span id="pk-xd-opp-name" class="text-xs font-black text-white truncate max-w-[120px] uppercase">ĐANG CHỜ...</span>
+                </div>
+                <div id="pk-xd-opp-cards" class="flex justify-center -space-x-6 perspective-1000 h-20 mb-2"></div>
+                <span id="pk-xd-opp-score" class="text-[10px] font-black text-slate-400 bg-slate-800 px-3 py-0.5 rounded-full border border-slate-600 shadow-inner opacity-0">? Điểm</span>
+            </div>
+
+            <div class="my-6 border-y border-white/10 py-4 text-center bg-black/40 shadow-inner">
+                <div class="text-[10px] text-yellow-400 font-bold mb-1 tracking-widest">TỔNG CƯỢC MỖI VÁN</div>
+                <div id="pk-xd-room-bet" class="font-mono text-2xl font-black text-yellow-400 drop-shadow-md mb-2">0</div>
+                <div id="pk-xd-status-text" class="text-sm font-black text-slate-300 font-oswald animate-pulse tracking-widest text-center mt-2">VUI LÒNG SẴN SÀNG</div>
+            </div>
+
+            <div class="w-full flex flex-col items-center relative mb-4">
+                <span id="pk-xd-my-score" class="text-sm font-black text-teal-400 bg-teal-950 px-4 py-1 rounded-full border border-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.4)] opacity-0 mb-3">0 Điểm</span>
+                <div id="pk-xd-my-cards" class="flex justify-center -space-x-6 perspective-1000 h-24 mb-4"></div>
+                <div class="flex justify-between w-full px-2">
+                    <span class="text-[10px] text-teal-400 font-bold bg-teal-950/50 px-2 py-0.5 rounded border border-teal-500/50 uppercase">BẠN</span>
+                    <span id="pk-xd-my-name" class="text-xs font-black text-white truncate max-w-[120px] uppercase">PLAYER</span>
+                </div>
+            </div>
+
+            <div id="pk-xd-control-ready" class="px-2 pb-2">
+                <button onclick="PK_XD.toggleReady()" id="pk-xd-btn-ready" class="w-full py-4 bg-blue-600 rounded-xl font-black text-white hover:bg-blue-500 click-bounce shadow-[0_0_15px_rgba(37,99,235,0.4)] transition-all text-xl tracking-wider">SẴN SÀNG</button>
+            </div>
+            
+            <div id="pk-xd-control-play" class="hidden px-2 pb-2 flex gap-3">
+                <button onclick="PK_XD.hit()" id="pk-xd-btn-hit" class="flex-1 py-3 bg-gradient-to-b from-blue-500 to-blue-700 rounded-xl font-black text-white btn-super border-[#1e3a8a] text-sm">RÚT BÀI</button>
+                <button onclick="PK_XD.stand()" id="pk-xd-btn-stand" class="flex-1 py-3 bg-gradient-to-b from-rose-500 to-rose-700 rounded-xl font-black text-white btn-super border-[#9f1239] text-sm">DẰN BÀI</button>
+            </div>
+        </div>
+
+        <div id="pk-xd-end-panel" class="hidden w-full mt-4">
+            <button id="pk-xd-btn-req-rematch" onclick="PK_XD.requestRematch()" class="w-full py-3 bg-blue-600 rounded-xl font-black text-white hover:bg-blue-500 click-bounce mb-2 shadow-[0_0_15px_rgba(37,99,235,0.4)]">YÊU CẦU CHƠI LẠI</button>
+            <div id="pk-xd-wait-rematch" class="hidden w-full mb-2">
+                <div class="text-center font-black text-sm text-red-500 animate-pulse border border-red-500/50 bg-red-900/20 py-2 rounded-lg">ĐANG CHỜ ĐỐI THỦ CHẤP NHẬN...</div>
+            </div>
+            <div id="pk-xd-group-rematch" class="hidden flex gap-2 mb-2">
+                <button onclick="PK_XD.acceptRematch()" class="flex-1 py-3 bg-emerald-600 rounded-xl font-black text-white hover:bg-emerald-500 click-bounce shadow-md">CHẤP NHẬN ĐẤU</button>
+                <button onclick="PK_XD.leaveRoom()" class="flex-1 py-3 bg-rose-600 rounded-xl font-black text-white hover:bg-rose-500 click-bounce shadow-md">TỪ CHỐI</button>
+            </div>
+            <button onclick="PK_XD.leaveRoom()" class="w-full py-3 bg-slate-800 rounded-xl font-black text-slate-300 border border-slate-600 hover:bg-rose-900 click-bounce">THOÁT PHÒNG</button>
+        </div>
+    </div>
+</div>
 
     </main>
 
@@ -1712,12 +2204,11 @@ function selectGlobalChip(val, isUserClick = false) {
 }
 
 function hideAllViews() {
-    ['lobby', 'taixiu', 'xocdia', 'baicao', 'roulette', 'vongquay', 'nohu', 'chungkhoan', 'baucua', 'crash', 'xidach', 'bank'].forEach(v => {
+    ['lobby', 'taixiu', 'xocdia', 'baicao', 'roulette', 'vongquay', 'nohu', 'chungkhoan', 'baucua', 'crash', 'xidach', 'bank', 'pk_lobby', 'pk_xucxac', 'pk_baucua', 'pk_oantuti', 'pk_xidach'].forEach(v => {
         const el = document.getElementById(`view-${v}`);
         if(el) el.classList.add('hidden');
     });
 }
-
 function openInstructionManual() {
     if (!currentView || currentView === 'lobby') return;
     const content = helpData[currentView];
@@ -1769,8 +2260,13 @@ function openGame(gameId) {
     if(gameId === 'crash') CRASH.initCanvas();
     if(gameId === 'xidach') XIDACH.resetUI();
     if(gameId === 'bank') BANK.updateUI();
+    
+    // ĐÃ FIX: Xóa lệnh khởi tạo xúc xắc bị dư, thêm khởi tạo Oẳn Tù Tì
+    if(gameId === 'pk_xucxac') PK.init();
+    if(gameId === 'pk_baucua') PK_BC.init();
+    if(gameId === 'pk_oantuti') PK_OTT.init();
+    if(gameId === 'pk_xidach') PK_XD.init(); // Dòng này thêm mới nha bro!
 }
-
 function goHome() {
     if(TX.hasBets() || XD.hasBets() || BAI.hasBets() || RL.hasBets() || VQ.hasBets() || NH.hasBets() || CK.hasBets() || CRASH.state === 'RUNNING' || (XIDACH.state !== 'IDLE' && XIDACH.hasBets())) {
         showToast("Vui lòng hủy cược trước khi thoát sảnh!", true); return;
@@ -2705,9 +3201,1161 @@ const CK = {
     }
 };
 
+
+
+
+
+
+
 setTimeout(updateContributionUI, 100);
 document.body.addEventListener('touchstart', () => { if(audioCtx.state === 'suspended') audioCtx.resume(); }, {once:true});
 document.body.addEventListener('click', () => { if(audioCtx.state === 'suspended') audioCtx.resume(); }, {once:true});
-    </script>
+
+ // ==========================================
+// 1. LOGIC PK TÀI XỈU 1VS1
+// ==========================================
+const PK = {
+    unsubList: null, unsubRoom: null, currentRoomId: null, isHost: false,
+    localStatus: '', lastJoinerId: null, resultGenerated: false, lastStatusHandled: '',
+    myChoice: null, myBet: 0, isReady: false, isAnimating: false, lastData: null,
+
+    init() {
+        document.getElementById('pk-lobby').classList.remove('hidden'); document.getElementById('pk-room').classList.add('hidden');
+        document.getElementById('pk-is-private').checked = false; document.getElementById('pk-pass-container').classList.add('hidden');
+        document.getElementById('pk-create-pass').value = ''; document.getElementById('pk-search-code').value = '';
+        this.listenRooms();
+    },
+
+    listenRooms() {
+        if(this.unsubList) this.unsubList();
+        this.unsubList = db.collection('pk_rooms').orderBy('createdAt', 'desc').onSnapshot(snap => {
+            const list = document.getElementById('pk-room-list'); if(!list) return;
+            list.innerHTML = '';
+            if(snap.empty) { list.innerHTML = '<div class="text-center text-slate-500 text-xs py-4 font-bold">Chưa có ai tạo phòng!</div>'; return; }
+            snap.forEach(doc => {
+                const data = doc.data(); const isMine = data.hostId === currentUser.uid;
+                if(data.status === 'finished' && data.joinerId) return; 
+                const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+                const playerCountUi = `<span class="bg-slate-800 text-yellow-400 px-1.5 rounded border border-slate-600 flex items-center gap-1">${data.joinerId ? "2/2" : "1/2"} 👤</span>`;
+                const roomStatus = data.joinerId ? "Đang giao chiến" : "Đang chờ đối thủ";
+                const myTag = isMine ? '<span class="text-[9px] bg-blue-600 text-white px-1.5 py-0.5 rounded ml-1">BÀN CỦA BẠN</span>' : '';
+                const lockIcon = data.isPrivate ? '<span class="text-[9px] bg-rose-900 text-rose-300 px-1.5 py-0.5 rounded ml-1">🔒 PIN</span>' : '';
+                list.innerHTML += `<div class="bg-black/40 border ${isMine ? 'border-blue-500/50' : 'border-red-500/20'} rounded-xl p-3 flex justify-between items-center mb-2 shadow-inner hover:bg-black/60"><div class="flex flex-col"><span class="font-black text-red-400 text-sm uppercase flex items-center">MÃ: ${doc.id} | 👤 ${safeHostName} ${lockIcon} ${myTag}</span><span class="text-[10px] text-slate-400 mt-1 flex items-center gap-2">${roomStatus} ${playerCountUi}</span></div><div class="flex items-center gap-3">${isMine ? `<button onclick="PK.reEnterRoom('${doc.id}', '${safeHostName}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md">VÀO LẠI</button>` : `<button onclick="PK.joinRoom('${doc.id}', ${data.isPrivate})" class="bg-gradient-to-b from-red-500 to-red-700 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce">VÀO BÀN</button>`}</div></div>`;
+            });
+        });
+    },
+
+    reEnterRoom(roomId, hostName) { this.isHost = true; this.enterRoomView(roomId, hostName, null); },
+
+    async searchRoom() {
+        const code = document.getElementById('pk-search-code').value.trim().toUpperCase(); if(!code) return this.listenRooms();
+        try {
+            const docSnap = await db.collection('pk_rooms').doc(code).get();
+            if(docSnap.exists) {
+                const data = docSnap.data(); const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+                const isMine = data.hostId === currentUser.uid; const playerCountUi = `<span class="bg-slate-800 text-yellow-400 px-1.5 rounded border border-slate-600 flex items-center gap-1 w-max">${data.joinerId ? "2/2" : "1/2"} 👤</span>`;
+                document.getElementById('pk-room-list').innerHTML = `<div class="bg-blue-900/30 border border-blue-500/50 rounded-xl p-3 flex justify-between items-center mb-2 shadow-[0_0_15px_rgba(59,130,246,0.2)]"><div class="flex flex-col"><span class="font-black text-blue-400 text-sm uppercase tracking-wider">MÃ: ${docSnap.id} | 👤 ${safeHostName}</span><span class="text-[10px] text-slate-300 mt-1">${playerCountUi}</span></div><div class="flex items-center gap-3">${isMine ? `<button onclick="PK.reEnterRoom('${docSnap.id}', '${safeHostName}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md">VÀO LẠI</button>` : `<button onclick="PK.joinRoom('${docSnap.id}', ${data.isPrivate})" class="bg-gradient-to-b from-blue-500 to-blue-700 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce">VÀO BÀN</button>`}</div></div>`;
+            } else { showToast("Không tìm thấy mã này!", true); }
+        } catch(e){}
+    },
+
+    async createRoom() {
+        if(!userName || userName === 'undefined' || userName === 'null') return showToast("Vui lòng nhập Tên ở mục 'BANKING VIP'!", true);
+        const isPrivate = document.getElementById('pk-is-private').checked; let pin = isPrivate ? document.getElementById('pk-create-pass').value : '';
+        if(isPrivate && pin.length !== 4) return showToast("Nhập PIN 4 số!", true);
+        playSound('chip'); const roomCode = Math.random().toString(36).substring(2, 6).toUpperCase();
+        this.isHost = true; this.localStatus = 'waiting'; this.resultGenerated = false;
+        try {
+            await db.collection('pk_rooms').doc(roomCode).set({ hostId: currentUser.uid, hostName: userName, status: 'waiting', isPrivate, pin, hostReady: false, joinerReady: false, hostChoice: null, hostBet: 0, joinerChoice: null, joinerBet: 0, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+            this.enterRoomView(roomCode, userName, pin || null);
+        } catch(e) { showToast("Lỗi tạo phòng!", true); }
+    },
+
+    async joinRoom(roomId, isPrivate) {
+        if(!userName || userName === 'undefined' || userName === 'null') return showToast("Cần nhập tên nhân vật!", true);
+        if(isPrivate) { const inputPin = prompt("Nhập mã PIN để vào bàn:"); if(!inputPin) return; const doc = await db.collection('pk_rooms').doc(roomId).get(); if(doc.data().pin !== inputPin) return showToast("Sai mã PIN!", true); }
+        playSound('chip'); this.isHost = false; this.localStatus = 'playing'; this.resultGenerated = false;
+        try { await db.collection('pk_rooms').doc(roomId).update({ joinerId: currentUser.uid, joinerName: userName, status: 'playing', joinerReady: false }); this.enterRoomView(roomId, '...', null); } catch(e) { showToast("Vào bàn thất bại!", true); }
+    },
+
+    selectSide(side) {
+        if(this.isReady) return; playSound('chip'); this.myChoice = side;
+        const zXiu = document.getElementById('pk-zone-xiu'); const zTai = document.getElementById('pk-zone-tai');
+        zXiu.style.borderColor = side === 'xiu' ? '#3b82f6' : ''; zXiu.style.boxShadow = side === 'xiu' ? '0 0 15px rgba(59,130,246,0.6)' : '';
+        zTai.style.borderColor = side === 'tai' ? '#ef4444' : ''; zTai.style.boxShadow = side === 'tai' ? '0 0 15px rgba(239,68,68,0.6)' : '';
+    },
+
+    async toggleReady() {
+        playSound('chip');
+        if (!this.isReady) {
+            const bet = parseInt(document.getElementById('pk-room-bet-input').value);
+            if (!this.myChoice) return showToast("Vui lòng Bấm Chọn TÀI hoặc XỈU!", true);
+            if (isNaN(bet) || bet < 1000) return showToast("Cược tối thiểu 1,000$!", true);
+            if (globalBalance < bet) return showToast("Ví ngoài không đủ tiền!", true);
+
+            this.myBet = bet; globalBalance -= bet; updateBalance(); window.syncDataToCloud(); this.isReady = true;
+            document.getElementById('pk-room-bet-input').disabled = true;
+            const btn = document.getElementById('pk-btn-ready'); btn.innerText = "HỦY SẴN SÀNG"; btn.classList.replace('bg-blue-600', 'bg-emerald-600'); btn.classList.replace('hover:bg-blue-500', 'hover:bg-emerald-500');
+            await db.collection('pk_rooms').doc(this.currentRoomId).update(this.isHost ? { hostReady: true, hostBet: bet, hostChoice: this.myChoice } : { joinerReady: true, joinerBet: bet, joinerChoice: this.myChoice });
+        } else {
+            globalBalance += this.myBet; updateBalance(); window.syncDataToCloud(); this.isReady = false; this.myBet = 0;
+            document.getElementById('pk-room-bet-input').disabled = false;
+            const btn = document.getElementById('pk-btn-ready'); btn.innerText = "ĐẶT CƯỢC & SẴN SÀNG"; btn.classList.replace('bg-emerald-600', 'bg-blue-600'); btn.classList.replace('hover:bg-emerald-500', 'hover:bg-blue-500');
+            await db.collection('pk_rooms').doc(this.currentRoomId).update(this.isHost ? { hostReady: false, hostBet: 0, hostChoice: null } : { joinerReady: false, joinerBet: 0, joinerChoice: null });
+        }
+    },
+
+    updateRematchUI(data) {
+        if(this.isAnimating || this.localStatus !== 'finished') return;
+        let myReady = this.isHost ? data.hostReady : data.joinerReady;
+        let oppReady = this.isHost ? data.joinerReady : data.hostReady;
+        
+        const endPanel = document.getElementById('pk-end-panel');
+        const btnReq = document.getElementById('pk-btn-req-rematch');
+        const waitRematch = document.getElementById('pk-wait-rematch');
+        const groupRematch = document.getElementById('pk-group-rematch');
+        const btnLeave = document.getElementById('pk-btn-leave');
+
+        if(endPanel) endPanel.classList.remove('hidden');
+
+        if (myReady && !oppReady) {
+            btnReq.classList.add('hidden');
+            groupRematch.classList.add('hidden');
+            waitRematch.classList.remove('hidden');
+            btnLeave.classList.remove('hidden');
+            document.getElementById('pk-status-text').classList.add('hidden');
+        }
+        else if (!myReady && oppReady) {
+            btnReq.classList.add('hidden');
+            groupRematch.classList.remove('hidden');
+            waitRematch.classList.add('hidden');
+            btnLeave.classList.add('hidden');
+            document.getElementById('pk-status-text').classList.add('hidden');
+        }
+        else if (!myReady && !oppReady) {
+            btnReq.classList.remove('hidden');
+            groupRematch.classList.add('hidden');
+            waitRematch.classList.add('hidden');
+            btnLeave.classList.remove('hidden');
+            document.getElementById('pk-status-text').classList.remove('hidden');
+        }
+    },
+
+    enterRoomView(roomId, hostName, pin) {
+        this.currentRoomId = roomId; this.lastJoinerId = null;
+        document.getElementById('pk-lobby').classList.add('hidden'); document.getElementById('pk-room').classList.remove('hidden');
+        document.getElementById('pk-room-code-display').innerText = `MÃ: ${roomId}`;
+        if(this.isHost && pin) { document.getElementById('pk-room-pin').innerText = `PIN: ${pin}`; document.getElementById('pk-room-pin').classList.remove('hidden'); }
+        this.fullResetUI();
+
+        if(this.unsubRoom) this.unsubRoom();
+        this.unsubRoom = db.collection('pk_rooms').doc(roomId).onSnapshot(doc => {
+            if(!doc.exists) { 
+                if(this.localStatus !== 'finished' && (this.localStatus === 'waiting' || this.localStatus === 'playing')) {
+                    if(this.isReady) { globalBalance += this.myBet; updateBalance(); window.syncDataToCloud(); }
+                    showToast("Phòng giải tán, hoàn lại cược!", true);
+                }
+                this.forceLeave(); return; 
+            }
+            const data = doc.data(); this.localStatus = data.status; this.lastData = data;
+
+            if(this.isHost && this.lastJoinerId && !data.joinerId) { 
+                showToast("⚠️ Đối thủ đã bỏ chạy!", true); 
+                if(this.isReady) this.toggleReady(); this.lastStatusHandled = 'waiting'; 
+            }
+            this.lastJoinerId = data.joinerId;
+
+            document.getElementById('pk-host-name').innerText = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+            document.getElementById('pk-joiner-name').innerText = data.joinerName && data.joinerName !== 'undefined' ? data.joinerName : 'ĐANG CHỜ...';
+            document.getElementById('pk-room-pot').innerText = formatMoney((data.hostBet || 0) + (data.joinerBet || 0));
+
+            this.updatePlayerStatus('host', data.hostReady, data.hostBet, data.hostChoice);
+            if(data.joinerId) { document.getElementById('pk-joiner-status').classList.remove('hidden'); this.updatePlayerStatus('joiner', data.joinerReady, data.joinerBet, data.joinerChoice); } else { document.getElementById('pk-joiner-status').classList.add('hidden'); }
+
+            if(data.status === 'playing') { 
+                if(this.lastStatusHandled !== 'playing') { this.resultGenerated = false; this.resetDices(); }
+                this.lastStatusHandled = 'playing';
+                
+                document.getElementById('pk-end-panel').classList.add('hidden');
+                document.getElementById('pk-control-panel').classList.remove('hidden');
+
+                if (data.hostReady && data.joinerReady) {
+                    document.getElementById('pk-status-text').innerText = "ĐÃ ĐỦ KÈO! ĐANG XÓC...";
+                    document.getElementById('pk-control-panel').classList.add('hidden'); document.getElementById('pk-bowl').classList.remove('bowl-open');
+
+                    if(this.isHost && !this.resultGenerated) {
+                        this.resultGenerated = true;
+                        setTimeout(() => {
+                            const d1 = Math.floor(Math.random()*6)+1, d2 = Math.floor(Math.random()*6)+1, d3 = Math.floor(Math.random()*6)+1;
+                            const sum = d1+d2+d3; const isBao = (d1===d2 && d2===d3);
+                           db.collection('pk_rooms').doc(roomId).update({ status: 'finished', dice: {d1, d2, d3}, sum, isBao, hostReady: false, joinerReady: false });
+                        }, 1200);
+                    }
+                } else {
+                    document.getElementById('pk-status-text').innerText = "VUI LÒNG ĐẶT CƯỢC VÀ SẴN SÀNG"; document.getElementById('pk-status-text').classList.remove('hidden');
+                }
+            }
+
+            if(data.status === 'finished') { 
+                if (this.lastStatusHandled !== 'finished') { this.lastStatusHandled = 'finished'; this.playAnimation(data); } else { this.updateRematchUI(data); }
+            }
+        });
+    },
+
+    updatePlayerStatus(role, isReady, bet, choice) {
+        const stEl = document.getElementById(`pk-${role}-status`);
+        if(isReady) {
+            let side = choice === 'tai' ? 'TÀI' : 'XỈU';
+            stEl.innerHTML = `${formatMoney(bet)} <span class="${choice === 'tai' ? 'text-red-400' : 'text-blue-400'}">${side}</span>`;
+            stEl.className = "text-[9px] font-black px-2 py-0.5 rounded mt-1 border bg-emerald-900/50 text-emerald-400 border-emerald-500";
+        } else {
+            stEl.innerText = "ĐANG CHỌN..."; stEl.className = "text-[9px] font-black px-2 py-0.5 rounded mt-1 border bg-slate-800 text-slate-400 border-slate-600";
+        }
+    },
+
+    playAnimation(data) {
+        this.isAnimating = true;
+        document.getElementById('pk-status-text').innerText = "ĐANG MỞ BÁT..."; document.getElementById('pk-end-panel').classList.add('hidden'); document.getElementById('pk-control-panel').classList.add('hidden');
+        const bowl = document.getElementById('pk-bowl'); bowl.classList.add('shaking'); playSound('shake');
+        let t = 0; const iv = setInterval(() => { this.setDice(1, Math.floor(Math.random()*6)+1); this.setDice(2, Math.floor(Math.random()*6)+1); this.setDice(3, Math.floor(Math.random()*6)+1); if(++t > 15) clearInterval(iv); }, 80);
+
+        setTimeout(() => {
+            bowl.classList.remove('shaking'); this.setDice(1, data.dice.d1); this.setDice(2, data.dice.d2); this.setDice(3, data.dice.d3); bowl.classList.add('bowl-open');
+            setTimeout(() => {
+                const ov = document.getElementById('pk-tx-result-overlay'); const sm = document.getElementById('pk-tx-sum');
+                sm.innerText = data.sum; sm.style.color = data.isBao ? '#f0abfc' : (data.sum >= 11 ? '#ef4444' : '#3b82f6');
+                ov.classList.add('opacity-100');
+                this.calculatePayout(data);
+                this.isAnimating = false; if(this.lastData) this.updateRematchUI(this.lastData);
+            }, 600);
+        }, 1500);
+    },
+
+    calculatePayout(data) {
+        let resultSide = data.isBao ? 'bao' : (data.sum >= 11 ? 'tai' : 'xiu');
+        let myChoice = this.isHost ? data.hostChoice : data.joinerChoice; let oppChoice = this.isHost ? data.joinerChoice : data.hostChoice;
+        let myBet = this.isHost ? data.hostBet : data.joinerBet; let oppBet = this.isHost ? data.joinerBet : data.hostBet;
+        let iWin = (!data.isBao && myChoice === resultSide); let oppWin = (!data.isBao && oppChoice === resultSide);
+        const st = document.getElementById('pk-status-text');
+
+        if (iWin && !oppWin) {
+            let win = myBet + Math.floor(oppBet * 0.95);
+            st.innerText = `THẮNG ĐẬM: +${formatMoney(win)}`; st.className = "text-center font-black text-2xl text-emerald-400 animate-bounce bg-black/50 py-2 rounded-xl border border-white/5 mt-4";
+            playSound('win'); triggerCoinRain(); globalBalance += win; updateHousePool(Math.floor(oppBet * 0.05)); VIP.addExp(myBet);
+        } else if (iWin && oppWin) {
+            st.innerText = "HÒA NHAU (HOÀN TIỀN)"; st.className = "text-center font-black text-xl text-slate-200 bg-black/50 py-2 rounded-xl border border-white/5 mt-4";
+            playSound('chip'); globalBalance += myBet;
+        } else if (!iWin && !oppWin) {
+            st.innerText = data.isBao ? "BÃO KHÔNG AI ĂN!" : "CẢ HAI CÙNG THUA!"; st.className = "text-center font-black text-xl text-fuchsia-400 bg-black/50 py-2 rounded-xl border border-white/5 mt-4";
+            playSound('lose');
+        } else {
+            st.innerText = "BẠN ĐÃ THUA KÈO!"; st.className = "text-center font-black text-2xl text-rose-500 bg-black/50 py-2 rounded-xl border border-white/5 mt-4"; playSound('lose');
+        }
+        updateBalance(); window.syncDataToCloud();
+    },
+
+    async requestRematch() { playSound('chip'); await db.collection('pk_rooms').doc(this.currentRoomId).update(this.isHost ? { hostReady: true } : { joinerReady: true }); },
+    async acceptRematch() { playSound('chip'); await db.collection('pk_rooms').doc(this.currentRoomId).update({ status: 'playing', hostReady: false, joinerReady: false, hostBet: 0, joinerBet: 0, hostChoice: null, joinerChoice: null, sum: 0, isBao: false }); },
+
+    setDice(id, val) { const d = document.getElementById(`pk-dice${id}`); if(d) d.className = `dice-3d face-${val}`; },
+    resetDices() { [1,2,3].forEach(i => this.setDice(i, 1)); document.getElementById('pk-tx-result-overlay').classList.remove('opacity-100'); document.getElementById('pk-bowl').classList.add('bowl-open'); },
+    
+    fullResetUI() { 
+        this.isReady = false; this.myChoice = null; this.myBet = 0;
+        document.getElementById('pk-zone-xiu').style.borderColor = ''; document.getElementById('pk-zone-xiu').style.boxShadow = '';
+        document.getElementById('pk-zone-tai').style.borderColor = ''; document.getElementById('pk-zone-tai').style.boxShadow = '';
+        document.getElementById('pk-room-bet-input').disabled = false; document.getElementById('pk-room-bet-input').value = '';
+        const btn = document.getElementById('pk-btn-ready'); btn.innerText = "ĐẶT CƯỢC & SẴN SÀNG"; btn.classList.replace('bg-emerald-600', 'bg-blue-600'); btn.classList.replace('hover:bg-emerald-500', 'hover:bg-blue-500');
+        this.resetDices(); document.getElementById('pk-status-text').innerText = "VUI LÒNG ĐẶT CƯỢC VÀ CHỌN CỬA"; document.getElementById('pk-status-text').className = "text-center font-black text-lg text-slate-300 animate-pulse bg-black/50 py-2 rounded-xl border border-white/5 mt-4"; document.getElementById('pk-status-text').classList.remove('hidden');
+        document.getElementById('pk-control-panel').classList.remove('hidden'); document.getElementById('pk-end-panel').classList.add('hidden'); 
+    },
+
+    async leaveRoom() {
+        if(this.unsubRoom) this.unsubRoom();
+        if(this.isReady && (this.localStatus === 'waiting' || this.localStatus === 'playing')) { globalBalance += this.myBet; updateBalance(); window.syncDataToCloud(); }
+        if(this.isHost) { try { await db.collection('pk_rooms').doc(this.currentRoomId).delete(); } catch(e){} }
+        else { try { await db.collection('pk_rooms').doc(this.currentRoomId).update({ status: 'waiting', joinerId: null, joinerName: null, joinerReady: false, joinerBet: 0, joinerChoice: null }); } catch(e){} }
+        this.forceLeave();
+    },
+    forceLeave() { if(this.unsubRoom) this.unsubRoom(); document.getElementById('pk-room').classList.add('hidden'); document.getElementById('pk-lobby').classList.remove('hidden'); this.currentRoomId = null; this.listenRooms(); }
+};
+
+// ==========================================
+// LOGIC PK BẦU CUA 1VS1
+// ==========================================
+const PK_BC = {
+    unsubList: null, unsubRoom: null, currentRoomId: null, isHost: false,
+    localStatus: '', lastJoinerId: null, resultGenerated: false, lastStatusHandled: '',
+    myChoices: [], myBetPerChoice: 0, myTotalBet: 0, isReady: false, isAnimating: false, lastData: null,
+    icons: { 'nai': '🦌', 'bau': '🎃', 'ga': '🐓', 'ca': '🐟', 'cua': '🦀', 'tom': '🦐' },
+
+    init() {
+        document.getElementById('pk-bc-lobby').classList.remove('hidden'); document.getElementById('pk-bc-room').classList.add('hidden');
+        document.getElementById('pk-bc-is-private').checked = false; document.getElementById('pk-bc-pass-container').classList.add('hidden');
+        document.getElementById('pk-bc-create-pass').value = ''; document.getElementById('pk-bc-search-code').value = '';
+        this.listenRooms();
+    },
+
+    listenRooms() {
+        if(this.unsubList) this.unsubList();
+        this.unsubList = db.collection('pk_baucua').orderBy('createdAt', 'desc').onSnapshot(snap => {
+            const list = document.getElementById('pk-bc-room-list'); if(!list) return;
+            list.innerHTML = '';
+            if(snap.empty) { list.innerHTML = '<div class="text-center text-slate-500 text-xs py-4 font-bold">Chưa có bàn Bầu Cua nào!</div>'; return; }
+            snap.forEach(doc => {
+                const data = doc.data(); const isMine = data.hostId === currentUser.uid;
+                if(data.status === 'finished' && data.joinerId) return; 
+                const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+                const playerCountUi = `<span class="bg-slate-800 text-yellow-400 px-1.5 rounded border border-slate-600 flex items-center gap-1">${data.joinerId ? "2/2" : "1/2"} 👤</span>`;
+                const roomStatus = data.joinerId ? "Đang giao chiến" : "Đang chờ đối thủ";
+                const myTag = isMine ? '<span class="text-[9px] bg-blue-600 text-white px-1.5 py-0.5 rounded ml-1">BÀN CỦA BẠN</span>' : '';
+                const lockIcon = data.isPrivate ? '<span class="text-[9px] bg-rose-900 text-rose-300 px-1.5 py-0.5 rounded ml-1">🔒 PIN</span>' : '';
+                list.innerHTML += `<div class="bg-black/40 border ${isMine ? 'border-blue-500/50' : 'border-yellow-500/20'} rounded-xl p-3 flex justify-between items-center mb-2 shadow-inner hover:bg-black/60"><div class="flex flex-col"><span class="font-black text-yellow-400 text-sm uppercase flex items-center">MÃ: ${doc.id} | 👤 ${safeHostName} ${lockIcon} ${myTag}</span><span class="text-[10px] text-slate-400 mt-1 flex items-center gap-2">${roomStatus} ${playerCountUi}</span></div><div class="flex items-center gap-3">${isMine ? `<button onclick="PK_BC.reEnterRoom('${doc.id}', '${safeHostName}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md">VÀO LẠI</button>` : `<button onclick="PK_BC.joinRoom('${doc.id}', ${data.isPrivate})" class="bg-gradient-to-b from-yellow-500 to-amber-700 text-slate-900 px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce">VÀO BÀN</button>`}</div></div>`;
+            });
+        });
+    },
+
+    reEnterRoom(roomId, hostName) { this.isHost = true; this.enterRoomView(roomId, hostName, null); },
+
+    async searchRoom() {
+        const code = document.getElementById('pk-bc-search-code').value.trim().toUpperCase(); if(!code) return this.listenRooms();
+        try {
+            const docSnap = await db.collection('pk_baucua').doc(code).get();
+            if(docSnap.exists) {
+                const data = docSnap.data(); const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+                const isMine = data.hostId === currentUser.uid; const playerCountUi = `<span class="bg-slate-800 text-yellow-400 px-1.5 rounded border border-slate-600 flex items-center gap-1 w-max">${data.joinerId ? "2/2" : "1/2"} 👤</span>`;
+                document.getElementById('pk-bc-room-list').innerHTML = `<div class="bg-blue-900/30 border border-blue-500/50 rounded-xl p-3 flex justify-between items-center mb-2 shadow-[0_0_15px_rgba(59,130,246,0.2)]"><div class="flex flex-col"><span class="font-black text-blue-400 text-sm uppercase tracking-wider">MÃ: ${docSnap.id} | 👤 ${safeHostName}</span><span class="text-[10px] text-slate-300 mt-1">${playerCountUi}</span></div><div class="flex items-center gap-3">${isMine ? `<button onclick="PK_BC.reEnterRoom('${docSnap.id}', '${safeHostName}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md">VÀO LẠI</button>` : `<button onclick="PK_BC.joinRoom('${docSnap.id}', ${data.isPrivate})" class="bg-gradient-to-b from-yellow-500 to-amber-700 text-slate-900 px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce">VÀO BÀN</button>`}</div></div>`;
+            } else { showToast("Không tìm thấy mã này!", true); }
+        } catch(e){}
+    },
+
+    async createRoom() {
+        if(!userName || userName === 'undefined' || userName === 'null') return showToast("Vui lòng nhập Tên ở mục 'BANKING VIP'!", true);
+        const isPrivate = document.getElementById('pk-bc-is-private').checked; let pin = isPrivate ? document.getElementById('pk-bc-create-pass').value : '';
+        if(isPrivate && pin.length !== 4) return showToast("Nhập PIN 4 số!", true);
+        playSound('chip'); const roomCode = Math.random().toString(36).substring(2, 6).toUpperCase();
+        this.isHost = true; this.localStatus = 'waiting'; this.resultGenerated = false;
+        try {
+            await db.collection('pk_baucua').doc(roomCode).set({ hostId: currentUser.uid, hostName: userName, status: 'waiting', isPrivate, pin, hostReady: false, joinerReady: false, hostChoices: [], hostBet: 0, joinerChoices: [], joinerBet: 0, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+            this.enterRoomView(roomCode, userName, pin || null);
+        } catch(e) { showToast("Lỗi tạo phòng!", true); }
+    },
+
+    async joinRoom(roomId, isPrivate) {
+        if(!userName || userName === 'undefined' || userName === 'null') return showToast("Cần nhập tên nhân vật!", true);
+        if(isPrivate) { const inputPin = prompt("Nhập mã PIN để vào bàn:"); if(!inputPin) return; const doc = await db.collection('pk_baucua').doc(roomId).get(); if(doc.data().pin !== inputPin) return showToast("Sai mã PIN!", true); }
+        playSound('chip'); this.isHost = false; this.localStatus = 'playing'; this.resultGenerated = false;
+        try { await db.collection('pk_baucua').doc(roomId).update({ joinerId: currentUser.uid, joinerName: userName, status: 'playing', joinerReady: false }); this.enterRoomView(roomId, '...', null); } catch(e) { showToast("Vào bàn thất bại!", true); }
+    },
+
+    selectSide(side) {
+        if(this.isReady) return; playSound('chip');
+        if(this.myChoices.includes(side)) { this.myChoices = this.myChoices.filter(c => c !== side); } 
+        else { if(this.myChoices.length >= 3) return showToast("Chỉ được chọn tối đa 3 linh vật!", true); this.myChoices.push(side); }
+        Object.keys(this.icons).forEach(k => {
+            const el = document.getElementById(`pk-bc-zone-${k}`);
+            if(this.myChoices.includes(k)) { el.classList.add('bg-yellow-500/20', 'border-yellow-400'); el.classList.remove('border-white/10'); } 
+            else { el.classList.remove('bg-yellow-500/20', 'border-yellow-400'); el.classList.add('border-white/10'); }
+        });
+    },
+
+    async toggleReady() {
+        playSound('chip');
+        if (!this.isReady) {
+            const betPerChoice = parseInt(document.getElementById('pk-bc-room-bet-input').value);
+            if (this.myChoices.length === 0) return showToast("Vui lòng Chọn ít nhất 1 Linh Vật!", true);
+            if (isNaN(betPerChoice) || betPerChoice < 1000) return showToast("Cược tối thiểu 1,000$/con!", true);
+            const totalBet = betPerChoice * this.myChoices.length;
+            if (globalBalance < totalBet) return showToast("Ví ngoài không đủ tiền!", true);
+
+            this.myTotalBet = totalBet; this.myBetPerChoice = betPerChoice;
+            globalBalance -= totalBet; updateBalance(); window.syncDataToCloud(); this.isReady = true;
+            document.getElementById('pk-bc-room-bet-input').disabled = true;
+            const btn = document.getElementById('pk-bc-btn-ready'); btn.innerText = "HỦY SẴN SÀNG"; btn.classList.replace('bg-blue-600', 'bg-emerald-600'); btn.classList.replace('hover:bg-blue-500', 'hover:bg-emerald-500');
+            await db.collection('pk_baucua').doc(this.currentRoomId).update(this.isHost ? { hostReady: true, hostBet: betPerChoice, hostChoices: this.myChoices } : { joinerReady: true, joinerBet: betPerChoice, joinerChoices: this.myChoices });
+        } else {
+            globalBalance += this.myTotalBet; updateBalance(); window.syncDataToCloud(); this.isReady = false; this.myTotalBet = 0; this.myBetPerChoice = 0;
+            document.getElementById('pk-bc-room-bet-input').disabled = false;
+            const btn = document.getElementById('pk-bc-btn-ready'); btn.innerText = "ĐẶT CƯỢC & SẴN SÀNG"; btn.classList.replace('bg-emerald-600', 'bg-blue-600'); btn.classList.replace('hover:bg-emerald-500', 'hover:bg-blue-500');
+            await db.collection('pk_baucua').doc(this.currentRoomId).update(this.isHost ? { hostReady: false, hostBet: 0, hostChoices: [] } : { joinerReady: false, joinerBet: 0, joinerChoices: [] });
+        }
+    },
+
+    updateRematchUI(data) {
+        if(this.isAnimating || this.localStatus !== 'finished') return;
+        let myReady = this.isHost ? data.hostReady : data.joinerReady;
+        let oppReady = this.isHost ? data.joinerReady : data.hostReady;
+        
+        const endPanel = document.getElementById('pk-bc-end-panel');
+        const btnReq = document.getElementById('pk-bc-btn-req-rematch');
+        const waitRematch = document.getElementById('pk-bc-wait-rematch');
+        const groupRematch = document.getElementById('pk-bc-group-rematch');
+        const btnLeave = document.getElementById('pk-bc-btn-leave');
+
+        if(endPanel) endPanel.classList.remove('hidden');
+
+        if (myReady && !oppReady) {
+            btnReq.classList.add('hidden');
+            groupRematch.classList.add('hidden');
+            waitRematch.classList.remove('hidden');
+            btnLeave.classList.remove('hidden');
+            document.getElementById('pk-bc-status-text').classList.add('hidden');
+        }
+        else if (!myReady && oppReady) {
+            btnReq.classList.add('hidden');
+            groupRematch.classList.remove('hidden');
+            waitRematch.classList.add('hidden');
+            btnLeave.classList.add('hidden');
+            document.getElementById('pk-bc-status-text').classList.add('hidden');
+        }
+        else if (!myReady && !oppReady) {
+            btnReq.classList.remove('hidden');
+            groupRematch.classList.add('hidden');
+            waitRematch.classList.add('hidden');
+            btnLeave.classList.remove('hidden');
+            document.getElementById('pk-bc-status-text').classList.remove('hidden');
+        }
+    },
+
+    enterRoomView(roomId, hostName, pin) {
+        this.currentRoomId = roomId; this.lastJoinerId = null;
+        document.getElementById('pk-bc-lobby').classList.add('hidden'); document.getElementById('pk-bc-room').classList.remove('hidden');
+        document.getElementById('pk-bc-room-code-display').innerText = `MÃ: ${roomId}`;
+        if(this.isHost && pin) { document.getElementById('pk-bc-room-pin').innerText = `PIN: ${pin}`; document.getElementById('pk-bc-room-pin').classList.remove('hidden'); }
+        this.fullResetUI();
+
+        if(this.unsubRoom) this.unsubRoom();
+        this.unsubRoom = db.collection('pk_baucua').doc(roomId).onSnapshot(doc => {
+            if(!doc.exists) { 
+                if(this.localStatus !== 'finished' && (this.localStatus === 'waiting' || this.localStatus === 'playing')) {
+                    if(this.isReady) { globalBalance += this.myTotalBet; updateBalance(); window.syncDataToCloud(); }
+                    showToast("Phòng giải tán, hoàn lại cược!", true);
+                }
+                this.forceLeave(); return; 
+            }
+            const data = doc.data(); this.localStatus = data.status; this.lastData = data;
+
+            if(this.isHost && this.lastJoinerId && !data.joinerId) { 
+                showToast("⚠️ Đối thủ đã bỏ chạy!", true); 
+                if(this.isReady) this.toggleReady(); this.lastStatusHandled = 'waiting'; 
+            }
+            this.lastJoinerId = data.joinerId;
+
+            const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+            const safeJoinerName = data.joinerName && data.joinerName !== 'undefined' ? data.joinerName : 'ĐANG CHỜ...';
+            document.getElementById('pk-bc-host-name').innerText = safeHostName;
+            document.getElementById('pk-bc-joiner-name').innerText = safeJoinerName;
+            
+            let hostTotal = data.hostReady ? (data.hostBet * (data.hostChoices?.length || 0)) : 0;
+            let joinerTotal = data.joinerReady ? (data.joinerBet * (data.joinerChoices?.length || 0)) : 0;
+            document.getElementById('pk-bc-room-pot').innerText = formatMoney(hostTotal + joinerTotal);
+
+            this.updatePlayerStatus('host', data.hostReady, data.hostBet, data.hostChoices);
+            if(data.joinerId) { document.getElementById('pk-bc-joiner-status').classList.remove('hidden'); this.updatePlayerStatus('joiner', data.joinerReady, data.joinerBet, data.joinerChoices); } else { document.getElementById('pk-bc-joiner-status').classList.add('hidden'); }
+
+            Object.keys(this.icons).forEach(k => { document.getElementById(`pk-bc-bets-${k}`).innerHTML = ''; });
+            if(data.hostReady && data.hostChoices) { data.hostChoices.forEach(c => { document.getElementById(`pk-bc-bets-${c}`).innerHTML += `<div class="text-[8px] bg-red-600/90 text-white rounded px-1 py-0.5 truncate border border-red-400 font-bold w-full">${safeHostName}: ${formatMoney(data.hostBet)}</div>`; }); }
+            if(data.joinerReady && data.joinerChoices) { data.joinerChoices.forEach(c => { document.getElementById(`pk-bc-bets-${c}`).innerHTML += `<div class="text-[8px] bg-blue-600/90 text-white rounded px-1 py-0.5 truncate border border-blue-400 font-bold w-full">${safeJoinerName}: ${formatMoney(data.joinerBet)}</div>`; }); }
+
+            if(data.status === 'playing') { 
+                if(this.lastStatusHandled !== 'playing') { this.resultGenerated = false; this.fullResetUI(); }
+                this.lastStatusHandled = 'playing';
+                
+                document.getElementById('pk-bc-end-panel').classList.add('hidden');
+                document.getElementById('pk-bc-control-panel').classList.remove('hidden');
+
+                if (data.hostReady && data.joinerReady) {
+                    document.getElementById('pk-bc-status-text').innerText = "ĐÃ ĐỦ KÈO! ĐANG XÓC...";
+                    document.getElementById('pk-bc-control-panel').classList.add('hidden'); document.getElementById('pk-bc-bowl').classList.remove('bowl-open');
+
+                    if(this.isHost && !this.resultGenerated) {
+                        this.resultGenerated = true;
+                        setTimeout(() => {
+                            const keys = Object.keys(this.icons);
+                            const d1 = keys[Math.floor(Math.random()*6)], d2 = keys[Math.floor(Math.random()*6)], d3 = keys[Math.floor(Math.random()*6)];
+                            const diceArr = [d1, d2, d3];
+                            
+                            let hScore = 0; if(data.hostChoices) { data.hostChoices.forEach(c => { hScore += (diceArr.filter(x => x === c).length * data.hostBet); }); }
+                            let jScore = 0; if(data.joinerChoices) { data.joinerChoices.forEach(c => { jScore += (diceArr.filter(x => x === c).length * data.joinerBet); }); }
+                            
+                            let winner = 'draw'; if (hScore > jScore) winner = 'host'; else if (jScore > hScore) winner = 'joiner';
+                            db.collection('pk_baucua').doc(roomId).update({ status: 'finished', dice: {d1, d2, d3}, winner, hScore, jScore, hostReady: false, joinerReady: false });
+                        }, 1200);
+                    }
+                } else {
+                    document.getElementById('pk-bc-status-text').innerText = "VUI LÒNG CHỌN LINH VẬT & ĐẶT CƯỢC"; document.getElementById('pk-bc-status-text').classList.remove('hidden');
+                }
+            }
+
+            if(data.status === 'finished') { 
+                if (this.lastStatusHandled !== 'finished') { this.lastStatusHandled = 'finished'; this.playAnimation(data); } else { this.updateRematchUI(data); }
+            }
+        });
+    },
+
+    updatePlayerStatus(role, isReady, bet, choices) {
+        const stEl = document.getElementById(`pk-bc-${role}-status`);
+        if(isReady && choices) {
+            stEl.innerHTML = `ĐÃ ĐẶT ${formatMoney(bet)}/CON (${choices.length} CON)`;
+            stEl.className = `text-[8px] font-black px-2 py-0.5 rounded mt-1 border bg-emerald-900/50 text-emerald-400 border-emerald-500`;
+        } else {
+            stEl.innerText = "ĐANG CHỌN..."; stEl.className = "text-[9px] font-black px-2 py-0.5 rounded mt-1 border bg-slate-800 text-slate-400 border-slate-600";
+        }
+    },
+
+    playAnimation(data) {
+        this.isAnimating = true;
+        document.getElementById('pk-bc-status-text').innerText = "ĐANG MỞ BÁT..."; document.getElementById('pk-bc-end-panel').classList.add('hidden'); document.getElementById('pk-bc-control-panel').classList.add('hidden');
+        const bowl = document.getElementById('pk-bc-bowl'); bowl.classList.add('shaking'); playSound('shake');
+        let t = 0; const keys = Object.keys(this.icons); const iv = setInterval(() => { this.setDice(1, keys[Math.floor(Math.random()*6)]); this.setDice(2, keys[Math.floor(Math.random()*6)]); this.setDice(3, keys[Math.floor(Math.random()*6)]); if(++t > 15) clearInterval(iv); }, 80);
+
+        setTimeout(() => {
+            bowl.classList.remove('shaking'); this.setDice(1, data.dice.d1); this.setDice(2, data.dice.d2); this.setDice(3, data.dice.d3); bowl.classList.add('bowl-open');
+            setTimeout(() => {
+                const ov = document.getElementById('pk-bc-result-overlay'); ov.classList.add('opacity-100');
+                this.calculatePayout(data);
+                this.isAnimating = false; if(this.lastData) this.updateRematchUI(this.lastData);
+            }, 600);
+        }, 1500);
+    },
+
+    calculatePayout(data) {
+        let myScore = this.isHost ? data.hScore : data.jScore; let oppScore = this.isHost ? data.jScore : data.hScore;
+        let hostTotal = data.hostBet * (data.hostChoices?.length || 0); let joinerTotal = data.joinerBet * (data.joinerChoices?.length || 0);
+        let myTotalBet = this.isHost ? hostTotal : joinerTotal; let oppTotalBet = this.isHost ? joinerTotal : hostTotal;
+        const st = document.getElementById('pk-bc-status-text');
+
+        if (data.winner === 'draw') {
+            if (myScore > 0 || oppScore > 0) { st.innerText = "HÒA NHAU (HOÀN TIỀN)"; st.className = "text-center font-black text-xl text-slate-200 bg-black/50 py-2 rounded-xl border border-white/5 mt-4"; playSound('chip'); globalBalance += myTotalBet; } 
+            else { st.innerText = "CẢ HAI CÙNG TRƯỢT!"; st.className = "text-center font-black text-xl text-fuchsia-400 bg-black/50 py-2 rounded-xl border border-white/5 mt-4"; playSound('lose'); }
+        } else {
+            let amIWinner = (data.winner === 'host' && this.isHost) || (data.winner === 'joiner' && !this.isHost);
+            if (amIWinner) {
+                let winAmount = myTotalBet + Math.floor(oppTotalBet * 0.95);
+                st.innerText = `THẮNG ĐẬM: +${formatMoney(winAmount)}`; st.className = "text-center font-black text-2xl text-emerald-400 animate-bounce bg-black/50 py-2 rounded-xl border border-white/5 mt-4";
+                playSound('win'); triggerCoinRain(); globalBalance += winAmount; updateHousePool(Math.floor(oppTotalBet * 0.05)); VIP.addExp(myTotalBet);
+            } else { st.innerText = "BẠN ĐÃ THUA KÈO!"; st.className = "text-center font-black text-2xl text-rose-500 bg-black/50 py-2 rounded-xl border border-white/5 mt-4"; playSound('lose'); }
+        }
+        updateBalance(); window.syncDataToCloud();
+    },
+
+    async requestRematch() { playSound('chip'); await db.collection('pk_baucua').doc(this.currentRoomId).update(this.isHost ? { hostReady: true } : { joinerReady: true }); },
+    async acceptRematch() { playSound('chip'); await db.collection('pk_baucua').doc(this.currentRoomId).update({ status: 'playing', hostReady: false, joinerReady: false, hostBet: 0, joinerBet: 0, hostChoices: [], joinerChoices: [], winner: null, hScore: 0, jScore: 0 }); },
+
+    setDice(id, val) { const d = document.getElementById(`pk-bc-dice${id}`); if(d) d.innerText = this.icons[val] || '❓'; },
+    
+    fullResetUI() { 
+        this.isReady = false; this.myChoices = []; this.myBetPerChoice = 0; this.myTotalBet = 0;
+        [1,2,3].forEach(i => this.setDice(i, '❓')); document.getElementById('pk-bc-result-overlay').classList.remove('opacity-100'); document.getElementById('pk-bc-bowl').classList.add('bowl-open');
+        Object.keys(this.icons).forEach(k => { 
+            const el = document.getElementById(`pk-bc-zone-${k}`); el.classList.remove('bg-yellow-500/20', 'border-yellow-400'); el.classList.add('border-white/10'); 
+            const betLabel = document.getElementById(`pk-bc-bets-${k}`); if(betLabel) betLabel.innerHTML = '';
+        });
+        document.getElementById('pk-bc-room-bet-input').disabled = false; document.getElementById('pk-bc-room-bet-input').value = '';
+        const btn = document.getElementById('pk-bc-btn-ready'); btn.innerText = "ĐẶT CƯỢC & SẴN SÀNG"; btn.classList.replace('bg-emerald-600', 'bg-blue-600'); btn.classList.replace('hover:bg-emerald-500', 'hover:bg-blue-500');
+        document.getElementById('pk-bc-status-text').innerText = "CHỌN TỐI ĐA 3 CON & ĐẶT CƯỢC"; document.getElementById('pk-bc-status-text').className = "text-center font-black text-lg text-slate-300 animate-pulse bg-black/50 py-2 rounded-xl border border-white/5 mt-4"; document.getElementById('pk-bc-status-text').classList.remove('hidden');
+        document.getElementById('pk-bc-control-panel').classList.remove('hidden'); document.getElementById('pk-bc-end-panel').classList.add('hidden'); 
+    },
+
+    async leaveRoom() {
+        if(this.unsubRoom) this.unsubRoom();
+        if(this.isReady && (this.localStatus === 'waiting' || this.localStatus === 'playing')) { globalBalance += this.myTotalBet; updateBalance(); window.syncDataToCloud(); }
+        if(this.isHost) { try { await db.collection('pk_baucua').doc(this.currentRoomId).delete(); } catch(e){} }
+        else { try { await db.collection('pk_baucua').doc(this.currentRoomId).update({ status: 'waiting', joinerId: null, joinerName: null, joinerReady: false, joinerBet: 0, joinerChoices: [] }); } catch(e){} }
+        this.forceLeave();
+    },
+
+    forceLeave() { if(this.unsubRoom) this.unsubRoom(); document.getElementById('pk-bc-room').classList.add('hidden'); document.getElementById('pk-bc-lobby').classList.remove('hidden'); this.currentRoomId = null; this.listenRooms(); }
+};
+
+// ==========================================
+// LOGIC PK OẲN TÙ TÌ
+// ==========================================
+const PK_OTT = {
+    unsubList: null, unsubRoom: null, currentRoomId: null, isHost: false, betAmount: 0,
+    localStatus: '', hasChosen: false, lastStatusHandled: '', lastJoinerId: null, isAnimating: false, lastData: null,
+    
+    init() {
+        document.getElementById('pk-ott-lobby').classList.remove('hidden'); document.getElementById('pk-ott-room').classList.add('hidden');
+        document.getElementById('pk-ott-is-private').checked = false; document.getElementById('pk-ott-pass-container').classList.add('hidden');
+        document.getElementById('pk-ott-create-pass').value = ''; document.getElementById('pk-ott-search-code').value = '';
+        this.listenRooms();
+    },
+
+    listenRooms() {
+        if(this.unsubList) this.unsubList();
+        this.unsubList = db.collection('pk_oantuti').orderBy('createdAt', 'desc').onSnapshot(snap => {
+            const list = document.getElementById('pk-ott-room-list'); if(!list) return;
+            list.innerHTML = '';
+            if(snap.empty) { list.innerHTML = '<div class="text-center text-slate-500 text-xs py-4 font-bold">Chưa có ai tạo bàn Oẳn Tù Tì.</div>'; return; }
+            snap.forEach(doc => {
+                const data = doc.data(); const isMine = data.hostId === currentUser.uid;
+                const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+                const safeJoinerName = data.joinerName && data.joinerName !== 'undefined' ? data.joinerName : '';
+                if(data.status === 'finished' && data.joinerId) return; 
+                const playerCountUi = `<span class="bg-slate-800 text-yellow-400 px-1.5 rounded flex items-center gap-1 shadow-sm border border-slate-600">${data.joinerId ? "2/2" : "1/2"} 👤</span>`;
+                const roomStatus = data.joinerId ? "Đang giao chiến" : "Đang chờ đối thủ";
+                const myTag = isMine ? '<span class="text-[9px] bg-blue-600 text-white px-1.5 py-0.5 rounded border border-blue-400 ml-1">BÀN CỦA BẠN</span>' : '';
+                const lockIcon = data.isPrivate ? '<span class="text-[9px] bg-rose-900 text-rose-300 px-1.5 py-0.5 rounded border border-rose-500 ml-1">🔒 PIN</span>' : '';
+                list.innerHTML += `<div class="bg-black/40 border ${isMine ? 'border-blue-500/50' : 'border-purple-500/20'} rounded-xl p-3 flex justify-between items-center hover:bg-black/60 shadow-inner mb-2"><div class="flex flex-col"><span class="font-black text-purple-400 text-sm uppercase flex items-center">MÃ: ${doc.id} | 👤 ${safeHostName} ${lockIcon} ${myTag}</span><span class="text-[10px] text-slate-400 mt-1 flex items-center gap-2">${roomStatus} ${playerCountUi}</span></div><div class="flex items-center gap-3"><span class="font-mono font-black text-yellow-400 drop-shadow-md text-base">${formatMoney(data.betAmount)}</span>${isMine ? `<button onclick="PK_OTT.reEnterRoom('${doc.id}', ${data.betAmount}, '${safeHostName}', '${safeJoinerName}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce border border-blue-400">VÀO LẠI</button>` : `<button onclick="PK_OTT.joinRoom('${doc.id}', ${data.betAmount}, ${data.isPrivate})" class="bg-gradient-to-b from-purple-500 to-fuchsia-700 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce">VÀO BÀN</button>`}</div></div>`;
+            });
+        });
+    },
+
+    reEnterRoom(roomId, bet, hostName, joinerName) { this.isHost = true; this.betAmount = bet; this.enterRoomView(roomId, bet, hostName, joinerName, null); },
+
+    async searchRoom() {
+        const code = document.getElementById('pk-ott-search-code').value.trim().toUpperCase(); if(!code) return this.listenRooms();
+        try {
+            const docSnap = await db.collection('pk_oantuti').doc(code).get();
+            if(docSnap.exists) {
+                const data = docSnap.data(); const isMine = data.hostId === currentUser.uid;
+                const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+                const safeJoinerName = data.joinerName && data.joinerName !== 'undefined' ? data.joinerName : '';
+                const playerCountUi = `<span class="bg-slate-800 text-yellow-400 px-1.5 rounded flex items-center gap-1 shadow-sm border border-slate-600 w-max">${data.joinerId ? "2/2" : "1/2"} 👤</span>`;
+                document.getElementById('pk-ott-room-list').innerHTML = `<div class="bg-blue-900/30 border border-blue-500/50 rounded-xl p-3 flex justify-between items-center shadow-[0_0_15px_rgba(59,130,246,0.2)] mb-2"><div class="flex flex-col"><span class="font-black text-blue-400 text-sm tracking-wider uppercase">MÃ: ${docSnap.id} | 👤 ${safeHostName}</span><span class="text-[10px] text-slate-300 mt-1">${playerCountUi}</span></div><div class="flex items-center gap-3"><span class="font-mono font-black text-yellow-400 drop-shadow-md text-base">${formatMoney(data.betAmount)}</span>${isMine ? `<button onclick="PK_OTT.reEnterRoom('${docSnap.id}', ${data.betAmount}, '${safeHostName}', '${safeJoinerName}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md">VÀO LẠI</button>` : `<button onclick="PK_OTT.joinRoom('${docSnap.id}', ${data.betAmount}, ${data.isPrivate})" class="bg-gradient-to-b from-blue-500 to-blue-700 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce">VÀO BÀN</button>`}</div></div>`;
+            } else { showToast("Không tìm thấy mã hợp lệ!", true); }
+        } catch(e) {}
+    },
+
+    async createRoom() {
+        if(!userName || userName === 'undefined' || userName === 'null') return showToast("Vui lòng nhập Tên ở mục 'BANKING VIP' trước!", true);
+        const bet = parseInt(document.getElementById('pk-ott-create-bet').value);
+        if(isNaN(bet) || bet < 1000) return showToast("Cược tối thiểu 1,000$!", true);
+        if(globalBalance < bet) return showToast("Ví ngoài không đủ lúa cho ván đầu!", true);
+
+        const isPrivate = document.getElementById('pk-ott-is-private').checked; let pin = '';
+        if(isPrivate) { pin = document.getElementById('pk-ott-create-pass').value; if(pin.length !== 4) return showToast("Vui lòng nhập đúng 4 số PIN!", true); }
+        playSound('chip'); globalBalance -= bet; updateBalance(); window.syncDataToCloud();
+        const roomCode = Math.random().toString(36).substring(2, 6).toUpperCase();
+        this.isHost = true; this.betAmount = bet; this.localStatus = 'waiting'; this.hasChosen = false;
+        try {
+            await db.collection('pk_oantuti').doc(roomCode).set({ hostId: currentUser.uid, hostName: userName, betAmount: bet, status: 'waiting', isPrivate: isPrivate, pin: pin, hostReady: true, joinerReady: false, hostChoice: null, joinerChoice: null, createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+            this.enterRoomView(roomCode, bet, userName, 'ĐANG CHỜ...', pin || null);
+        } catch(e) { showToast("Lỗi tạo phòng!", true); globalBalance += bet; updateBalance(); window.syncDataToCloud(); }
+    },
+
+    async joinRoom(roomId, bet, isPrivate) {
+        if(!userName || userName === 'undefined' || userName === 'null') return showToast("Vui lòng nhập Tên ở mục BANKING VIP!", true);
+        if(globalBalance < bet) return showToast("Ví ngoài không đủ lúa!", true);
+        if(isPrivate) { const inputPin = prompt("Phòng Kín! Vui lòng nhập 4 số PIN:"); if(!inputPin) return; const doc = await db.collection('pk_oantuti').doc(roomId).get(); if(doc.data().pin !== inputPin) return showToast("Sai mã PIN!", true); }
+        playSound('chip'); globalBalance -= bet; updateBalance(); window.syncDataToCloud();
+        this.isHost = false; this.betAmount = bet; this.localStatus = 'playing'; this.hasChosen = false;
+        try { await db.collection('pk_oantuti').doc(roomId).update({ joinerId: currentUser.uid, joinerName: userName, status: 'playing', joinerReady: true }); this.enterRoomView(roomId, bet, '...', userName, null); } catch(e) { showToast("Bàn đã đầy hoặc bị hủy!", true); globalBalance += bet; updateBalance(); window.syncDataToCloud(); }
+    },
+
+    updateRematchUI(data) {
+        if(this.isAnimating || this.localStatus !== 'finished') return;
+        let myReady = this.isHost ? data.hostReady : data.joinerReady;
+        let oppReady = this.isHost ? data.joinerReady : data.hostReady;
+        
+        const endPanel = document.getElementById('pk-ott-end-panel');
+        const btnReq = document.getElementById('pk-ott-btn-req-rematch');
+        const waitRematch = document.getElementById('pk-ott-wait-rematch');
+        const groupRematch = document.getElementById('pk-ott-group-rematch');
+        const btnLeave = document.getElementById('pk-ott-btn-leave');
+
+        if(endPanel) endPanel.classList.remove('hidden');
+
+        if (myReady && !oppReady) {
+            btnReq.classList.add('hidden');
+            groupRematch.classList.add('hidden');
+            waitRematch.classList.remove('hidden');
+            btnLeave.classList.remove('hidden');
+            document.getElementById('pk-ott-status-text').classList.add('hidden');
+        }
+        else if (!myReady && oppReady) {
+            btnReq.classList.add('hidden');
+            groupRematch.classList.remove('hidden');
+            waitRematch.classList.add('hidden');
+            btnLeave.classList.add('hidden');
+            document.getElementById('pk-ott-status-text').classList.add('hidden');
+        }
+        else if (!myReady && !oppReady) {
+            btnReq.classList.remove('hidden');
+            groupRematch.classList.add('hidden');
+            waitRematch.classList.add('hidden');
+            btnLeave.classList.remove('hidden');
+            document.getElementById('pk-ott-status-text').classList.remove('hidden');
+        }
+    },
+
+    enterRoomView(roomId, bet, hostName, joinerName, pin) {
+        this.currentRoomId = roomId; this.lastJoinerId = null;
+        document.getElementById('pk-ott-lobby').classList.add('hidden'); document.getElementById('pk-ott-room').classList.remove('hidden');
+        document.getElementById('pk-ott-room-bet').innerText = formatMoney(bet); document.getElementById('pk-ott-room-code-display').innerText = roomId;
+        if(this.isHost && pin) { document.getElementById('pk-ott-room-pin').innerText = `PIN: ${pin}`; document.getElementById('pk-ott-room-pin').classList.remove('hidden'); } else { document.getElementById('pk-ott-room-pin').classList.add('hidden'); }
+        this.resetUI();
+
+        if(this.unsubRoom) this.unsubRoom();
+        this.unsubRoom = db.collection('pk_oantuti').doc(roomId).onSnapshot(doc => {
+            if(!doc.exists) { 
+                let myReady = this.lastData ? (this.isHost ? this.lastData.hostReady : this.lastData.joinerReady) : false;
+                if(this.localStatus !== 'finished' || myReady) { globalBalance += this.betAmount; updateBalance(); window.syncDataToCloud(); showToast("Bàn đã giải tán, hoàn tiền cược!", true); } 
+                else { showToast("Bàn đã giải tán!", true); }
+                this.forceLeave(); return; 
+            }
+            const data = doc.data(); this.localStatus = data.status; this.lastData = data;
+
+            if(this.isHost && this.lastJoinerId && !data.joinerId) { showToast("⚠️ Đối thủ đã thoát khỏi phòng!", true); this.resetUI(); this.hasChosen = false; this.lastStatusHandled = 'waiting'; }
+            this.lastJoinerId = data.joinerId;
+
+            const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+            const safeJoinerName = data.joinerName && data.joinerName !== 'undefined' ? data.joinerName : 'ĐANG CHỜ...';
+            document.getElementById('pk-ott-host-name').innerText = safeHostName; document.getElementById('pk-ott-joiner-name').innerText = safeJoinerName;
+
+            if(data.status === 'playing') { 
+                if(this.lastStatusHandled !== 'playing') { this.hasChosen = false; this.resetIcons(); }
+                this.lastStatusHandled = 'playing';
+                
+                document.getElementById('pk-ott-end-panel').classList.add('hidden');
+                
+                if(!this.hasChosen) {
+                    document.getElementById('pk-ott-action-panel').classList.remove('hidden');
+                    document.getElementById('pk-ott-status-text').innerText = "HÃY CHỌN KÉO / BÚA / BAO!";
+                } else {
+                    document.getElementById('pk-ott-action-panel').classList.add('hidden');
+                    document.getElementById('pk-ott-status-text').innerText = "ĐANG ĐỢI ĐỐI THỦ CHỌN...";
+                }
+
+                if(data.hostChoice) document.getElementById('pk-ott-host-display').innerText = "✔️";
+                if(data.joinerChoice) document.getElementById('pk-ott-joiner-display').innerText = "✔️";
+
+                if(this.isHost && data.hostChoice && data.joinerChoice) { this.resolveMatch(roomId, data.hostChoice, data.joinerChoice, data.betAmount); }
+            }
+            if(data.status === 'finished') { 
+                if (this.lastStatusHandled !== 'finished') { this.lastStatusHandled = 'finished'; this.showResult(data); } 
+                else { this.updateRematchUI(data); }
+            }
+        });
+    },
+
+    async makeChoice(choice) { playSound('chip'); this.hasChosen = true; document.getElementById('pk-ott-action-panel').classList.add('hidden'); document.getElementById(this.isHost ? 'pk-ott-host-display' : 'pk-ott-joiner-display').innerText = choice === 'keo' ? '✌️' : (choice === 'bua' ? '✊' : '✋'); await db.collection('pk_oantuti').doc(this.currentRoomId).update(this.isHost ? { hostChoice: choice } : { joinerChoice: choice }); },
+
+    async resolveMatch(roomId, hChoice, jChoice, bet) {
+        const rules = { 'keo': 'bao', 'bua': 'keo', 'bao': 'bua' }; let winner = 'draw';
+        if(hChoice !== jChoice) { winner = rules[hChoice] === jChoice ? 'host' : 'joiner'; }
+        await db.collection('pk_oantuti').doc(roomId).update({ status: 'finished', winner: winner, hostReady: false, joinerReady: false });
+    },
+
+    showResult(data) {
+        this.isAnimating = true; document.getElementById('pk-ott-action-panel').classList.add('hidden');
+        const mapIcon = { 'keo': '✌️', 'bua': '✊', 'bao': '✋' };
+        
+        // CHỐNG UNDEFINED: Gắn chặt biến nếu null sẽ hiển thị ❓
+        const hIcon = data.hostChoice ? mapIcon[data.hostChoice] : '❓';
+        const jIcon = data.joinerChoice ? mapIcon[data.joinerChoice] : '❓';
+
+        document.getElementById('pk-ott-host-display').style.transform = 'rotateY(360deg)'; document.getElementById('pk-ott-host-display').innerText = hIcon;
+        document.getElementById('pk-ott-joiner-display').style.transform = 'rotateY(360deg)'; document.getElementById('pk-ott-joiner-display').innerText = jIcon;
+
+        let isWin = false, isDraw = data.winner === 'draw'; if((data.winner === 'host' && this.isHost) || (data.winner === 'joiner' && !this.isHost)) isWin = true;
+
+        const stText = document.getElementById('pk-ott-status-text');
+        if(isWin) {
+            stText.innerText = "BẠN ĐÃ THẮNG!"; stText.className = "text-center font-black text-2xl text-emerald-400 font-oswald tracking-widest drop-shadow-[0_0_15px_rgba(16,185,129,0.8)] relative z-10 bg-black/80 py-2 rounded-xl border border-emerald-500/50 mb-2";
+            playSound('win'); triggerCoinRain(); let prize = Math.floor(data.betAmount * 1.95); globalBalance += prize; updateHousePool(Math.floor(data.betAmount * 0.05)); updateBalance(); window.syncDataToCloud(); VIP.addExp(data.betAmount);
+        } else if (isDraw) {
+            stText.innerText = "HÒA NHAU!"; stText.className = "text-center font-black text-xl text-slate-200 font-oswald tracking-widest relative z-10 bg-black/80 py-2 rounded-xl border border-white/50 mb-2";
+            playSound('chip'); globalBalance += data.betAmount; updateBalance(); window.syncDataToCloud();
+        } else {
+            stText.innerText = "BẠN ĐÃ THUA!"; stText.className = "text-center font-black text-2xl text-rose-500 font-oswald tracking-widest drop-shadow-[0_0_15px_rgba(244,63,94,0.8)] relative z-10 bg-black/80 py-2 rounded-xl border border-rose-500/50 mb-2";
+            playSound('lose');
+        }
+        
+        setTimeout(() => { this.isAnimating = false; if(this.lastData) this.updateRematchUI(this.lastData); }, 1500);
+    },
+
+    async requestRematch() {
+        if(globalBalance < this.betAmount) return showToast("Không đủ lúa cược tiếp!", true);
+        playSound('chip'); globalBalance -= this.betAmount; updateBalance(); window.syncDataToCloud();
+        const updateData = this.isHost ? { hostReady: true } : { joinerReady: true };
+        await db.collection('pk_oantuti').doc(this.currentRoomId).update(updateData);
+    },
+
+    async acceptRematch() {
+        if(globalBalance < this.betAmount) return showToast("Không đủ lúa cược!", true);
+        playSound('chip'); globalBalance -= this.betAmount; updateBalance(); window.syncDataToCloud();
+        await db.collection('pk_oantuti').doc(this.currentRoomId).update({ hostReady: false, joinerReady: false, hostChoice: null, joinerChoice: null, status: 'playing', winner: null });
+    },
+
+    resetIcons() { document.getElementById('pk-ott-host-display').style.transform = 'rotateY(0deg)'; document.getElementById('pk-ott-host-display').innerText = '❓'; document.getElementById('pk-ott-joiner-display').style.transform = 'rotateY(0deg)'; document.getElementById('pk-ott-joiner-display').innerText = '❓'; },
+
+    resetUI() {
+        this.resetIcons();
+        document.getElementById('pk-ott-status-text').innerText = "ĐANG CHỜ ĐỐI THỦ..."; document.getElementById('pk-ott-status-text').className = "text-center font-black text-lg text-slate-300 font-oswald animate-pulse bg-black/50 py-2 rounded-xl border border-white/5 mb-2"; document.getElementById('pk-ott-status-text').classList.remove('hidden');
+        document.getElementById('pk-ott-action-panel').classList.add('hidden'); document.getElementById('pk-ott-end-panel').classList.add('hidden');
+    },
+
+    async leaveRoom() {
+        if(this.unsubRoom) { this.unsubRoom(); this.unsubRoom = null; }
+        let myReady = this.lastData ? (this.isHost ? this.lastData.hostReady : this.lastData.joinerReady) : false;
+        if(this.localStatus === 'waiting' || this.localStatus === 'playing' || myReady) { globalBalance += this.betAmount; updateBalance(); window.syncDataToCloud(); }
+
+        if(this.isHost) { try { await db.collection('pk_oantuti').doc(this.currentRoomId).delete(); } catch(e){} } 
+        else { try { await db.collection('pk_oantuti').doc(this.currentRoomId).update({ status: 'waiting', joinerId: null, joinerName: null, joinerReady: false, joinerChoice: null, hostChoice: null, winner: null }); } catch(e){} }
+        this.forceLeave();
+    },
+
+    forceLeave() { if(this.unsubRoom) { this.unsubRoom(); this.unsubRoom = null; } document.getElementById('pk-ott-room').classList.add('hidden'); document.getElementById('pk-ott-lobby').classList.remove('hidden'); this.currentRoomId = null; this.listenRooms(); }
+};
+
+// ==========================================
+// LOGIC PK XÌ DÁCH 1VS1
+// ==========================================
+// ==========================================
+// LOGIC PK XÌ DÁCH 1VS1 (BẢN HOÀN CHỈNH - ĐÃ FIX LỖI)
+// ==========================================
+const PK_XD = {
+    unsubList: null, unsubRoom: null, currentRoomId: null, isHost: false, betAmount: 0,
+    localStatus: '', lastStatusHandled: '', lastJoinerId: null, lastData: null, resultGenerated: false,
+
+    init() {
+        document.getElementById('pk-xd-lobby').classList.remove('hidden'); document.getElementById('pk-xd-room').classList.add('hidden');
+        document.getElementById('pk-xd-is-private').checked = false; document.getElementById('pk-xd-pass-container').classList.add('hidden');
+        document.getElementById('pk-xd-create-pass').value = ''; document.getElementById('pk-xd-search-code').value = '';
+        this.listenRooms();
+    },
+
+    listenRooms() {
+        if(this.unsubList) this.unsubList();
+        this.unsubList = db.collection('pk_xidach').orderBy('createdAt', 'desc').onSnapshot(snap => {
+            const list = document.getElementById('pk-xd-room-list'); if(!list) return;
+            list.innerHTML = '';
+            if(snap.empty) { list.innerHTML = '<div class="text-center text-slate-500 text-xs py-4 font-bold">Chưa có ai tạo bàn Xì Dách.</div>'; return; }
+            snap.forEach(doc => {
+                const data = doc.data(); const isMine = data.hostId === currentUser.uid;
+                const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+                if(data.status === 'finished' && data.joinerId) return; 
+                const playerCountUi = `<span class="bg-slate-800 text-yellow-400 px-1.5 rounded flex items-center gap-1 shadow-sm border border-slate-600">${data.joinerId ? "2/2" : "1/2"} 👤</span>`;
+                const roomStatus = data.joinerId ? "Đang giao chiến" : "Đang chờ đối thủ";
+                const myTag = isMine ? '<span class="text-[9px] bg-blue-600 text-white px-1.5 py-0.5 rounded border border-blue-400 ml-1">BÀN CỦA BẠN</span>' : '';
+                const lockIcon = data.isPrivate ? '<span class="text-[9px] bg-rose-900 text-rose-300 px-1.5 py-0.5 rounded border border-rose-500 ml-1">🔒 PIN</span>' : '';
+                list.innerHTML += `<div class="bg-black/40 border ${isMine ? 'border-blue-500/50' : 'border-teal-500/30'} rounded-xl p-3 flex justify-between items-center hover:bg-black/60 shadow-inner mb-2"><div class="flex flex-col"><span class="font-black text-teal-400 text-sm uppercase flex items-center">MÃ: ${doc.id} | 👤 ${safeHostName} ${lockIcon} ${myTag}</span><span class="text-[10px] text-slate-400 mt-1 flex items-center gap-2">${roomStatus} ${playerCountUi}</span></div><div class="flex items-center gap-3"><span class="font-mono font-black text-yellow-400 drop-shadow-md text-base">${formatMoney(data.betAmount)}</span>${isMine ? `<button onclick="PK_XD.reEnterRoom('${doc.id}', ${data.betAmount}, '${safeHostName}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce">VÀO LẠI</button>` : `<button onclick="PK_XD.joinRoom('${doc.id}', ${data.betAmount}, ${data.isPrivate})" class="bg-gradient-to-b from-teal-500 to-emerald-700 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce">VÀO BÀN</button>`}</div></div>`;
+            });
+        });
+    },
+
+    reEnterRoom(roomId, bet, hostName) { this.isHost = true; this.betAmount = bet; this.enterRoomView(roomId, bet, hostName, null); },
+
+    async searchRoom() {
+        const code = document.getElementById('pk-xd-search-code').value.trim().toUpperCase(); if(!code) return this.listenRooms();
+        try {
+            const docSnap = await db.collection('pk_xidach').doc(code).get();
+            if(docSnap.exists) {
+                const data = docSnap.data(); const isMine = data.hostId === currentUser.uid;
+                const safeHostName = data.hostName && data.hostName !== 'undefined' ? data.hostName : 'Ẩn danh';
+                const playerCountUi = `<span class="bg-slate-800 text-yellow-400 px-1.5 rounded flex items-center gap-1 shadow-sm border border-slate-600 w-max">${data.joinerId ? "2/2" : "1/2"} 👤</span>`;
+                document.getElementById('pk-xd-room-list').innerHTML = `<div class="bg-blue-900/30 border border-blue-500/50 rounded-xl p-3 flex justify-between items-center shadow-[0_0_15px_rgba(59,130,246,0.2)] mb-2"><div class="flex flex-col"><span class="font-black text-blue-400 text-sm tracking-wider uppercase">MÃ: ${docSnap.id} | 👤 ${safeHostName}</span><span class="text-[10px] text-slate-300 mt-1">${playerCountUi}</span></div><div class="flex items-center gap-3"><span class="font-mono font-black text-yellow-400 drop-shadow-md text-base">${formatMoney(data.betAmount)}</span>${isMine ? `<button onclick="PK_XD.reEnterRoom('${docSnap.id}', ${data.betAmount}, '${safeHostName}')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md">VÀO LẠI</button>` : `<button onclick="PK_XD.joinRoom('${docSnap.id}', ${data.betAmount}, ${data.isPrivate})" class="bg-gradient-to-b from-teal-500 to-emerald-700 text-white px-4 py-2 rounded-lg font-black text-xs shadow-md click-bounce">VÀO BÀN</button>`}</div></div>`;
+            } else { showToast("Không tìm thấy mã hợp lệ!", true); }
+        } catch(e) {}
+    },
+
+    async createRoom() {
+        if(!userName || userName === 'undefined' || userName === 'null') return showToast("Vui lòng nhập Tên ở mục 'BANKING VIP' trước!", true);
+        const bet = parseInt(document.getElementById('pk-xd-create-bet').value);
+        if(isNaN(bet) || bet < 1000) return showToast("Cược tối thiểu 1,000$!", true);
+        if(globalBalance < bet) return showToast("Ví ngoài không đủ lúa cho ván đầu!", true);
+
+        const isPrivate = document.getElementById('pk-xd-is-private').checked; let pin = '';
+        if(isPrivate) { pin = document.getElementById('pk-xd-create-pass').value; if(pin.length !== 4) return showToast("Vui lòng nhập đúng 4 số PIN!", true); }
+        
+        playSound('chip'); globalBalance -= bet; updateBalance(); window.syncDataToCloud();
+        const roomCode = Math.random().toString(36).substring(2, 6).toUpperCase();
+        this.isHost = true; this.betAmount = bet; this.localStatus = 'waiting';
+        
+        try {
+            await db.collection('pk_xidach').doc(roomCode).set({ hostId: currentUser.uid, hostName: userName, betAmount: bet, status: 'waiting', isPrivate, pin, hostReady: true, joinerReady: false, hostCards: [], joinerCards: [], hostDone: false, joinerDone: false, deck: [], createdAt: firebase.firestore.FieldValue.serverTimestamp() });
+            this.enterRoomView(roomCode, bet, userName, pin || null);
+        } catch(e) { showToast("Lỗi tạo phòng!", true); globalBalance += bet; updateBalance(); window.syncDataToCloud(); }
+    },
+
+    async joinRoom(roomId, bet, isPrivate) {
+        if(!userName || userName === 'undefined' || userName === 'null') return showToast("Vui lòng nhập Tên ở mục BANKING VIP!", true);
+        if(globalBalance < bet) return showToast("Ví ngoài không đủ lúa!", true);
+        if(isPrivate) { const inputPin = prompt("Phòng Kín! Nhập 4 số PIN:"); if(!inputPin) return; const doc = await db.collection('pk_xidach').doc(roomId).get(); if(doc.data().pin !== inputPin) return showToast("Sai mã PIN!", true); }
+        
+        playSound('chip'); globalBalance -= bet; updateBalance(); window.syncDataToCloud();
+        this.isHost = false; this.betAmount = bet; this.localStatus = 'playing';
+        
+        try { await db.collection('pk_xidach').doc(roomId).update({ joinerId: currentUser.uid, joinerName: userName, status: 'playing', joinerReady: true }); this.enterRoomView(roomId, bet, '...', null); } 
+        catch(e) { showToast("Bàn đã đầy hoặc bị hủy!", true); globalBalance += bet; updateBalance(); window.syncDataToCloud(); }
+    },
+
+    getHandRank(hand) {
+        if(!hand || hand.length === 0) return { type: 'none', score: 0, label: '0 Điểm' };
+        if(hand.length === 2 && hand[0].v === 'A' && hand[1].v === 'A') return { type: 'xibang', score: 22, label: 'XÌ BÀNG' };
+        let score = XIDACH.calcScore(hand); 
+        if(hand.length === 2 && score === 21) return { type: 'xidach', score: 21.5, label: 'XÌ DÁCH' };
+        if(hand.length === 5 && score <= 21) return { type: 'ngulinh', score: score, label: 'NGŨ LINH' };
+        if(score > 21) return { type: 'bust', score: score, label: 'QUẮC' };
+        return { type: 'points', score: score, label: `${score} Điểm` };
+    },
+
+    // --- BẢN VÁ: Sửa luật Ngũ Linh & Quắc (Ít điểm hơn = Thắng) ---
+    compareHands(r1, r2) {
+        const p = { 'bust': 0, 'points': 1, 'ngulinh': 2, 'xidach': 3, 'xibang': 4 };
+        if (p[r1.type] > p[r2.type]) return 1; 
+        if (p[r1.type] < p[r2.type]) return -1;
+        
+        if (r1.type === 'points') { if (r1.score > r2.score) return 1; if (r1.score < r2.score) return -1; }
+        if (r1.type === 'ngulinh') { if (r1.score < r2.score) return 1; if (r1.score > r2.score) return -1; } 
+        if (r1.type === 'bust') { if (r1.score < r2.score) return 1; if (r1.score > r2.score) return -1; } 
+        
+        return 0; // Hòa
+    },
+
+    renderCardsHTML(cards, isHidden) {
+        if(!cards || cards.length === 0) return '';
+        
+        // Tự động nhúng CSS hiệu ứng chia bài nảy (Pop In) nếu chưa có
+        if (!document.getElementById('pk-xd-card-anim')) {
+            document.head.insertAdjacentHTML('beforeend', `
+                <style id="pk-xd-card-anim">
+                    @keyframes popInCard {
+                        0% { opacity: 0; transform: translateY(-40px) scale(0.6); }
+                        70% { transform: translateY(5px) scale(1.05); }
+                        100% { opacity: 1; transform: translateY(0) scale(1); }
+                    }
+                </style>
+            `);
+        }
+
+        const total = cards.length;
+        return cards.map((c, i) => {
+            // Toán học xòe bài: tính góc nghiêng và độ võng cho từng lá
+            const rotate = (i - (total - 1) / 2) * 12; // Mỗi lá lệch nhau 12 độ
+            const ty = Math.abs(i - (total - 1) / 2) * 5; // Võng xuống tạo đường cong
+            const delay = i * 0.15; // Trễ nhịp để chia từng lá một
+
+            // ================== GIAO DIỆN BÀI ÚP ==================
+            if (isHidden) {
+                return `
+                <div style="animation: popInCard 0.4s ease-out ${delay}s backwards; z-index: ${i};" class="relative">
+                    <div class="w-[60px] h-[85px] flex-shrink-0 rounded-lg shadow-[0_8px_15px_rgba(0,0,0,0.6)] relative overflow-hidden transition-transform duration-300 hover:-translate-y-2 border border-slate-800" 
+                         style="transform: rotate(${rotate}deg) translateY(${ty}px);">
+                        <div class="absolute inset-0 bg-[repeating-linear-gradient(45deg,#7f1d1d,#7f1d1d_4px,#9f1239_4px,#9f1239_8px)]"></div>
+                        <div class="absolute inset-1 border border-yellow-500/60 rounded shadow-inner"></div>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-90">
+                            <span class="text-3xl drop-shadow-[0_0_8px_rgba(234,179,8,0.8)]">🐉</span>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            // ================== GIAO DIỆN BÀI NGỬA ==================
+            const isRed = ['♥','♦'].includes(c.s);
+            const color = isRed ? 'text-rose-600' : 'text-slate-900';
+            
+            return `
+            <div style="animation: popInCard 0.4s ease-out ${delay}s backwards; z-index: ${i};" class="relative">
+                <div class="w-[60px] h-[85px] flex-shrink-0 shadow-[0_8px_15px_rgba(0,0,0,0.4)] rounded-lg border border-slate-300 bg-gradient-to-br from-white to-slate-200 relative transition-transform duration-300 hover:-translate-y-3 cursor-pointer"
+                     style="transform: rotate(${rotate}deg) translateY(${ty}px);">
+                    
+                    <div class="absolute top-1 left-1 flex flex-col items-center leading-none w-4">
+                        <span class="text-[14px] font-black ${color} drop-shadow-sm">${c.v}</span>
+                        <span class="text-[12px] ${color} mt-0.5">${c.s}</span>
+                    </div>
+                    
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="text-4xl ${color} opacity-80 drop-shadow-md transform transition-transform hover:scale-110">${c.s}</span>
+                    </div>
+                    
+                    <div class="absolute bottom-1 right-1 flex flex-col items-center leading-none w-4 rotate-180">
+                        <span class="text-[14px] font-black ${color} drop-shadow-sm">${c.v}</span>
+                        <span class="text-[12px] ${color} mt-0.5">${c.s}</span>
+                    </div>
+                </div>
+            </div>`;
+        }).join('');
+    },
+    async toggleReady() {
+        playSound('chip');
+        if (!this.lastData || (this.isHost ? this.lastData.hostReady : this.lastData.joinerReady)) {
+            globalBalance += this.betAmount; updateBalance(); window.syncDataToCloud();
+            await db.collection('pk_xidach').doc(this.currentRoomId).update(this.isHost ? { hostReady: false } : { joinerReady: false });
+        } else {
+            if (globalBalance < this.betAmount) return showToast("Không đủ lúa!", true);
+            globalBalance -= this.betAmount; updateBalance(); window.syncDataToCloud();
+            await db.collection('pk_xidach').doc(this.currentRoomId).update(this.isHost ? { hostReady: true } : { joinerReady: true });
+        }
+    },
+
+    enterRoomView(roomId, bet, hostName, pin) {
+        this.currentRoomId = roomId; this.lastJoinerId = null; this.resultGenerated = false;
+        document.getElementById('pk-xd-lobby').classList.add('hidden'); document.getElementById('pk-xd-room').classList.remove('hidden');
+        document.getElementById('pk-xd-room-bet').innerText = formatMoney(bet); document.getElementById('pk-xd-room-code-display').innerText = `MÃ: ${roomId}`;
+        if(this.isHost && pin) { document.getElementById('pk-xd-room-pin').innerText = `PIN: ${pin}`; document.getElementById('pk-xd-room-pin').classList.remove('hidden'); } 
+        else { document.getElementById('pk-xd-room-pin').classList.add('hidden'); }
+        this.resetUI();
+
+        if(this.unsubRoom) this.unsubRoom();
+        this.unsubRoom = db.collection('pk_xidach').doc(roomId).onSnapshot(doc => {
+            if(!doc.exists) { 
+                let myReady = this.lastData ? (this.isHost ? this.lastData.hostReady : this.lastData.joinerReady) : false;
+                if(this.localStatus !== 'finished' && myReady) { globalBalance += this.betAmount; updateBalance(); window.syncDataToCloud(); showToast("Phòng giải tán, hoàn tiền cược!", true); } 
+                this.forceLeave(); return; 
+            }
+            const data = doc.data(); this.localStatus = data.status; this.lastData = data;
+
+            if(this.isHost && this.lastJoinerId && !data.joinerId) { showToast("⚠️ Đối thủ đã chạy mất!", true); this.resetUI(); this.lastStatusHandled = 'waiting'; }
+            this.lastJoinerId = data.joinerId;
+
+            const myData = this.isHost ? { name: data.hostName, cards: data.hostCards, done: data.hostDone, ready: data.hostReady } : { name: data.joinerName, cards: data.joinerCards, done: data.joinerDone, ready: data.joinerReady };
+            const oppData = this.isHost ? { name: data.joinerName, cards: data.joinerCards, done: data.joinerDone, ready: data.joinerReady } : { name: data.hostName, cards: data.hostCards, done: data.hostDone, ready: data.hostReady };
+
+            document.getElementById('pk-xd-my-name').innerText = myData.name && myData.name !== 'undefined' ? myData.name : 'BẠN';
+            document.getElementById('pk-xd-opp-name').innerText = oppData.name && oppData.name !== 'undefined' ? oppData.name : 'ĐANG CHỜ...';
+
+            if(data.status === 'waiting') {
+                if(data.hostReady && data.joinerReady && this.isHost) {
+                    let deck = XIDACH.getDeck(); let hCards = [deck.pop(), deck.pop()]; let jCards = [deck.pop(), deck.pop()];
+                    let hR = this.getHandRank(hCards); let jR = this.getHandRank(jCards);
+                    db.collection('pk_xidach').doc(roomId).update({ status: 'playing', deck, hostCards: hCards, joinerCards: jCards, hostDone: (hR.type==='xibang'||hR.type==='xidach'), joinerDone: (jR.type==='xibang'||jR.type==='xidach'), winner: null });
+                } else {
+                    this.resetUI();
+                    const btn = document.getElementById('pk-xd-btn-ready');
+                    btn.innerText = myData.ready ? "HỦY SẴN SÀNG" : "SẴN SÀNG";
+                    btn.className = myData.ready ? "w-full py-4 bg-emerald-600 rounded-xl font-black text-white hover:bg-emerald-500 click-bounce shadow-md text-xl tracking-wider" : "w-full py-4 bg-blue-600 rounded-xl font-black text-white hover:bg-blue-500 click-bounce shadow-md text-xl tracking-wider";
+                    document.getElementById('pk-xd-status-text').innerText = myData.ready ? (oppData.ready ? "ĐANG CHIA BÀI..." : "ĐANG CHỜ ĐỐI THỦ SẴN SÀNG...") : "VUI LÒNG SẴN SÀNG";
+                }
+            }
+
+            if(data.status === 'playing') {
+                if(this.lastStatusHandled !== 'playing') { this.resultGenerated = false; playSound('shake'); }
+                this.lastStatusHandled = 'playing';
+                
+                document.getElementById('pk-xd-control-ready').classList.add('hidden');
+                document.getElementById('pk-xd-end-panel').classList.add('hidden');
+                
+                document.getElementById('pk-xd-my-cards').innerHTML = this.renderCardsHTML(myData.cards, false);
+                document.getElementById('pk-xd-opp-cards').innerHTML = this.renderCardsHTML(oppData.cards, true); 
+
+                let myRank = this.getHandRank(myData.cards);
+                document.getElementById('pk-xd-my-score').innerText = myRank.label; document.getElementById('pk-xd-my-score').classList.remove('opacity-0');
+                document.getElementById('pk-xd-opp-score').classList.add('opacity-0'); 
+
+                if(!myData.done) {
+                    document.getElementById('pk-xd-control-play').classList.remove('hidden');
+                    document.getElementById('pk-xd-status-text').innerText = "TỚI LƯỢT BẠN RÚT HOẶC DẰN!"; document.getElementById('pk-xd-status-text').className = "text-sm font-black text-teal-400 font-oswald animate-pulse tracking-widest text-center mt-2";
+                } else {
+                    document.getElementById('pk-xd-control-play').classList.add('hidden');
+                    document.getElementById('pk-xd-status-text').innerText = oppData.done ? "ĐANG MỞ BÁT..." : "ĐANG ĐỢI ĐỐI THỦ RÚT BÀI..."; document.getElementById('pk-xd-status-text').className = "text-sm font-black text-slate-400 font-oswald animate-pulse tracking-widest text-center mt-2";
+                }
+
+                if(data.hostDone && data.joinerDone && this.isHost && !this.resultGenerated) {
+                    this.resultGenerated = true;
+                    let hR = this.getHandRank(data.hostCards); let jR = this.getHandRank(data.joinerCards);
+                    let cmp = this.compareHands(hR, jR); let winner = cmp === 1 ? 'host' : (cmp === -1 ? 'joiner' : 'draw');
+                    setTimeout(() => { db.collection('pk_xidach').doc(roomId).update({ status: 'finished', winner, hostReady: false, joinerReady: false }); }, 1000);
+                }
+            }
+
+            if(data.status === 'finished') { 
+                if (this.lastStatusHandled !== 'finished') { this.lastStatusHandled = 'finished'; this.showResult(data, myData, oppData); } 
+                else { this.updateRematchUI(data); }
+            }
+        });
+    },
+
+    async hit() {
+        if(!this.lastData || this.lastData.status !== 'playing') return;
+        let myDone = this.isHost ? this.lastData.hostDone : this.lastData.joinerDone; if(myDone) return;
+        
+        playSound('chip');
+        const docRef = db.collection('pk_xidach').doc(this.currentRoomId);
+        const doc = await docRef.get(); let data = doc.data();
+        let deck = data.deck; let card = deck.pop();
+        let myCards = this.isHost ? data.hostCards : data.joinerCards; myCards.push(card);
+        
+        let rank = this.getHandRank(myCards); let done = (rank.type === 'bust' || rank.type === 'ngulinh' || myCards.length >= 5);
+        let updateData = { deck };
+        if(this.isHost) { updateData.hostCards = myCards; updateData.hostDone = done; } else { updateData.joinerCards = myCards; updateData.joinerDone = done; }
+        await docRef.update(updateData);
+    },
+
+    // --- BẢN VÁ: Chặn "dằn dơ" dưới 16 tuổi ---
+    async stand() {
+        let myCards = this.isHost ? this.lastData.hostCards : this.lastData.joinerCards;
+        let rank = this.getHandRank(myCards);
+        if (rank.score < 16 && rank.type === 'points') {
+            return showToast("Chưa đủ 16 tuổi không được dằn bài!", true);
+        }
+        
+        playSound('chip'); const docRef = db.collection('pk_xidach').doc(this.currentRoomId);
+        await docRef.update(this.isHost ? { hostDone: true } : { joinerDone: true });
+    },
+
+    showResult(data, myData, oppData) {
+        document.getElementById('pk-xd-control-play').classList.add('hidden');
+        document.getElementById('pk-xd-opp-cards').innerHTML = this.renderCardsHTML(oppData.cards, false);
+        
+        let oppRank = this.getHandRank(oppData.cards);
+        document.getElementById('pk-xd-opp-score').innerText = oppRank.label; document.getElementById('pk-xd-opp-score').classList.remove('opacity-0');
+
+        let isWin = false, isDraw = data.winner === 'draw'; if((data.winner === 'host' && this.isHost) || (data.winner === 'joiner' && !this.isHost)) isWin = true;
+
+        const stText = document.getElementById('pk-xd-status-text');
+        if(isWin) {
+            stText.innerText = "BẠN ĐÃ THẮNG!"; stText.className = "text-center font-black text-2xl text-emerald-400 font-oswald tracking-widest drop-shadow-md mt-2";
+            playSound('win'); triggerCoinRain(); let prize = Math.floor(data.betAmount * 1.95); globalBalance += prize; updateHousePool(Math.floor(data.betAmount * 0.05)); updateBalance(); window.syncDataToCloud(); VIP.addExp(data.betAmount);
+        } else if (isDraw) {
+            stText.innerText = "HÒA NHAU!"; stText.className = "text-center font-black text-xl text-slate-200 font-oswald tracking-widest mt-2";
+            playSound('chip'); globalBalance += data.betAmount; updateBalance(); window.syncDataToCloud();
+        } else {
+            stText.innerText = "BẠN ĐÃ THUA!"; stText.className = "text-center font-black text-2xl text-rose-500 font-oswald tracking-widest drop-shadow-md mt-2";
+            playSound('lose');
+        }
+        setTimeout(() => { this.updateRematchUI(this.lastData); }, 1500);
+    },
+
+    updateRematchUI(data) {
+        let myReady = this.isHost ? data.hostReady : data.joinerReady; let oppReady = this.isHost ? data.joinerReady : data.hostReady;
+        const endPanel = document.getElementById('pk-xd-end-panel'); const btnReq = document.getElementById('pk-xd-btn-req-rematch'); const waitRematch = document.getElementById('pk-xd-wait-rematch'); const groupRematch = document.getElementById('pk-xd-group-rematch');
+        
+        endPanel.classList.remove('hidden');
+        if (myReady && !oppReady) { btnReq.classList.add('hidden'); groupRematch.classList.add('hidden'); waitRematch.classList.remove('hidden'); }
+        else if (!myReady && oppReady) { btnReq.classList.add('hidden'); groupRematch.classList.remove('hidden'); waitRematch.classList.add('hidden'); }
+        else if (!myReady && !oppReady) { btnReq.classList.remove('hidden'); groupRematch.classList.add('hidden'); waitRematch.classList.add('hidden'); }
+    },
+
+    // --- BẢN VÁ: Fix chống nuốt tiền khi chơi lại ---
+    async requestRematch() {
+        if(globalBalance < this.betAmount) return showToast("Không đủ lúa cược tiếp!", true);
+        playSound('chip'); globalBalance -= this.betAmount; updateBalance(); window.syncDataToCloud();
+        await db.collection('pk_xidach').doc(this.currentRoomId).update(this.isHost ? { hostReady: true } : { joinerReady: true });
+    },
+
+    async acceptRematch() {
+        if(globalBalance < this.betAmount) return showToast("Không đủ lúa cược!", true);
+        playSound('chip'); globalBalance -= this.betAmount; updateBalance(); window.syncDataToCloud();
+        await db.collection('pk_xidach').doc(this.currentRoomId).update({ 
+            status: 'waiting', 
+            [this.isHost ? 'hostReady' : 'joinerReady']: true, 
+            hostCards: [], joinerCards: [], hostDone: false, joinerDone: false, winner: null 
+        });
+    },
+
+    resetUI() {
+        document.getElementById('pk-xd-my-cards').innerHTML = ''; document.getElementById('pk-xd-opp-cards').innerHTML = '';
+        document.getElementById('pk-xd-my-score').classList.add('opacity-0'); document.getElementById('pk-xd-opp-score').classList.add('opacity-0');
+        document.getElementById('pk-xd-status-text').innerText = "VUI LÒNG SẴN SÀNG"; document.getElementById('pk-xd-status-text').className = "text-sm font-black text-slate-300 font-oswald animate-pulse tracking-widest text-center mt-2";
+        document.getElementById('pk-xd-control-ready').classList.remove('hidden'); document.getElementById('pk-xd-control-play').classList.add('hidden'); document.getElementById('pk-xd-end-panel').classList.add('hidden');
+    },
+
+    async leaveRoom() {
+        if(this.unsubRoom) { this.unsubRoom(); this.unsubRoom = null; }
+        let myReady = this.lastData ? (this.isHost ? this.lastData.hostReady : this.lastData.joinerReady) : false;
+        if(this.localStatus === 'waiting' || this.localStatus === 'playing' || myReady) { globalBalance += this.betAmount; updateBalance(); window.syncDataToCloud(); }
+        if(this.isHost) { try { await db.collection('pk_xidach').doc(this.currentRoomId).delete(); } catch(e){} } 
+        else { try { await db.collection('pk_xidach').doc(this.currentRoomId).update({ status: 'waiting', joinerId: null, joinerName: null, joinerReady: false, joinerCards: [], hostCards: [], winner: null }); } catch(e){} }
+        this.forceLeave();
+    },
+
+    forceLeave() { if(this.unsubRoom) { this.unsubRoom(); this.unsubRoom = null; } document.getElementById('pk-xd-room').classList.add('hidden'); document.getElementById('pk-xd-lobby').classList.remove('hidden'); this.currentRoomId = null; this.listenRooms(); }
+};
+
+
+</script>
 </body>
 </html>
